@@ -1,12 +1,22 @@
+import React from 'react';
+
+import AddTripView from './components/add-trip-view/add-trip-view';
+import Chat from './components/chat/chat';
+import DropdownMenu from './components/dropdown-menu/dropdown-menu';
+import ProfileView from './components/profile-view/profile-view';
+import SearchView from './components/search-view/search-view';
+import TripView from './components/trip-view/trip-view';
+
+
 function App() {
   return (
     <div>
-      <div>Rikki is my hero</div>
-      <div>Ian is the GOAT</div>
-      <div>Michael is the best representation</div>
-      <div>Brandon is the most hilarious</div>
-      <div>Jay is Mongo Da Boss</div>
-      <div>Cheyenne is the doge QUEEN</div>
+      <AddTripView />
+      <Chat />
+      <DropdownMenu />
+      <ProfileView />
+      <SearchView />
+      <TripView />
     </div>
   )
 }

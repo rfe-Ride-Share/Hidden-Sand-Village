@@ -11,12 +11,11 @@ import TripView from './components/trip-view/trip-view';
 function App() {
   return (
     <div>
-      <AddTripView />
-      <Chat />
-      <DropdownMenu />
-      <ProfileView />
-      <SearchView />
-      <TripView />
+     <div>Put your component here when you want to test it out.</div>
+     <div>Please save these divs in a comment below when testing.</div>
+     <div>So that you are able to restore this component to exactly</div>
+     <div>the way it was to avoid merge conflicts.</div>
+     <div>This message is coming to you from App.jsx</div>
     </div>
   )
 }

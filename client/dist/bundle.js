@@ -16,7 +16,67 @@
   \****************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction App() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(\"div\", {\n    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"Rikki is my hero\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"Ian is the GOAT\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"Michael is the best representation\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"Brandon is the most hilarious\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"Jay is Mongo Da Boss\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n      children: \"Cheyenne is the doge QUEEN\"\n    })]\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack://language/./client/src/App.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_add_trip_view_add_trip_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/add-trip-view/add-trip-view */ \"./client/src/components/add-trip-view/add-trip-view.jsx\");\n/* harmony import */ var _components_chat_chat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/chat/chat */ \"./client/src/components/chat/chat.jsx\");\n/* harmony import */ var _components_dropdown_menu_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/dropdown-menu/dropdown-menu */ \"./client/src/components/dropdown-menu/dropdown-menu.jsx\");\n/* harmony import */ var _components_profile_view_profile_view__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/profile-view/profile-view */ \"./client/src/components/profile-view/profile-view.jsx\");\n/* harmony import */ var _components_search_view_search_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/search-view/search-view */ \"./client/src/components/search-view/search-view.jsx\");\n/* harmony import */ var _components_trip_view_trip_view__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/trip-view/trip-view */ \"./client/src/components/trip-view/trip-view.jsx\");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\n\n\n\n\n\n\n\nfunction App() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(\"div\", {\n    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(\"div\", {\n      children: \"Put your component here when you want to test it out.\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(\"div\", {\n      children: \"Please save these divs in a comment below when testing.\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(\"div\", {\n      children: \"So that you are able to restore this component to exactly\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(\"div\", {\n      children: \"the way it was to avoid merge conflicts.\"\n    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(\"div\", {\n      children: \"This message is coming to you from App.jsx\"\n    })]\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack://language/./client/src/App.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/add-trip-view/add-trip-view.jsx":
+/*!***************************************************************!*\
+  !*** ./client/src/components/add-trip-view/add-trip-view.jsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction AddTripView() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Rikki is my hero\"\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (AddTripView);\n\n//# sourceURL=webpack://language/./client/src/components/add-trip-view/add-trip-view.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/chat/chat.jsx":
+/*!*********************************************!*\
+  !*** ./client/src/components/chat/chat.jsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction Chat() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Ian is the GOAT\"\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Chat);\n\n//# sourceURL=webpack://language/./client/src/components/chat/chat.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/dropdown-menu/dropdown-menu.jsx":
+/*!***************************************************************!*\
+  !*** ./client/src/components/dropdown-menu/dropdown-menu.jsx ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction DropdownMenu() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Michael is the best representation\"\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (DropdownMenu);\n\n//# sourceURL=webpack://language/./client/src/components/dropdown-menu/dropdown-menu.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/profile-view/profile-view.jsx":
+/*!*************************************************************!*\
+  !*** ./client/src/components/profile-view/profile-view.jsx ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction Chat() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Brandon is the most hilarious\"\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Chat);\n\n//# sourceURL=webpack://language/./client/src/components/profile-view/profile-view.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/search-view/search-view.jsx":
+/*!***********************************************************!*\
+  !*** ./client/src/components/search-view/search-view.jsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction SearchView() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Cheyenne is the doge QUEEN\"\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (SearchView);\n\n//# sourceURL=webpack://language/./client/src/components/search-view/search-view.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/trip-view/trip-view.jsx":
+/*!*******************************************************!*\
+  !*** ./client/src/components/trip-view/trip-view.jsx ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n\n\n\nfunction TripView() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Jay is Mongo Da Boss\"\n  });\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (TripView);\n\n//# sourceURL=webpack://language/./client/src/components/trip-view/trip-view.jsx?");
 
 /***/ }),
 

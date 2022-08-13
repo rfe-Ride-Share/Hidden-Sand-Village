@@ -1,6 +1,7 @@
 function App() {
   return (
     <div>
+      <div>Anothy is the wittiest</div>
       <div>Rikki is my hero</div>
       <div>Ian is the GOAT</div>
       <div>Michael is the best representation</div>

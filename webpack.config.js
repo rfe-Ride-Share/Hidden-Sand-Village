@@ -6,6 +6,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/client/dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -29,6 +30,11 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [{ from: /./, to: '/index.html' }],
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx'],

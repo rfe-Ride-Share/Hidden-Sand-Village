@@ -1,12 +1,21 @@
+import React from 'react';
+
+import AddTripView from './components/add-trip-view/add-trip-view';
+import Chat from './components/chat/chat';
+import DropdownMenu from './components/dropdown-menu/dropdown-menu';
+import ProfileView from './components/profile-view/profile-view';
+import SearchView from './components/search-view/search-view';
+import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
+
 function App() {
   return (
     <div>
-      <div>Rikki is my hero</div>
-      <div>Ian is the GOAT</div>
-      <div>Michael is the best representation</div>
-      <div>Brandon is the most hilarious</div>
-      <div>Jay is Mongo Da Boss</div>
-      <div>Cheyenne is the doge QUEEN</div>
+      <div>This is a very important message!!</div>
+      <div>Put your component here when you want to test it out.</div>
+      <div>Please save these divs in a comment below when testing.</div>
+      <div>So that you are able to restore this component to exactly</div>
+      <div>the way it was to avoid merge conflicts.</div>
+      <div>This message is coming to you from App.jsx</div>
     </div>
   )
 }

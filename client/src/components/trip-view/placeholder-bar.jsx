@@ -9,9 +9,18 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 export default function PlaceHolderBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+    <Box
+      sx={{
+        flexGrow: 1,
+        margin: '0px',
+      }}
+    >
+      <AppBar position="static"ß>
+        <Toolbar
+        sx={{
+          backgroundColor: '#11ABC1',
+        }}
+        >
           <IconButton
             size="large"
             edge="start"
@@ -19,7 +28,6 @@ export default function PlaceHolderBar() {
             aria-label="menu"
             sx={{
               mr: 2,
-              color: '#11ABC1',
             }}
           >
             <MenuIcon />

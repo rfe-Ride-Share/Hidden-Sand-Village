@@ -5,10 +5,10 @@ import Chat from './components/chat/chat';
 import DropdownMenu from './components/dropdown-menu/dropdown-menu';
 import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
-import TripView from './components/trip-view/trip-view';
+import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
 
 function App() {
-  return <TripView />;
+  return <RiderTripView />;
 }
 
 export default App;

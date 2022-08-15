@@ -3,14 +3,15 @@ import styled from 'styled-components';
 
 function TitleOfTrip() {
   return (
-    <div>
+    <TitleOfTripComponent>
       New York, NY -> Orlando, FL
-    </div>
+    </TitleOfTripComponent>
   )
 }
 
 const TitleOfTripComponent = styled.div`
-  margin: 5px;
+  font-size: 32px;
+  margin: 25px;
 `
 
 export default TitleOfTrip;

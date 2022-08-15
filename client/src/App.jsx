@@ -6,6 +6,7 @@ import DropdownMenu from './components/dropdown-menu/dropdown-menu';
 import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
 import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
+import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <div>the way it was to avoid merge conflicts.</div>
       <div>This message is coming to you from App.jsx</div>
     </div>
-  )
+  );
 }
 
 export default App;

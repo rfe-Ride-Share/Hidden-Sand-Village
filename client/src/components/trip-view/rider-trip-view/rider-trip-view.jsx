@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import PlaceHolderBar from '../placeholder-bar';
 import TitleOfTrip from '../title-of-trip';
-import Card from './card';
+import RiderCard from './card';
 import Paper from '@mui/material/Paper';
 
 function TripView() {
@@ -19,7 +19,7 @@ function TripView() {
             width: '100%',
           }}
         />
-        <Card />
+        <RiderCard />
       </TripViewContainer>
     </div>
   );

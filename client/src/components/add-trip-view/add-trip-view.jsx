@@ -8,34 +8,80 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import InputAdornment from '@mui/material/InputAdornment';
+//import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import  {AdapterMoment}  from '@mui/x-date-pickers/AdapterMoment';
+import  {LocalizationProvider}  from '@mui/x-date-pickers/LocalizationProvider';
+import  TimePicker  from '@mui/x-date-pickers/TimePicker';
+import  {DateTimePicker}  from '@mui/x-date-pickers/DateTimePicker';
+// import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+// import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 
-
+import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 
 
 
 function AddTripView() {
 
+  const [seats, setSeats] = React.useState('');
+  const [value, setValue] = React.useState(
+    new Date('2014-08-18T21:11:54')
+  );
+
+  const [tripDetails, setTripDetails] = React.useState('');
+  const [from, setFrom] = React.useState('');
+  const [to, setTo] = React.useState('');
+  const [tripValue, setTripValue] = React.useState('');
+
+  ////////////////////////////////////////////
+////           STATE OBJ                ///
+///////////////////////////////////////////
+
+const tripPost = {
+  from: from,
+  to: to,
+  seats: seats,
+  dateTime: value,
+  tripDetails: tripValue
+
+}
+
+//console.log('tripPost', tripPost)
+
+////////////////////////////////////////
+//     SEND OFF DATA                 //
+//////////////////////////////////////
+
+
+const handleSubmit = (event) => {
+
+//event.preventDefault();
+console.log('add trip information', tripPost)
+
+};
+
+
+  ///////////////////////////////
+  ///          TOP BAR        ///
+  //////////////////////////////
   const ButtonAppBar = (
 
 
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" className="top-bar">
           <Toolbar>
             <IconButton
               size="large"
@@ -47,59 +93,30 @@ function AddTripView() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
+
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit"></Button>
           </Toolbar>
         </AppBar>
       </Box>
 
 
   );
-///////////////////////////////////////
-  const TextBox = (
-    <TextareaAutosize
-    aria-label="minimum height"
-    minRows={3}
-    placeholder="Details about trip"
-    style={{ width: 400, height: 200 }}
-  />
-  );
 
-///////////////////////////////////////////
-  const BasicTextFields =(
 
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue="Hello World"
-        />
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        <TextField id="filled-basic" label="Filled" variant="filled" />
-        <TextField id="standard-basic" label="Standard" variant="standard" />
-      </Box>
-    );
 ////////////////////////////////////////////////////////
+///                 PASSENGERS                      ///
+///////////////////////////////////////////////////////
 
-  const [seats, setSeats] = React.useState('');
 
   const handleChange = (event) => {
     setSeats(event.target.value);
   };
-
+  const icon =  <PersonAddAltIcon/>
   const BasicSelect = (
 
-      <FormControl sx={{minWidth: 200 }} size="small">
-        <InputLabel id="demo-simple-select-label">Max. Passengers</InputLabel>
+      <FormControl sx={{m:1, minWidth: 200 }} size="small">
+        <InputLabel id="demo-simple-select-label">{icon}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -122,29 +139,144 @@ function AddTripView() {
 
   );
 
+//////////////////////////////////////////////////
+//             DATE  AND TIME                  //
+/////////////////////////////////////////////////
 
+
+  const handleDateChange = (newValue) => {
+    setValue(newValue)
+  };
+
+
+
+  const dateTime = (
+
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+
+        <DateTimePicker
+          label="Depature Date and Time"
+          value={value}
+          onChange={handleDateChange}
+          renderInput={(params) => <TextField {...params} />}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <DepartureBoardIcon />
+              </InputAdornment>  ),
+        }}/>
+
+
+    </LocalizationProvider>
+  );
+
+/////////////////////////////////
+//       TRIP DETAILS         //
+///////////////////////////////
+
+    const handleTripChange = (event) => {
+      setTripValue(event.target.value);
+    };
+
+    const trip = (
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '60ch'},
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <div>
+          <TextField fullWidth
+            id="outlined-multiline-flexible"
+            label="Trip Details"
+            multiline
+            maxRows={20}
+            minRows={10}
+            value={tripValue}
+            onChange={handleTripChange}
+            placeholder="Tell people about your trip!"
+
+          />
+          </div>
+          </Box>
+          );
+
+
+
+
+
+///////////////////////////
+//   RENDERED STUFFF      //
+///////////////////////////
 
 
   return (
+
     <div>
-    {ButtonAppBar}<br></br>
-    <TextField id="outlined-basic" label="From*"  variant="outlined" /><br></br><br></br>
-    <TextField id="outlined-basic" label="To*" variant="outlined" /><br></br><br></br>
+      <TopBar>
+      {ButtonAppBar}
+      </TopBar>
+      <br></br>
+    <Stack spacing={3} sx={{m:1, width: 450}}>
 
+    <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br>
+
+     <IconArrow>
+     <SwapVertIcon fontSize="large"/>
+     </IconArrow>
+
+
+    <br></br>
+    <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br>
+     </Stack><br></br>
+    <TextAreaCenter>
+    {dateTime}
+    </TextAreaCenter><br></br><br></br>
     {BasicSelect}<br></br><br></br>
-
-    <label for="birthday">Departure Date*</label>
-          <input type="date" id="date" name="date" onChange={(e) => {console.log(e.target.value)}}></input><br></br><br></br>
-
-
-    {TextBox}
-
-
-
-
-
+    {trip}
+    <ButtonCan className="button-container">
+      <Button className="post-button" variant="contained" type="submit" onClick={(e) => {handleSubmit()}}>Add Trip</Button>
+      <Button className="cancel-button" variant="contained" type="submit" onClick={(e) => {console.log('CANCEL')}}>Cancel</Button>
+    </ButtonCan>
     </div>
   )
 }
+
+const ButtonCan = styled.div`
+
+
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  .post-button{
+    background:#F5B935;
+
+  }
+
+  .cancel-button{
+    background: #DF3062;
+    margin-left: 30px;
+
+  }
+
+`
+
+const TextAreaCenter = styled.div`
+margin-left: 8px;
+
+`
+
+const IconArrow = styled.div`
+display: flex;
+justify-content: center;
+`
+
+const TopBar = styled.div`
+.top-bar{
+  background: #11ABC1;
+}
+`
 
 export default AddTripView;

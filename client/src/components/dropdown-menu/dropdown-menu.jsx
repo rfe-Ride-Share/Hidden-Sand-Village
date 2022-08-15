@@ -54,7 +54,7 @@ const DropdownMenu = () => {
             <ListItem key={item.text} disablePadding>
               <Link
                 to={item.link}
-                style={{ 'text-decoration': 'none', color: 'black' }}
+                style={{ textDecoration: 'none', color: 'black' }}
               >
                 <ListItemButton>
                   <ListItemIcon>{item.icon}</ListItemIcon>

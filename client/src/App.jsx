@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />
-        <Route path="/trip" element={<TripView />} />
+        <Route path="/trip" element={<RiderTripView />} />
         <Route path="/profile" element={<ProfileView />} />
       </Routes>
 
@@ -27,7 +27,7 @@ function App() {
       <div>the way it was to avoid merge conflicts.</div>
       <div>This message is coming to you from App.jsx</div> */}
     </div>
-  )
+  );
 }
 
 export default App;

@@ -19,17 +19,32 @@ export default function RiderCard() {
         margin: '25px',
         display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'space-between',
         borderRadius: '15px',
       }}
     >
       <ProfileImage />
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} gutterBottom>
-          Rider Name
-        </Typography>
-        <RatingStars rating={3.7} />
-      </CardContent>
-      <ButtonRow status='confirmed' />
+      <MainCardContainer>
+        <CardContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Typography sx={{ fontSize: 14 }} gutterBottom>
+            Rider Name
+          </Typography>
+          <RatingStars rating={3.7} />
+        </CardContent>
+        <ButtonRow status="confirmed" />
+      </MainCardContainer>
     </Card>
   );
 }
+
+const MainCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+`;

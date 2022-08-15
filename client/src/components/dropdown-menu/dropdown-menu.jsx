@@ -69,29 +69,40 @@ const DropdownMenu = () => {
             {
               text: 'Create Trips',
               icon: <TimeToLeaveIcon />,
-              link: '/createtrip',
+              link: '/add',
             },
-            { text: 'My Trips', icon: <CommuteIcon />, link: '/mytrips' },
+            { text: 'My Trips', icon: <CommuteIcon />, link: '/' },
           ].map((item, index) => (
             <ListItem key={item.text} onClick={handleClose} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-                <Link to={item.link}></Link>
-              </ListItemButton>
+              <Link
+                to={item.link}
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </Link>
             </ListItem>
           ))}
         </MUIList>
         <Divider />
         <MUIList>
-          {[{ text: 'Log Out', icon: <LogoutIcon /> }].map((item, index) => (
-            <ListItem key={item.text} onClick={handleClose} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {[{ text: 'Log Out', icon: <LogoutIcon />, link: '/' }].map(
+            (item, index) => (
+              <ListItem key={item.text} onClick={handleClose} disablePadding>
+                <Link
+                  to={item.link}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            )
+          )}
         </MUIList>
       </Drawer>
     </Box>

@@ -18,6 +18,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/trip" element={<RiderTripView />} />
         <Route path="/profile" element={<ProfileView />} />
+        <Route path="/add" element={<AddTripView />} />
       </Routes>
 
       {/* <div>This is a very important message!!</div>

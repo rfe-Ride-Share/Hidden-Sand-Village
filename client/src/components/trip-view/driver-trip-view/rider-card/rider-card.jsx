@@ -33,7 +33,7 @@ export default function RiderCard() {
           }}
         >
           <Typography sx={{ fontSize: 14 }} gutterBottom>
-            Rider Name
+            John Jacob Jingle Heimer Schmidt
           </Typography>
           <RatingStars rating={3.7} />
         </CardContent>

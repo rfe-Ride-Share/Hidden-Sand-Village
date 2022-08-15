@@ -16,7 +16,7 @@ function App() {
       <div>So that you are able to restore this component to exactly</div>
       <div>the way it was to avoid merge conflicts.</div>
       <div>This message is coming to you from App.jsx</div>
-    </div>;
+    </div>
   )
 }
 

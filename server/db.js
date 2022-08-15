@@ -23,9 +23,19 @@ const tripSchema = new Schema({
 const Trip = mongoose.model('Trip', tripSchema);
 
 function createTrip(data) {
-  Trip.create(data, function (err) {
-    if (err) return handleError(err);
-  });
+  return Trip.create(data);
+}
+
+function deleteTrip(id) {
+  return Trip.deleteOne(id).exec(); // {deletedCount: 1}
+}
+
+function findTrip(id) {
+  return Trip.findOne(id).exec();
+}
+
+function updateTrip(id, data) {
+  return Trip.findOneAndUpdate(id, data);
 }
 
 const userSchema = new Schema({
@@ -40,22 +50,39 @@ const userSchema = new Schema({
   future_trips: [Schema.Types.ObjectId],
 });
 
-const user = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-function createUser(data) {
-  user.create(data, function (err) {
-    if (err) return handleError(err);
-  });
+function findOneAndUpdateUser(id, data) {
+  return User.findOneAndUpdate({ user_id: id }, data).exec();
 }
 
-function getProfileData(id) {}
+function createUser(data) {
+  return User.create(data);
+}
 
-function postProfileData(id) {}
+function deleteUser(id) {
+  return User.deleteOne({ user_id: id }).exec(); // {deletedCount: 1}
+}
+
+function getProfileData(id) {
+  return User.findOne({ user_id: id }).exec();
+}
+
+function postProfileData(data) {}
 // user
 //  picture
 //  name
 //  reviews
 //  bio
 // current past and future trips
-
 // chat
+module.exports = {
+  createTrip,
+  deleteTrip,
+  findTrip,
+  updateTrip,
+  createUser,
+  findOneAndUpdateUser,
+  getProfileData,
+  deleteUser,
+};

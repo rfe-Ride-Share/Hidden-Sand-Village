@@ -69,8 +69,8 @@ app.delete('/user/:id', (req, res) => {
     .catch((err) => console.error(err));
 });
 
-app.get('*', (req, res) => {
-  res.status(404).send('Page does not exist...');
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 });
 
 // chat??

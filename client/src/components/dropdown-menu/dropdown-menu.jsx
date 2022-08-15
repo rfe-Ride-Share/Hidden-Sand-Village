@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import { List as MUIList } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -28,7 +27,7 @@ const DropdownMenu = () => {
     setOpen(false);
   };
   return (
-    <>
+    <Box>
       <Appbar setOpen={setOpen}></Appbar>
       <Drawer open={open}>
         <IconButton onClick={handleClose}>
@@ -51,7 +50,7 @@ const DropdownMenu = () => {
             { text: 'Home', icon: <HomeIcon />, link: '/' },
             { text: 'Messages', icon: <MessageIcon />, link: '/chat' },
           ].map((item, index) => (
-            <ListItem key={item.text} disablePadding>
+            <ListItem key={item.text} onClick={handleClose} disablePadding>
               <Link
                 to={item.link}
                 style={{ textDecoration: 'none', color: 'black' }}
@@ -74,7 +73,7 @@ const DropdownMenu = () => {
             },
             { text: 'My Trips', icon: <CommuteIcon />, link: '/mytrips' },
           ].map((item, index) => (
-            <ListItem key={item.text} disablePadding>
+            <ListItem key={item.text} onClick={handleClose} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
@@ -86,7 +85,7 @@ const DropdownMenu = () => {
         <Divider />
         <MUIList>
           {[{ text: 'Log Out', icon: <LogoutIcon /> }].map((item, index) => (
-            <ListItem key={item.text} disablePadding>
+            <ListItem key={item.text} onClick={handleClose} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
@@ -95,7 +94,7 @@ const DropdownMenu = () => {
           ))}
         </MUIList>
       </Drawer>
-    </>
+    </Box>
   );
 };
 

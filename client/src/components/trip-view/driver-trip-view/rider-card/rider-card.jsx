@@ -8,6 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 import ButtonRow from './buttons/button-row';
+import ProfileImage from './profile-image';
+import RatingStars from './stars/rating-stars';
 
 export default function RiderCard() {
   return (
@@ -16,14 +18,16 @@ export default function RiderCard() {
         minWidth: 400,
         margin: '25px',
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         borderRadius: '15px',
       }}
     >
+      <ProfileImage />
       <CardContent>
         <Typography sx={{ fontSize: 14 }} gutterBottom>
           Rider Name
         </Typography>
+        <RatingStars rating={3.7} />
       </CardContent>
       <ButtonRow status='confirmed' />
     </Card>

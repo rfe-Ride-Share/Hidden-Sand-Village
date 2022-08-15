@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function RemoveRiderButton() {
   return(
@@ -17,7 +18,7 @@ function RemoveRiderButton() {
         console.log('Remove rider functionality placeholder for Driver View. need to change remove-rider-button.jsx');
       }}
     >
-      Remove
+      <DeleteIcon />
     </Button>
   );
 }

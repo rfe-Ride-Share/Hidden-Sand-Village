@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import PlaceHolderBar from '../placeholder-bar';
 import TitleOfTrip from '../title-of-trip';
 import RiderCard from './card';
+import AskToJoin from './asktojoin';
+
 import Paper from '@mui/material/Paper';
 
 function TripView() {
@@ -15,11 +17,13 @@ function TripView() {
         <Paper
           elevation={12}
           sx={{
-            height: '300px',
+            height: '400px',
             width: '100%',
+            borderRadius: '20px',
           }}
         />
         <RiderCard />
+        <AskToJoin />
       </TripViewContainer>
     </div>
   );

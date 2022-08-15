@@ -9,8 +9,7 @@ import Typography from '@mui/material/Typography';
 
 export default function RiderCard() {
   return (
-    <WrapperComponent>
-      <Card sx={{ minWidth: 350 }}>
+      <Card sx={{ minWidth: 350, margin: '25px' }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             4:00 PM August 26, 2022
@@ -31,10 +30,5 @@ export default function RiderCard() {
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
-    </WrapperComponent>
   );
 }
-
-const WrapperComponent = styled.div`
-  margin: 50px;
-`;

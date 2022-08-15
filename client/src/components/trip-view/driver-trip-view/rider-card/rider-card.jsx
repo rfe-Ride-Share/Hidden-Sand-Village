@@ -11,12 +11,12 @@ import ButtonRow from './buttons/button-row';
 import ProfileImage from './profile-image';
 import RatingStars from './stars/rating-stars';
 
-export default function RiderCard({ profile = {}}) {
+export default function RiderCard({ profile = {}, status }) {
   return (
     <Card
       sx={{
         minWidth: 400,
-        margin: '25px',
+        marginTop: '25px',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -37,7 +37,7 @@ export default function RiderCard({ profile = {}}) {
           </Typography>
           <RatingStars rating={profile.rating} />
         </CardContent>
-        <ButtonRow status="confirmed" />
+        <ButtonRow status={status} />
       </MainCardContainer>
     </Card>
   );

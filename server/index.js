@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 
+const db = require('./db');
+
 const app = express();
 
 app.use(express.json());
@@ -9,5 +11,97 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 const PORT = 3000;
 
+// trips
+app.get('/trips/:id', (req, res) => {
+  db.findTrip(req.params.id)
+    .then((trip) => res.send(trip))
+    .catch((err) => res.status(400).send(err));
+});
+
+app.post('/trips', (req, res) => {
+  db.createTrip(req.body)
+    .then((data) => res.status(201).send(data))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.put('/trips/:id', (req, res) => {
+  db.updateTrip(req.params.id, req.body)
+    .then((data) => res.status(201).send(data))
+    .catch((err) => res.status(400).send(err));
+});
+
+app.delete('/trips/:id', (req, res) => {
+  db.deleteTrip(req.params.id)
+    .then((data) => {
+      data.deletedCount === 1
+        ? res.status(200).send(data)
+        : res.status(400).send(data);
+    })
+    .catch((err) => res.status(500).send());
+});
+
+// user
+app.get('/user/:id', (req, res) => {
+  db.getProfileData(req.params.id)
+    .then((response) => res.send(response))
+    .catch(() => res.send('User not found ❌'));
+});
+
+app.post('/user/', (req, res) => {
+  db.createUser(req.body)
+    .then(() => res.status(201).send('User created ✅'))
+    .catch((err) => res.status(500).send('Could not create or update user ❌'));
+});
+
+app.put('/user/:id', (req, res) => {
+  db.findOneAndUpdateUser(req.params.id, req.body)
+    .then(() => res.status(201).send('User updated ✅'))
+    .catch((err) => res.status(500).send('Could not create or update user ❌'));
+});
+
+app.delete('/user/:id', (req, res) => {
+  db.deleteUser(req.params.id)
+    .then((data) => {
+      data.deletedCount === 1
+        ? res.status(200).send(data)
+        : res.status(400).send(data);
+    })
+    .catch((err) => console.error(err));
+});
+
+app.get('*', (req, res) => {
+  res.status(404).send('Page does not exist...');
+});
+
+// chat??
 app.listen(PORT);
 console.log('Server listening at http://localhost:3000');
+
+const testUser = {
+  user_id: 1000,
+  user_photo: 'fakeUrl.picture',
+  first_name: 'IAN',
+  last_name: 'ZUBER',
+  reviews: [
+    { stars: 1, review_text: 'So wack' },
+    { stars: 5, review_text: 'wonderful' },
+  ],
+  bio: 'Just a small town girl, livin in a lonely world',
+};
+// possibly change driver and passengers based on userid
+
+const sampleTrip = {
+  date: '1660576677204',
+  depart_time: '1660576677205',
+  departure: 'home',
+  destination: 'home away from home',
+  driver: 'Carl Poole',
+  passengers: [
+    {
+      Rider: { departure: 'place1', destination: 'place2', status: 'upcoming' },
+    },
+  ],
+  price: '2.38',
+  duration: 'one hour',
+  status: 'upcoming', // pending/done/cancelled/upcoming/full/
+};

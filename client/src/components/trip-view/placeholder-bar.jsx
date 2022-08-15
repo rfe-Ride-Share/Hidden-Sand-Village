@@ -16,7 +16,11 @@ export default function PlaceHolderBar() {
       }}
     >
       <AppBar position="static"ß>
-        <Toolbar>
+        <Toolbar
+        sx={{
+          backgroundColor: '#11ABC1',
+        }}
+        >
           <IconButton
             size="large"
             edge="start"

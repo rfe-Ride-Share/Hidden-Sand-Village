@@ -9,7 +9,11 @@ function AskToJoin() {
         sx={{
           width: '250px',
           height: '50px',
-          borderRadius: '15px'
+          borderRadius: '15px',
+          backgroundColor: '#DF3062',
+        }}
+        onClick={() => {
+          console.log('Ask to Join functionality goes here: asktojoin.jsx');
         }}
       >
           Ask to Join

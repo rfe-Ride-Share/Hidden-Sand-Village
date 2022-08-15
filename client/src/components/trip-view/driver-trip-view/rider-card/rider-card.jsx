@@ -11,7 +11,7 @@ import ButtonRow from './buttons/button-row';
 import ProfileImage from './profile-image';
 import RatingStars from './stars/rating-stars';
 
-export default function RiderCard() {
+export default function RiderCard({ profile = {}}) {
   return (
     <Card
       sx={{
@@ -23,7 +23,7 @@ export default function RiderCard() {
         borderRadius: '15px',
       }}
     >
-      <ProfileImage />
+      <ProfileImage image={profile.image} />
       <MainCardContainer>
         <CardContent
           sx={{
@@ -33,9 +33,9 @@ export default function RiderCard() {
           }}
         >
           <Typography sx={{ fontSize: 14 }} gutterBottom>
-            John Jacob Jingle Heimer Schmidt
+            {profile.name}
           </Typography>
-          <RatingStars rating={3.7} />
+          <RatingStars rating={profile.rating} />
         </CardContent>
         <ButtonRow status="confirmed" />
       </MainCardContainer>

@@ -8,7 +8,7 @@ import SearchView from './components/search-view/search-view';
 import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
 
 function App() {
-  return <RiderTripView />;
+  return <RiderTripView status='confirmed' />;
 }
 
 export default App;

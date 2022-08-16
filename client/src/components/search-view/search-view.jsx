@@ -12,7 +12,7 @@ import Stack from '@mui/material/Stack';
 
 import SearchBar from './searchBar';
 import MapDirections from './mapDirections';
-import RiderCard from '../trip-view/rider-trip-view/card';
+import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
 import getDistance from './helpers/getDistance';
 

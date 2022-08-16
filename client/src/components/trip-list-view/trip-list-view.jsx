@@ -108,11 +108,6 @@ function TripListView() {
 
   return (
     <TripList>
-      <ButtonRow>
-        <CancelButton />
-        <MessageButton />
-        <ReviewButton />
-      </ButtonRow>
       Pending Trips
       {pendingTrips}
       Upcoming Trips

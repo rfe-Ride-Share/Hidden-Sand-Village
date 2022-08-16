@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-function AskToJoin() {
+function ReviewButton() {
   return (
       <Button
         variant="contained"
@@ -12,7 +12,7 @@ function AskToJoin() {
           backgroundColor: '#DF3062',
         }}
         onClick={() => {
-          console.log('Ask to Join functionality goes here: asktojoin.jsx');
+          console.log('Review functionality goes here: trip-list-view/buttons/review-button.jsx');
         }}
       >
           Ask to Join
@@ -20,4 +20,4 @@ function AskToJoin() {
   );
 }
 
-export default AskToJoin;
+export default ReviewButton;

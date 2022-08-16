@@ -2,3 +2,4 @@
 .DS_Store
 .env
 /client/dist/bundle.js
+/client/dist/bundle.js.map

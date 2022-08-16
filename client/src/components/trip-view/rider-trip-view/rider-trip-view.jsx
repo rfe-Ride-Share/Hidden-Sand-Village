@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import PlaceHolderBar from '../placeholder-bar';
 import TitleOfTrip from '../title-of-trip';
-import RiderCard from './card';
+import RiderCard from './rider-card';
 
 import AskToJoin from './buttons/asktojoin';
 import Pending from './buttons/pending';
@@ -11,7 +11,7 @@ import Confirmed from './buttons/confirmed';
 
 import Paper from '@mui/material/Paper';
 
-function TripView({ status }) {
+function RiderTripView({ status, tripInfo }) {
   let displayButton = <AskToJoin />;
 
   if (status === 'pending') {
@@ -22,8 +22,7 @@ function TripView({ status }) {
 
   return (
     <div>
-      <PlaceHolderBar />
-      <TripViewContainer>
+      <RiderTripViewContainer>
         <TitleOfTrip />
         <Paper
           elevation={12}
@@ -33,17 +32,17 @@ function TripView({ status }) {
             borderRadius: '20px',
           }}
         />
-        <RiderCard />
+        <RiderCard tripInfo={tripInfo} />
         {displayButton}
-      </TripViewContainer>
+      </RiderTripViewContainer>
     </div>
   );
 }
 
-const TripViewContainer = styled.div`
+const RiderTripViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export default TripView;
+export default RiderTripView;

@@ -29,7 +29,7 @@ const DropdownMenu = () => {
   return (
     <Box>
       <Appbar setOpen={setOpen}></Appbar>
-      <Drawer open={open}>
+      <Drawer open={open} onBackdropClick={() => setOpen(false)}>
         <IconButton onClick={handleClose}>
           <ChevronLeftIcon></ChevronLeftIcon>
         </IconButton>

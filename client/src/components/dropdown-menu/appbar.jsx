@@ -12,7 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import LoginButton from '../auth/login-button';
+import AuthenticationButton from '../auth/authentication-button';
 
 function Appbar({ setOpen }) {
   return (
@@ -33,7 +33,7 @@ function Appbar({ setOpen }) {
           Home
         </Typography>
         {/* Replace with login button */}
-        <LoginButton />
+        <AuthenticationButton />
         <Button color="inherit">Login as a hacker</Button>
       </Toolbar>
     </AppBar>

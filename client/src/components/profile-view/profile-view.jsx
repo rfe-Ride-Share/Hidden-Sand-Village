@@ -1,18 +1,7 @@
-// import React from 'react';
-
-// function Chat() {
-//   return (
-//     <div>Brandon is the most hilarious</div>
-//   )
-// }
-
-// export default Chat;
 import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
-// import { CodeSnippet } from '../components/code-snippet';
-// import { PageLayout } from '../components/page-layout';
 
-export default function Chat() {
+export default function ProfileView() {
   const { user } = useAuth0();
 
   if (!user) {
@@ -20,7 +9,6 @@ export default function Chat() {
   }
 
   return (
-    // <PageLayout>
     <div className="content-layout">
       <h1 id="page-title" className="content__title">
         Profile Page
@@ -37,21 +25,20 @@ export default function Chat() {
         </p>
         <div className="profile-grid">
           <div className="profile__header">
-            <img src={user.picture} alt="Profile" className="profile__avatar" />
+            <img
+              src={user.picture}
+              alt="Profile"
+              className="profile__avatar"
+              referrerpolicy="no-referrer"
+            />
             <div className="profile__headline">
               <h2 className="profile__title">{user.name}</h2>
               <span className="profile__description">{user.email}</span>
             </div>
           </div>
-          <div className="profile__details">
-            {/* <CodeSnippet
-                title="Decoded ID Token"
-                code={JSON.stringify(user, null, 2)}
-              /> */}
-          </div>
+          <div className="profile__details"></div>
         </div>
       </div>
     </div>
-    // </PageLayout>
   );
 }

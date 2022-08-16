@@ -11,6 +11,7 @@ import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-vie
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 import TripListView from './components/trip-list-view/trip-list-view';
 import ReviewView from './components/review-view/review-view';
+import { ProtectedRoute } from './components/profile-view/protected-route';
 
 function App() {
   return (
@@ -21,7 +22,11 @@ function App() {
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/trip" element={<RiderTripView />} />
-        <Route path="/profile" element={<ProfileView />} />
+        <Route
+          path="/profile"
+          element={<ProtectedRoute component={ProfileView} />}
+          // element={<ProfileView />}
+        />
       </Routes>
 
       {/* <div>This is a very important message!!</div>

@@ -18,7 +18,9 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api';
 
+import { ProtectedRoute } from './components/profile-view/protected-route';
 const library = ['places'];
+
 function App() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.GMAPS_API_KEY,
@@ -31,12 +33,18 @@ function App() {
   return (
     <div>
       <DropdownMenu></DropdownMenu>
-      <ReviewView />
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/trip" element={<RiderTripView />} />
+        <Route
+          path="/profile"
+          element={<ProtectedRoute component={ProfileView} />}
+        />
         <Route path="/profile" element={<ProfileView />} />
+        <Route path="/review" element={<ReviewView />} />
+        <Route path="/driver-trip" element={<DriverTripView />} />
+        <Route path="/trips" element={<TripListView />} />
         <Route path="/add" element={<AddTripView />} />
       </Routes>
 

@@ -48,7 +48,9 @@ function ProfileView() {
             culpa qui officia deserunt mollit anim id est laborum.
           </Item>
           <Typography>Contact</Typography>
-          <Item onClick={handleMessage}>Message Me</Item>
+          <Item onClick={handleMessage} style={{}}>
+            Message Me
+          </Item>
         </Stack>
       </Box>
     </Container>

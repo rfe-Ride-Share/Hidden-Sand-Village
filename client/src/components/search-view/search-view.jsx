@@ -12,7 +12,7 @@ import Stack from '@mui/material/Stack';
 
 import SearchBar from './searchBar';
 import MapDirections from './mapDirections';
-import RiderCard from '../trip-view/rider-trip-view/card';
+import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
 import getDistance from './helpers/getDistance';
 
@@ -20,9 +20,9 @@ import getDistance from './helpers/getDistance';
 
 export default function SearchView() {
   // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: process.env.GMAPS_API_KEY,
+  //   googleMapsApiKey: 'INSERT KEY HERE',
   //   libraries: library,
-  //  });
+  // });
 
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });

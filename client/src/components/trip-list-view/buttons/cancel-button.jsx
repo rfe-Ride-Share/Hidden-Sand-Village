@@ -6,7 +6,7 @@ function CancelButton() {
       <Button
         variant="contained"
         sx={{
-          width: '250px',
+          width: '150px',
           height: '50px',
           borderRadius: '15px',
           backgroundColor: '#DF3062',
@@ -15,7 +15,7 @@ function CancelButton() {
           console.log('Cancel functionality goes here: trip-list-view/buttons/cancel-button.jsx');
         }}
       >
-          Ask to Join
+          Cancel
       </Button>
   );
 }

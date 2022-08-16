@@ -6,16 +6,16 @@ function ReviewButton() {
       <Button
         variant="contained"
         sx={{
-          width: '250px',
+          width: '150px',
           height: '50px',
           borderRadius: '15px',
-          backgroundColor: '#DF3062',
+          backgroundColor: '#F5B935',
         }}
         onClick={() => {
           console.log('Review functionality goes here: trip-list-view/buttons/review-button.jsx');
         }}
       >
-          Ask to Join
+          Review
       </Button>
   );
 }

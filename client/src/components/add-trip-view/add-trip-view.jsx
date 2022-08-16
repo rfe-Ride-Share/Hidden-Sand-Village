@@ -1,4 +1,4 @@
-
+// import 'dotenv/config';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -23,17 +23,20 @@ import  TimePicker  from '@mui/x-date-pickers/TimePicker';
 import  {DateTimePicker}  from '@mui/x-date-pickers/DateTimePicker';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+
 import Autocomplete from '@mui/material/Autocomplete';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
 
+
+
+
 import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
-import DataUsageIcon from '@mui/icons-material/DataUsage';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+
 
 
 
@@ -63,7 +66,7 @@ const tripPost = {
 
 }
 
-//console.log('tripPost', tripPost)
+console.log('tripPost', tripPost)
 
 ////////////////////////////////////////
 //     SEND OFF DATA                 //
@@ -212,8 +215,7 @@ console.log('add trip information', tripPost)
 //////////////////////////////////////////////////////////
 
 
-
-const SearchBar =({ setPos, name, placeholder }) => {
+function SearchBar({ setPos, name, placeholder }) {
   //Autocomplete variables
   const {
     ready,
@@ -225,15 +227,18 @@ const SearchBar =({ setPos, name, placeholder }) => {
 
   //Handle select
   const handleSelect = async (val) => {
+
     setValue(val, false);
+
     clearSuggestions();
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
     setPos({ lat, lng });
   };
 
-  const [address, setAddress] = useState('');
-  const [inputValue, setInputValue] = useState('');
+  const [address, setAddress] = React.useState('');
+
+  const [inputValue, setInputValue] = React.useState('');
 
   return (
     <div>
@@ -244,6 +249,7 @@ const SearchBar =({ setPos, name, placeholder }) => {
         onInputChange={(e, newValue) => {
           setInputValue(newValue);
           setValue(newValue);
+
         }}
         onChange={(event, newValue) => {
           setAddress(newValue);
@@ -267,7 +273,14 @@ const SearchBar =({ setPos, name, placeholder }) => {
   );
 }
 
+const [startPos, setStartPos] = React.useState({ lat: 0, lng: 0 });
+const [destPos, setDestPos] = React.useState({ lat: 0, lng: 0 });
+const [distance, setDistance] = React.useState(0);
 
+
+
+
+  // process.env.GMAPS_API_KEY
 ///////////////////////////
 //   RENDERED STUFFF      //
 ///////////////////////////
@@ -283,11 +296,16 @@ const SearchBar =({ setPos, name, placeholder }) => {
     <Stack spacing={3} sx={{m:1, width: 450}}>
 
     {/* <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br> */}
-
-     {/* <IconArrow>
+    <SearchBar setPos={setStartPos}
+        name={'Start'}
+        placeholder={'Where will you be travelling from?'} setFrom={setFrom}/>
+     <IconArrow>
      <SwapVertIcon fontSize="large"/>
-     </IconArrow> */}
-     {SearchBar()}
+     </IconArrow>
+
+    <SearchBar setPos={setDestPos}
+        name={'Destination'}
+        placeholder={'Where will you be travelling to?'} setTo={setTo}/>
 
     <br></br>
     {/* <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br> */}

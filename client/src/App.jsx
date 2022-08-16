@@ -12,16 +12,13 @@ import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-vie
 function App() {
   return (
     <div>
-<<<<<<< HEAD
-
-      <AddTripView/>
-=======
       <DropdownMenu></DropdownMenu>
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/trip" element={<RiderTripView />} />
         <Route path="/profile" element={<ProfileView />} />
+        <Route path="/add" element={<AddTripView />} />
       </Routes>
 
       {/* <div>This is a very important message!!</div>
@@ -30,7 +27,6 @@ function App() {
       <div>So that you are able to restore this component to exactly</div>
       <div>the way it was to avoid merge conflicts.</div>
       <div>This message is coming to you from App.jsx</div> */}
->>>>>>> f94e4d881d98a6d48439c35c611ccb8c853e7ea4
     </div>
   );
 }

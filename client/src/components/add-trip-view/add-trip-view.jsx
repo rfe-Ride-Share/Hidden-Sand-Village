@@ -23,7 +23,11 @@ import  TimePicker  from '@mui/x-date-pickers/TimePicker';
 import  {DateTimePicker}  from '@mui/x-date-pickers/DateTimePicker';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 // import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-
+import Autocomplete from '@mui/material/Autocomplete';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from 'use-places-autocomplete';
 
 import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
@@ -203,8 +207,65 @@ console.log('add trip information', tripPost)
           </Box>
           );
 
+///////////////////////////////////////////////////////////
+// search function auto complete directions from Michael //
+//////////////////////////////////////////////////////////
 
 
+
+const SearchBar =({ setPos, name, placeholder }) => {
+  //Autocomplete variables
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete();
+
+  //Handle select
+  const handleSelect = async (val) => {
+    setValue(val, false);
+    clearSuggestions();
+    const results = await getGeocode({ address: val });
+    const { lat, lng } = await getLatLng(results[0]);
+    setPos({ lat, lng });
+  };
+
+  const [address, setAddress] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+  return (
+    <div>
+      <Autocomplete
+        freeSolo
+        id="search-bar"
+        value={value}
+        onInputChange={(e, newValue) => {
+          setInputValue(newValue);
+          setValue(newValue);
+        }}
+        onChange={(event, newValue) => {
+          setAddress(newValue);
+          handleSelect(newValue);
+        }}
+        disableClearable
+        options={data.map(({ description }) => description)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={name}
+            placeholder={placeholder}
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
+    </div>
+  );
+}
 
 
 ///////////////////////////
@@ -221,15 +282,15 @@ console.log('add trip information', tripPost)
       <br></br>
     <Stack spacing={3} sx={{m:1, width: 450}}>
 
-    <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br>
+    {/* <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br> */}
 
-     <IconArrow>
+     {/* <IconArrow>
      <SwapVertIcon fontSize="large"/>
-     </IconArrow>
-
+     </IconArrow> */}
+     {SearchBar()}
 
     <br></br>
-    <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br>
+    {/* <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br> */}
      </Stack><br></br>
     <TextAreaCenter>
     {dateTime}

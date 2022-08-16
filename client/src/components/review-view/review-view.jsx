@@ -41,7 +41,23 @@ function ReviewView({ listOfProfiles }) {
             currentIndex < reviewResults.length;
             currentIndex++
           ) {
-            console.log(JSON.stringify(reviewResults[currentIndex]));
+            const review = {};
+            review.stars = reviewList[currentIndex].rating;
+            review.review_text = reviewList[currentIndex].feedback;
+
+            const id = reviewList[currentIndex].id;
+
+            const reviews = listOfProfiles[currentIndex].reviews || [];
+            reviews.push(review);
+
+            axios({
+              method: 'put',
+              url: `/user/${id}`,
+              data: reviews,
+            })
+              .then((response) => {
+                console.log(response);
+              })
           }
         }}
       />

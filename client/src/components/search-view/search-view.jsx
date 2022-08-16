@@ -20,9 +20,15 @@ import getDistance from './helpers/getDistance';
 
 export default function SearchView() {
   // const { isLoaded } = useLoadScript({
+<<<<<<< HEAD
   //   googleMapsApiKey: process.env.GMAPS_API_KEY,
   //   libraries: library,
   //  });
+=======
+  //   googleMapsApiKey: `AIzaSyALRO6gGBBm7Hz9jAqWLN3jaKpDE8Jse10`,
+  //   libraries: library,
+  // });
+>>>>>>> 2299d495762e9e430f085f65a6662cac2bb34cd9
 
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });
@@ -77,6 +83,7 @@ export default function SearchView() {
     // });
   }, [startPos, destPos]);
 
+<<<<<<< HEAD
   //function to calculate total distance between searched positions and trip positions card values are placeholders use
 
   // const totalDistance = (card) => {
@@ -90,6 +97,8 @@ export default function SearchView() {
   //   return total;
   // };
 
+=======
+>>>>>>> 2299d495762e9e430f085f65a6662cac2bb34cd9
   // if (!isLoaded) return <div>Loading...</div>;
 
   return (

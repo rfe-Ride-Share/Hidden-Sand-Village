@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
 import RatingStars from './rating-stars';
 
-export default function ReviewCard() {
+export default function ReviewCard({ profile = {} }) {
   return (
     <Card
       sx={{
@@ -28,10 +29,19 @@ export default function ReviewCard() {
           }}
         >
           <Typography sx={{ fontSize: 14 }} gutterBottom>
-            Name
+            Rate Tyrion
           </Typography>
-          <RatingStars />
+          <RatingStars profile={profile} />
         </CardContent>
+        <TextField
+          id="outlined-basic"
+          label="Feedback"
+          variant="outlined"
+          sx={{
+            margin: '20px',
+            borderRadius: '20px',
+          }}
+        />
       </MainCardContainer>
     </Card>
   );

@@ -5,13 +5,17 @@ import SubmitReviewsButton from './submit-reviews-button';
 import ReviewCard from './review-card';
 
 function ReviewView() {
+  const reviewList = [];
+
+  for (let currentIndex = 0; currentIndex < 4; currentIndex++) {
+    reviewList.push(<ReviewCard />);
+  }
   return (
     <ReviewList>
-      I am Batman
+      {reviewList}
       <SubmitReviewsButton />
-      <ReviewCard />
     </ReviewList>
-  )
+  );
 }
 
 const ReviewList = styled.div`

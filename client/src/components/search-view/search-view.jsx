@@ -13,7 +13,7 @@ const library = ['places'];
 
 export default function SearchView() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GMAPS_API_KEY,
+    googleMapsApiKey: 'AIzaSyDypHOW9EjMiiArLxw9cwt_gGni4VaTxKw',
     libraries: library,
   });
 

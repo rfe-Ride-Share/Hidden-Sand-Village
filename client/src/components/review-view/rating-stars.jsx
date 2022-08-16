@@ -6,7 +6,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 function getStarsFromNumber(number, setRating, profile) {
   let icons = [];
-  let key = 9001;
+  let key = 10001;
   for (let currentIteration = 0; currentIteration < 5; currentIteration++) {
     if (number >= 0.5) {
       icons.push(
@@ -42,7 +42,8 @@ function getStarsFromNumber(number, setRating, profile) {
 }
 
 function RatingStars({ profile = {} }) {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(3);
+  profile.rating = rating;
   const ratingInStars = getStarsFromNumber(rating, setRating, profile);
   return <RatingStarsComponent>{ratingInStars}</RatingStarsComponent>;
 }

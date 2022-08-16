@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-function ReviewButton() {
+function ReviewButton({ trip = {} }) {
   return (
       <Button
         variant="contained"
@@ -15,7 +16,7 @@ function ReviewButton() {
           console.log('Review functionality goes here: trip-list-view/buttons/review-button.jsx');
         }}
       >
-          Review
+          <Link to='/review' state={trip}>Review</Link>
       </Button>
   );
 }

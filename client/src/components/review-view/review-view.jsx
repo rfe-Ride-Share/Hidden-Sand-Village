@@ -5,15 +5,34 @@ import SubmitReviewsButton from './submit-reviews-button';
 import ReviewCard from './review-card';
 
 function ReviewView() {
+  const profileList = [
+    { name: 'Tyrion' },
+    { name: 'Nymeira' },
+    { name: 'Willow' },
+    { name: 'Sadie' },
+    { name: 'Piglet' },
+    { name: 'Pancake' },
+  ];
+
   const reviewList = [];
 
-  for (let currentIndex = 0; currentIndex < 4; currentIndex++) {
-    reviewList.push(<ReviewCard />);
+  for (let currentIndex = 0; currentIndex < 6; currentIndex++) {
+    reviewList.push(<ReviewCard profile={profileList[currentIndex]} />);
   }
   return (
     <ReviewList>
       {reviewList}
-      <SubmitReviewsButton />
+      <SubmitReviewsButton
+        onClick={() => {
+          for (
+            let currentIndex = 0;
+            currentIndex < profileList.length;
+            currentIndex++
+          ) {
+            console.log(JSON.stringify(profileList[currentIndex]));
+          }
+        }}
+      />
     </ReviewList>
   );
 }

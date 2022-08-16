@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-function SubmitReviewsButton() {
+function SubmitReviewsButton({ onClick }) {
   return (
       <Button
         variant="contained"
@@ -12,9 +12,7 @@ function SubmitReviewsButton() {
           backgroundColor: '#DF3062',
           margin: '25px',
         }}
-        onClick={() => {
-          console.log('Submit Reviews functionality goes here: submit-reviews-button.jsx');
-        }}
+        onClick={onClick}
       >
           Submit Reviews
       </Button>

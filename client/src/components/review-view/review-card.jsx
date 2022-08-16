@@ -29,7 +29,7 @@ export default function ReviewCard({ profile = {} }) {
           }}
         >
           <Typography sx={{ fontSize: 14 }} gutterBottom>
-            Rate Tyrion
+            Rate {profile.name}
           </Typography>
           <RatingStars profile={profile} />
         </CardContent>
@@ -40,6 +40,9 @@ export default function ReviewCard({ profile = {} }) {
           sx={{
             margin: '20px',
             borderRadius: '20px',
+          }}
+          onChange={(event) => {
+            profile.feedback = event.target.value;
           }}
         />
       </MainCardContainer>

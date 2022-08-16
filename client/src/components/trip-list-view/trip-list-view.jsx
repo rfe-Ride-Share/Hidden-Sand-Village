@@ -93,19 +93,6 @@ function TripListView() {
 
   populateLists(pendingTrips, upcomingTrips, pastTrips, listOfTrips);
 
-  console.log(
-    '🚀 ~ file: trip-list-view.jsx ~ line 45 ~ TripListView ~ pendingTrips',
-    pendingTrips
-  );
-  console.log(
-    '🚀 ~ file: trip-list-view.jsx ~ line 47 ~ TripListView ~ upcomingTrips',
-    upcomingTrips
-  );
-  console.log(
-    '🚀 ~ file: trip-list-view.jsx ~ line 49 ~ TripListView ~ pastTrips',
-    pastTrips
-  );
-
   return (
     <TripList>
       Pending Trips

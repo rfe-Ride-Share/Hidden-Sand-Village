@@ -1,23 +1,23 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-function AskToJoin() {
+function MessageButton() {
   return (
       <Button
         variant="contained"
         sx={{
-          width: '250px',
+          width: '150px',
           height: '50px',
           borderRadius: '15px',
-          backgroundColor: '#DF3062',
+          backgroundColor: '#11ABC1',
         }}
         onClick={() => {
-          console.log('Ask to Join functionality goes here: asktojoin.jsx');
+          console.log('Message functionality goes here: trip-list-view/buttons/message-button.jsx');
         }}
       >
-          Ask to Join
+          Message
       </Button>
   );
 }
 
-export default AskToJoin;
+export default MessageButton;

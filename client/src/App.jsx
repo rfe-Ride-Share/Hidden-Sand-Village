@@ -8,11 +8,15 @@ import DropdownMenu from './components/dropdown-menu/dropdown-menu';
 import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
 import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
+import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
+import TripListView from './components/trip-list-view/trip-list-view';
+import ReviewView from './components/review-view/review-view';
 
 function App() {
   return (
     <div>
       <DropdownMenu></DropdownMenu>
+      <ReviewView />
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />

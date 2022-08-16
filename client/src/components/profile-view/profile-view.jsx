@@ -1,44 +1,60 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import React from 'react';
 
-export default function ProfileView() {
-  const { user } = useAuth0();
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
-  if (!user) {
-    return null;
-  }
+function ProfileView() {
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+  const handleMessage = () => {
+    console.log('message me!');
+  };
 
   return (
-    <div className="content-layout">
-      <h1 id="page-title" className="content__title">
-        Profile Page
-      </h1>
-      <div className="content__body">
-        <p id="page-description">
-          <span>
-            You can use the <strong>ID Token</strong> to get the profile
-            information of an authenticated user.
-          </span>
-          <span>
-            <strong>Only authenticated users can access this page.</strong>
-          </span>
-        </p>
-        <div className="profile-grid">
-          <div className="profile__header">
-            <img
-              src={user.picture}
-              alt="Profile"
-              className="profile__avatar"
-              referrerpolicy="no-referrer"
-            />
-            <div className="profile__headline">
-              <h2 className="profile__title">{user.name}</h2>
-              <span className="profile__description">{user.email}</span>
-            </div>
-          </div>
-          <div className="profile__details"></div>
-        </div>
-      </div>
-    </div>
+    <Container spacing={2}>
+      <Avatar
+        alt="user picture"
+        src="https://picsum.photos/200"
+        style={{ margin: '1em auto' }}
+        sx={{ width: 80, height: 80 }}
+      />
+      <Box style={{ flexGlow: 1, textAlign: 'center' }}>
+        <Stack spacing={2} justifyContent="space-between">
+          <Typography>Carl Poole</Typography>
+          <Typography>My Reviews</Typography>
+          <Item>
+            <Rating name="read-only" value={5} readOnly />
+            <div>100 reviews</div>
+          </Item>
+          <Typography>Bio</Typography>
+          <Item>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Item>
+          <Typography>Contact</Typography>
+          <Item onClick={handleMessage} style={{}}>
+            Message Me
+          </Item>
+        </Stack>
+      </Box>
+    </Container>
   );
 }
+
+export default ProfileView;

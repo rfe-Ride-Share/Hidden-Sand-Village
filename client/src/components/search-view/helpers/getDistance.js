@@ -32,4 +32,4 @@ module.exports = getDistance = (search, trip) => {
  add total
  {...object, distStart: number, distEnd: number, distTotal: number}
  sort into results array by total distance
- */ ``;
+ */

@@ -11,11 +11,34 @@ function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
   for (const trip of tripList) {
     console.log(trip.status);
     if (trip.status === 'pending') {
-      pendingTrips.push(<RiderCard tripInfo={trip} />);
+      pendingTrips.push(
+        <div>
+          <RiderCard tripInfo={trip} />
+          <ButtonRow>
+            <CancelButton />
+            <MessageButton />
+          </ButtonRow>
+        </div>
+      );
     } else if (trip.status === 'upcoming') {
-      upcomingTrips.push(<RiderCard tripInfo={trip} />);
+      upcomingTrips.push(
+        <div>
+          <RiderCard tripInfo={trip} />
+          <ButtonRow>
+            <CancelButton />
+            <MessageButton />
+          </ButtonRow>
+        </div>
+      );
     } else {
-      pastTrips.push(<RiderCard tripInfo={trip} />);
+      pastTrips.push(
+        <div>
+          <RiderCard tripInfo={trip} />
+          <ButtonRow>
+            <ReviewButton />
+          </ButtonRow>
+        </div>
+      );
     }
   }
 }

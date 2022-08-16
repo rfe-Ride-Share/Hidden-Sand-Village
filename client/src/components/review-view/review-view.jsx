@@ -5,16 +5,7 @@ import axios from 'axios';
 import SubmitReviewsButton from './submit-reviews-button';
 import ReviewCard from './review-card';
 
-function ReviewView({ listOfProfiles }) {
-  listOfProfiles = [
-    { id: 0, name: 'Tyrion' },
-    { id: 1, name: 'Nymeira' },
-    { id: 2, name: 'Willow' },
-    { id: 3, name: 'Sadie' },
-    { id: 4, name: 'Piglet' },
-    { id: 5, name: 'Pancake' },
-  ];
-
+function ReviewView({ listOfProfiles = [] }) {
   const reviewResults = [];
 
   for (const profile of listOfProfiles) {
@@ -42,19 +33,15 @@ function ReviewView({ listOfProfiles }) {
             currentIndex++
           ) {
             const review = {};
-            review.stars = reviewList[currentIndex].rating;
-            review.review_text = reviewList[currentIndex].feedback;
+            review.stars = reviewResults[currentIndex].rating;
+            review.review_text = reviewResults[currentIndex].feedback;
 
-            const id = reviewList[currentIndex].id;
+            const id = reviewResults[currentIndex].id;
 
             const reviews = listOfProfiles[currentIndex].reviews || [];
             reviews.push(review);
 
-            axios({
-              method: 'put',
-              url: `/user/${id}`,
-              data: reviews,
-            })
+            axios.put(`/users/${id}`, reviews)
               .then((response) => {
                 console.log(response);
               })

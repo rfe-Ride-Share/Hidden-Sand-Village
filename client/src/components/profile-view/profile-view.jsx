@@ -17,6 +17,9 @@ function ProfileView() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
+  const handleMessage = () => {
+    console.log('message me!');
+  };
 
   return (
     <Container spacing={2}>
@@ -24,6 +27,7 @@ function ProfileView() {
         alt="user picture"
         src="https://picsum.photos/200"
         style={{ margin: '1em auto' }}
+        sx={{ width: 80, height: 80 }}
       />
       <Box style={{ flexGlow: 1, textAlign: 'center' }}>
         <Stack spacing={2} justifyContent="space-between">
@@ -44,7 +48,7 @@ function ProfileView() {
             culpa qui officia deserunt mollit anim id est laborum.
           </Item>
           <Typography>Contact</Typography>
-          <Item>Message Me</Item>
+          <Item onClick={handleMessage}>Message Me</Item>
         </Stack>
       </Box>
     </Container>

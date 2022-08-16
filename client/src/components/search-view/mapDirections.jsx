@@ -13,7 +13,7 @@ export default function MapDirections({ startPos, destPos }) {
     () => ({ lat: 35.92143223969268, lng: -79.06361405386014 }),
     []
   );
-  const [directions, setDirections] = useState();
+  const [directions, setDirections] = useState(false);
   const fetchDirections = (start, end) => {
     const service = new google.maps.DirectionsService();
     service.route(
@@ -43,7 +43,7 @@ export default function MapDirections({ startPos, destPos }) {
 
   useEffect(() => {
     fetchDirections(startPos, destPos);
-  }, [startPos, destPos]);
+  }, []);
 
   const options = useMemo(() => ({
     disableDefaultUI: true,

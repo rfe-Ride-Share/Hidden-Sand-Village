@@ -1,6 +1,11 @@
 // import 'dotenv/config';
 import { useEffect, useMemo, useState } from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  DirectionsRenderer,
+} from '@react-google-maps/api';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -11,22 +16,54 @@ import RiderCard from '../trip-view/rider-trip-view/card';
 
 import getDistance from './helpers/getDistance';
 
-const library = ['places'];
+// const library = ['places'];
 
 export default function SearchView() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GMAPS_API_KEY,
-    libraries: library,
-  });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.GMAPS_API_KEY,
+  //   libraries: library,
+  //  });
 
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });
   const [destPos, setDestPos] = useState({ lat: 0, lng: 0 });
   const [distance, setDistance] = useState(0);
 
-  useEffect(() => {
-    setDistance(getDistance(startPos, destPos));
+  const [getDirs, setDirs] = useState(false);
 
+  const fetchDirections = (start, end) => {
+    // if (!isLoaded) {
+    //   return;
+    // }
+    const service = new google.maps.DirectionsService();
+    service.route(
+      {
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === 'OK' && result) {
+          setDirs(result);
+          let miles = result.routes[0].legs[0].distance.value / 1609.34;
+          let seconds = result.routes[0].legs[0].duration.value;
+          let startAddress = result.routes[0].legs[0].start_address;
+          let endAddress = result.routes[0].legs[0].end_address;
+          let centsPerMile = 62.5;
+          console.log('🚙', Math.round(miles));
+          console.log('⏰', seconds);
+          console.log('🚪', startAddress);
+          console.log('📍', endAddress);
+          console.log('💰', `$${((miles * centsPerMile) / 100).toFixed(2)}`);
+          console.log(result);
+        }
+      }
+    );
+  };
+
+  useEffect(() => {
+    console.log(startPos, destPos);
+    fetchDirections(startPos, destPos);
     //Sort trips by distance to input locations assuming tripsResults is array of trip objects
     // let tripsCopy = tripResults.slice();
     // tripsCopy.sort((a, b) => {
@@ -53,7 +90,7 @@ export default function SearchView() {
   //   return total;
   // };
 
-  if (!isLoaded) return <div>Loading...</div>;
+  // if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <>
@@ -82,8 +119,8 @@ export default function SearchView() {
         <RiderCard />
         <RiderCard />
         <RiderCard />
+        {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
       </Box>
-      {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
     </>
   );
 }

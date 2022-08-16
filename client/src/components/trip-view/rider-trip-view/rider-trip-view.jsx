@@ -22,7 +22,6 @@ function RiderTripView({ status, tripInfo }) {
 
   return (
     <div>
-      <PlaceHolderBar />
       <RiderTripViewContainer>
         <TitleOfTrip />
         <Paper

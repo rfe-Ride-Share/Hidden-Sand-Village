@@ -38,7 +38,6 @@ function DriverTripView({ status, tripInfo }) {
 
   return (
     <div>
-      <PlaceHolderBar />
       <DriverTripViewContainer>
         <TitleOfTrip />
         <Paper

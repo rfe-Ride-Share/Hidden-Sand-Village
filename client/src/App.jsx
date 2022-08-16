@@ -23,7 +23,6 @@ function App() {
   return (
     <div>
       <DropdownMenu></DropdownMenu>
-      <TripListView />
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />

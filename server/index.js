@@ -69,8 +69,8 @@ app.delete('/user/:id', (req, res) => {
     .catch((err) => console.error(err));
 });
 
-app.get('*', (req, res) => {
-  res.status(404).send('Page does not exist...');
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 });
 
 // chat??
@@ -93,15 +93,23 @@ const testUser = {
 const sampleTrip = {
   date: '1660576677204',
   depart_time: '1660576677205',
-  departure: 'home',
+  departure: 'home', //
+  // lat, long
   destination: 'home away from home',
-  driver: 'Carl Poole',
+  // lat , long
+  driver: 'Carl Poole', // driver email
+  // notes
+  // distance
+  // meters
   passengers: [
     {
       Rider: { departure: 'place1', destination: 'place2', status: 'upcoming' },
     },
   ],
+  // passenger_capacity
+  // passenger?
   price: '2.38',
   duration: 'one hour',
+  // seconds
   status: 'upcoming', // pending/done/cancelled/upcoming/full/
 };

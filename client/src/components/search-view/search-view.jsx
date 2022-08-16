@@ -19,10 +19,10 @@ import getDistance from './helpers/getDistance';
 // const library = ['places'];
 
 export default function SearchView() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDypHOW9EjMiiArLxw9cwt_gGni4VaTxKw',
-    libraries: library,
-  });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: 'INSERT KEY HERE',
+  //   libraries: library,
+  // });
 
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });

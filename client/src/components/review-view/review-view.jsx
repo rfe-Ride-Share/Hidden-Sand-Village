@@ -47,6 +47,7 @@ function ReviewView({ listOfProfiles = [] }) {
                 console.log(response);
               });
           }
+            window.location.replace('http://localhost:3000/');
         }}
       />
     </ReviewList>

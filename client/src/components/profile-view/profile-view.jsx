@@ -5,11 +5,8 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Stack from '@mui/material/Stack';
 
 function ProfileView() {

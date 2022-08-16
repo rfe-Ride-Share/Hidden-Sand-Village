@@ -9,6 +9,7 @@ import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
 import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
+import TripListView from './components/trip-list-view/trip-list-view';
 
 function App() {
   const tripInfo = {
@@ -22,6 +23,7 @@ function App() {
   return (
     <div>
       <DropdownMenu></DropdownMenu>
+      <TripListView />
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />

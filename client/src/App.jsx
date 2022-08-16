@@ -33,7 +33,6 @@ function App() {
   return (
     <div>
       <DropdownMenu></DropdownMenu>
-      <ReviewView />
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<Chat />} />
@@ -43,6 +42,9 @@ function App() {
           element={<ProtectedRoute component={ProfileView} />}
         />
         <Route path="/profile" element={<ProfileView />} />
+        <Route path="/review" element={<ReviewView />} />
+        <Route path="/driver-trip" element={<DriverTripView />} />
+        <Route path="/trips" element={<TripListView />} />
         <Route path="/add" element={<AddTripView />} />
       </Routes>
 

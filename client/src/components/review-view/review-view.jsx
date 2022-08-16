@@ -17,6 +17,7 @@ function ReviewView({ listOfProfiles = [] }) {
 
     reviewResults.push(newReview);
   }
+
   const reviewList = [];
 
   for (let currentIndex = 0; currentIndex < 6; currentIndex++) {
@@ -44,7 +45,7 @@ function ReviewView({ listOfProfiles = [] }) {
             axios.put(`/users/${id}`, reviews)
               .then((response) => {
                 console.log(response);
-              })
+              });
           }
         }}
       />

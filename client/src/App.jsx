@@ -9,16 +9,26 @@ import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-vie
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 
 function App() {
+  const tripInfo = {
+    date: '4:00 PM August 27th, 2022',
+    startPoint: '20 W 34th St., New York, NY 10001',
+    endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
+    totalCost: '$250',
+    riderCostLow: 25,
+    riderCostHigh: 125,
+  }
   return (
-    <div>
-      <div>This is a very important message!!</div>
-      <div>Put your component here when you want to test it out.</div>
-      <div>Please save these divs in a comment below when testing.</div>
-      <div>So that you are able to restore this component to exactly</div>
-      <div>the way it was to avoid merge conflicts.</div>
-      <div>This message is coming to you from App.jsx</div>
-    </div>
+    <DriverTripView status={'pending'} tripInfo={tripInfo} />
   );
 }
 
 export default App;
+
+{/* <div>
+<div>This is a very important message!!</div>
+<div>Put your component here when you want to test it out.</div>
+<div>Please save these divs in a comment below when testing.</div>
+<div>So that you are able to restore this component to exactly</div>
+<div>the way it was to avoid merge conflicts.</div>
+<div>This message is coming to you from App.jsx</div>
+</div> */}

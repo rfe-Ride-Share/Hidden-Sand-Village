@@ -3,9 +3,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 import SearchBar from './searchBar';
 import MapDirections from './mapDirections';
+import RiderCard from '../trip-view/rider-trip-view/card';
 
 import getDistance from './helpers/getDistance';
 
@@ -24,25 +26,64 @@ export default function SearchView() {
 
   useEffect(() => {
     setDistance(getDistance(startPos, destPos));
+
+    //Sort trips by distance to input locations assuming tripsResults is array of trip objects
+    // let tripsCopy = tripResults.slice();
+    // tripsCopy.sort((a, b) => {
+    //   if (totalDistance(a) < totalDistance(b)) {
+    //     return 1;
+    //   }
+    //   if (totalDistance(a) > totalDistance(b)) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // });
   }, [startPos, destPos]);
+
+  //function to calculate total distance between searched positions and trip positions card values are placeholders use
+
+  // const totalDistance = (card) => {
+  //   let total = 0;
+  //   if (startPos.lat !== 0 && startPos.lng === 0) {
+  //     total += getDistance(startPos, card.startPos);
+  //   }
+  //   if (destPos.lat !== 0 && destPos.lng === 0) {
+  //     total += getDistance(destPos, card.destPos);
+  //   }
+  //   return total;
+  // };
 
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <>
-      <p>Distance of {distance} miles between points.</p>
-      <SearchBar
-        setPos={setStartPos}
-        name={'Start'}
-        placeholder={'Where will you be travelling from?'}
-      />
+      {/* <p>Distance of {distance} miles between points.</p> */}
       <br></br>
-      <SearchBar
-        setPos={setDestPos}
-        name={'Destination'}
-        placeholder={'Where will you be travelling to?'}
-      />
-      <MapDirections startPos={startPos} destPos={destPos} />
+      <Stack>
+        <SearchBar
+          setPos={setStartPos}
+          name={'Start'}
+          placeholder={'Where will you be travelling from?'}
+        />
+        <br></br>
+        <SearchBar
+          setPos={setDestPos}
+          name={'Destination'}
+          placeholder={'Where will you be travelling to?'}
+        />
+      </Stack>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <RiderCard />
+        <RiderCard />
+        <RiderCard />
+      </Box>
+      {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
     </>
   );
 }

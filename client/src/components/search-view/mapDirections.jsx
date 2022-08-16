@@ -25,14 +25,17 @@ export default function MapDirections({ startPos, destPos }) {
       (result, status) => {
         if (status === 'OK' && result) {
           setDirections(result);
-          let meters = result.routes[0].legs[0].distance.value;
+          let miles = result.routes[0].legs[0].distance.value / 1900;
           let seconds = result.routes[0].legs[0].duration.value;
           let startAddress = result.routes[0].legs[0].start_address;
           let endAddress = result.routes[0].legs[0].end_address;
-          console.log('🚙', meters / 1900);
+          let centsPerMile = 62.5;
+          console.log('🚙', Math.round(miles));
           console.log('⏰', seconds);
           console.log('🚪', startAddress);
           console.log('📍', endAddress);
+          console.log('💰', `$${((miles * centsPerMile) / 100).toFixed(2)}`);
+          console.log(result);
         }
       }
     );

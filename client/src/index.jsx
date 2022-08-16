@@ -5,14 +5,19 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const domain = process.env.ISSUER_BASE_URL;
+const clientId = process.env.CLIENT_ID;
+const redirectUri = process.env.CALLBACK_URL;
+
 root.render(
-  <Auth0Provider
-    domain="YOUR_AUTH0_DOMAIN"
-    clientId="YOUR_AUTH0_CLIENT_ID"
-    redirectUri={window.location.origin}
-  >
-    <BrowserRouter>
+  <BrowserRouter>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      redirectUri={redirectUri}
+    >
       <App />
-    </BrowserRouter>
-  </Auth0Provider>
+    </Auth0Provider>
+  </BrowserRouter>
 );

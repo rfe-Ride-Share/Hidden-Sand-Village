@@ -1,23 +1,23 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-function AskToJoin() {
+function ReviewButton() {
   return (
       <Button
         variant="contained"
         sx={{
-          width: '250px',
+          width: '150px',
           height: '50px',
           borderRadius: '15px',
-          backgroundColor: '#DF3062',
+          backgroundColor: '#F5B935',
         }}
         onClick={() => {
-          console.log('Ask to Join functionality goes here: asktojoin.jsx');
+          console.log('Review functionality goes here: trip-list-view/buttons/review-button.jsx');
         }}
       >
-          Ask to Join
+          Review
       </Button>
   );
 }
 
-export default AskToJoin;
+export default ReviewButton;

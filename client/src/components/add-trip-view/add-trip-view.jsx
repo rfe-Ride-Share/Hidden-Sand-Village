@@ -20,7 +20,7 @@ import  {AdapterMoment}  from '@mui/x-date-pickers/AdapterMoment';
 import  {LocalizationProvider}  from '@mui/x-date-pickers/LocalizationProvider';
 import  {DateTimePicker}  from '@mui/x-date-pickers/DateTimePicker';
 import SearchBar from '../search-view/searchBar.jsx';
-
+import {useLoadScript} from '@react-google-maps/api';
 import Autocomplete from '@mui/material/Autocomplete';
 import usePlacesAutocomplete, {
   getGeocode,
@@ -35,8 +35,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 
 
-
-
+const library = ['places'];
 
 function AddTripView() {
 
@@ -211,15 +210,21 @@ console.log('add trip information', tripPost)
 // search function auto complete directions from Michael //
 //////////////////////////////////////////////////////////
 
+// const { isLoaded } = useLoadScript({
+//   googleMapsApiKey: process.env.GMAPS_API_KEY,
+//   libraries: library,
+// });
 
 
 
 
-
-
+const [startPos, setStartPos] = React.useState({ lat: 0, lng: 0 });
+const [destPos, setDestPos] = React.useState({ lat: 0, lng: 0 });
 ///////////////////////////
 //   RENDERED STUFFF      //
 ///////////////////////////
+
+// if (!isLoaded) return <div>Loading...</div>;
 
 
   return (

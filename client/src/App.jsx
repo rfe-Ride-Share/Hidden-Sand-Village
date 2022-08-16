@@ -11,8 +11,31 @@ import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-vie
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 import TripListView from './components/trip-list-view/trip-list-view';
 import ReviewView from './components/review-view/review-view';
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  DirectionsRenderer,
+} from '@react-google-maps/api';
+
+const library = ['places'];
+
+
+
+
 
 function App() {
+
+
+
+    const { isLoaded } = useLoadScript({
+      googleMapsApiKey: process.env.GMAPS_API_KEY,
+      libraries: library,
+    });
+
+
+    if (!isLoaded) return <div>Loading...</div>;
+
   return (
     <div>
       <DropdownMenu></DropdownMenu>

@@ -210,10 +210,7 @@ console.log('add trip information', tripPost)
 // search function auto complete directions from Michael //
 //////////////////////////////////////////////////////////
 
-// const { isLoaded } = useLoadScript({
-//   googleMapsApiKey: process.env.GMAPS_API_KEY,
-//   libraries: library,
-// });
+
 
 
 
@@ -224,7 +221,7 @@ const [destPos, setDestPos] = React.useState({ lat: 0, lng: 0 });
 //   RENDERED STUFFF      //
 ///////////////////////////
 
-// if (!isLoaded) return <div>Loading...</div>;
+
 
 
   return (

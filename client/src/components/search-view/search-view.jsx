@@ -12,10 +12,10 @@ import getDistance from './helpers/getDistance';
 const library = ['places'];
 
 export default function SearchView() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: `AIzaSyALRO6gGBBm7Hz9jAqWLN3jaKpDE8Jse10`,
-    libraries: library,
-  });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: `AIzaSyALRO6gGBBm7Hz9jAqWLN3jaKpDE8Jse10`,
+  //   libraries: library,
+  // });
 
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });
@@ -26,7 +26,7 @@ export default function SearchView() {
     setDistance(getDistance(startPos, destPos));
   }, [startPos, destPos]);
 
-  if (!isLoaded) return <div>Loading...</div>;
+  // if (!isLoaded) return <div>Loading...</div>;
 
   return (
     <>

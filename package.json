@@ -11,7 +11,11 @@
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
+<<<<<<< HEAD
     "@mui/x-date-pickers": "^5.0.0-beta.5",
+=======
+    "@react-google-maps/api": "^2.12.1",
+>>>>>>> 67d44eee9165a674c11e04c2a3125aa31b8ac0ef
     "axios": "^0.27.2",
     "babel-loader": "^8.2.5",
     "dotenv": "^16.0.1",

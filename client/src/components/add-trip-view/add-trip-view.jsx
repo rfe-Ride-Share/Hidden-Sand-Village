@@ -16,13 +16,10 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import InputAdornment from '@mui/material/InputAdornment';
-//import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import  {AdapterMoment}  from '@mui/x-date-pickers/AdapterMoment';
 import  {LocalizationProvider}  from '@mui/x-date-pickers/LocalizationProvider';
-import  TimePicker  from '@mui/x-date-pickers/TimePicker';
 import  {DateTimePicker}  from '@mui/x-date-pickers/DateTimePicker';
-// import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-// import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import SearchBar from '../search-view/searchBar.jsx';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import usePlacesAutocomplete, {
@@ -215,72 +212,11 @@ console.log('add trip information', tripPost)
 //////////////////////////////////////////////////////////
 
 
-function SearchBar({ setPos, name, placeholder }) {
-  //Autocomplete variables
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete();
-
-  //Handle select
-  const handleSelect = async (val) => {
-
-    setValue(val, false);
-
-    clearSuggestions();
-    const results = await getGeocode({ address: val });
-    const { lat, lng } = await getLatLng(results[0]);
-    setPos({ lat, lng });
-  };
-
-  const [address, setAddress] = React.useState('');
-
-  const [inputValue, setInputValue] = React.useState('');
-
-  return (
-    <div>
-      <Autocomplete
-        freeSolo
-        id="search-bar"
-        value={value}
-        onInputChange={(e, newValue) => {
-          setInputValue(newValue);
-          setValue(newValue);
-
-        }}
-        onChange={(event, newValue) => {
-          setAddress(newValue);
-          handleSelect(newValue);
-        }}
-        disableClearable
-        options={data.map(({ description }) => description)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={name}
-            placeholder={placeholder}
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
-        )}
-      />
-    </div>
-  );
-}
-
-const [startPos, setStartPos] = React.useState({ lat: 0, lng: 0 });
-const [destPos, setDestPos] = React.useState({ lat: 0, lng: 0 });
-const [distance, setDistance] = React.useState(0);
 
 
 
 
-  // process.env.GMAPS_API_KEY
+
 ///////////////////////////
 //   RENDERED STUFFF      //
 ///////////////////////////
@@ -298,14 +234,14 @@ const [distance, setDistance] = React.useState(0);
     {/* <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br> */}
     <SearchBar setPos={setStartPos}
         name={'Start'}
-        placeholder={'Where will you be travelling from?'} setFrom={setFrom}/>
+        placeholder={'Where will you be travelling from?'} />
      <IconArrow>
      <SwapVertIcon fontSize="large"/>
      </IconArrow>
 
     <SearchBar setPos={setDestPos}
         name={'Destination'}
-        placeholder={'Where will you be travelling to?'} setTo={setTo}/>
+        placeholder={'Where will you be travelling to?'}/>
 
     <br></br>
     {/* <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br> */}

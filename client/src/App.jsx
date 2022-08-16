@@ -7,12 +7,12 @@ import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
 import TripView from './components/trip-view/trip-view';
 
-import SearchBar from './components/search-view/search-bar.jsx';
+// import SearchBar from './components/search-view/search-bar.jsx';
 
 function App() {
   return (
     <div>
-      <SearchBar />
+      <SearchView />
       <div>This is a very important message!!</div>
       <div>Put your component here when you want to test it out.</div>
       <div>Please save these divs in a comment below when testing.</div>

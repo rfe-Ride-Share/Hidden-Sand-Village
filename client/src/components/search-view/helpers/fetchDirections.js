@@ -8,7 +8,6 @@ module.exports = fetchDirections = (start, end, setDirections) => {
     },
     (result, status) => {
       if (status === 'OK' && result) {
-        // setDirections(result);
         let miles = result.routes[0].legs[0].distance.value / 1609.34;
         let milesReadable = result.routes[0].legs[0].distance.text;
         let seconds = result.routes[0].legs[0].duration.value;

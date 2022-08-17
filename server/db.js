@@ -38,8 +38,8 @@ function deleteTrip(id) {
   return Trip.deleteOne(id).exec(); // {deletedCount: 1}
 }
 
-function findTrip(id) {
-  return Trip.findOne(id).exec();
+function findTrip() {
+  return Trip.find().exec();
 }
 
 function updateTrip(id, data) {
@@ -60,8 +60,8 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-function findOneAndUpdateUser(id, data) {
-  return User.findOneAndUpdate({ user_id: id }, data).exec();
+function findOneAndUpdateUser(query, data) {
+  return User.findOneAndUpdate(query, data).exec();
 }
 
 function createUser(data) {

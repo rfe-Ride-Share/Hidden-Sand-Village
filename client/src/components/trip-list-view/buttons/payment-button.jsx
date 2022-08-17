@@ -2,23 +2,23 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-function AskToJoin() {
+function PaymentButton({ trip = {} }) {
   return (
       <Button
         variant="contained"
         sx={{
-          width: '250px',
+          width: '150px',
           height: '50px',
           borderRadius: '15px',
-          backgroundColor: '#DF3062',
+          backgroundColor: '#2FDD92',
         }}
         onClick={() => {
-          console.log('Ask to Join functionality goes here: asktojoin.jsx');
+          console.log('Payment functionality goes here: trip-list-view/buttons/payment-button.jsx');
         }}
       >
-          <Link to='/confirm' >Ask to Join</Link>
+          <Link to='/payment' state={trip}>Payment</Link>
       </Button>
   );
 }
 
-export default AskToJoin;
+export default PaymentButton;

@@ -2,23 +2,23 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-function AskToJoin() {
+function GoBackButton({ trip = {}, text = 'Go Back' }) {
   return (
       <Button
         variant="contained"
         sx={{
-          width: '250px',
+          width: '150px',
           height: '50px',
           borderRadius: '15px',
-          backgroundColor: '#DF3062',
+          backgroundColor: '#F5B935',
         }}
         onClick={() => {
-          console.log('Ask to Join functionality goes here: asktojoin.jsx');
+          console.log('Go Back functionality goes here: agree-to-payment/buttons/go-back-button.jsx');
         }}
       >
-          <Link to='/confirm' >Ask to Join</Link>
+          <Link to='/' >{text}</Link>
       </Button>
   );
 }
 
-export default AskToJoin;
+export default GoBackButton;

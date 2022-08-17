@@ -13,7 +13,7 @@ function ReviewView() {
 
   axios.get('/tripp', { _id: trip._id })
     .then((result) => {
-      const data = results.data;
+      const data = result.data;
       const newListOfProfiles = data.passengers;
 
       const email = data.driver_email;

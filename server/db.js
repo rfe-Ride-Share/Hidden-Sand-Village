@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+require('dotenv').config();
 
 mongoose
-  .connect('mongodb://localhost:27017/sandy')
+  .connect(process.env.MONGO)
   .then(() => console.log('connected to MongoDB...'))
   .catch((err) => console.log(err));
 

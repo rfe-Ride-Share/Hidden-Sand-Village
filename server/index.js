@@ -1,10 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 
 const db = require('./db');
 
 const app = express();
+app.use(cors());
+
+// socket io config
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  cors: {
+    orogin: 'http://localhost:3000',
+    method: ['GET', 'POST'],
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('user connected', socket.id);
+});
+
+httpServer.listen(3001, () => {
+  console.log('Socket IO server connected...');
+});
 
 app.use(express.json());
 // app.use(bodyParser.json());

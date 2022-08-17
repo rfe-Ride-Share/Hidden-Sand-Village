@@ -11,7 +11,7 @@ import Confirmed from './buttons/confirmed';
 
 import Paper from '@mui/material/Paper';
 
-function RiderTripView({ status, tripInfo }) {
+function RiderTripView({ status, tripInfo = {} }) {
   let displayButton = <AskToJoin />;
 
   if (status === 'pending') {
@@ -23,7 +23,7 @@ function RiderTripView({ status, tripInfo }) {
   return (
     <div>
       <RiderTripViewContainer>
-        <TitleOfTrip />
+        <TitleOfTrip title={tripInfo.title} />
         <Paper
           elevation={12}
           sx={{

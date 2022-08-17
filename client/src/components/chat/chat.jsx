@@ -22,7 +22,7 @@ function Chat() {
        {/* <ChatList users={users} /> */}
       {/* <Conversation></Conversation> */}
       <Message users={users}></Message>
-      <Message users={users}></Message>
+
     </div>
   );
 }

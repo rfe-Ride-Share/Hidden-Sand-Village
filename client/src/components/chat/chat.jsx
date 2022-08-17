@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Message from './Message.jsx'
+import Message from './message.jsx'
 import Conversation from './conversation.jsx';
 import styled from 'styled-components'
 

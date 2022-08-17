@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 
-function AskToJoin() {
+function ConfirmRequestButton({ isAccepted, setIsConfirmed }) {
   return (
       <Button
         variant="contained"
@@ -13,12 +12,15 @@ function AskToJoin() {
           backgroundColor: '#DF3062',
         }}
         onClick={() => {
-          console.log('Ask to Join functionality goes here: asktojoin.jsx');
+          console.log('notifying the driver of a request goes here in confirm-request-button.jsx');
+          if (isAccepted) {
+            setIsConfirmed(true);
+          }
         }}
       >
-          <Link to='/confirm' >Ask to Join</Link>
+          Confirm Request
       </Button>
   );
 }
 
-export default AskToJoin;
+export default ConfirmRequestButton;

@@ -7,17 +7,25 @@ import UserIconCard from './user-icon-card';
 
 function ChatList({ users = {} }) {
   const listOfUserIcons = [];
-  const onClick = () => console.log('opening this users direct message is supposed to appear here. user-icon-card.jsx');
+  const onClick = () =>
+    console.log(
+      'opening this users direct message is supposed to appear here. user-icon-card.jsx'
+    );
 
   for (const user of users) {
     listOfUserIcons.push(
-      <UserIconCard image={user.user_photo} name={user.first_name} onClick={onClick} />
-    )
+      <UserIconCard
+        image={user.user_photo}
+        name={user.first_name}
+        onClick={onClick}
+      />
+    );
   }
   return (
     <Paper
-      elevation={12}
+      elevation={0}
       sx={{
+        height: '100%',
         minHeight: '400px',
         width: '20%',
         borderRadius: '20px',

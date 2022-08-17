@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Card from '@mui/material/card';
+import Card from '@mui/material/Card';
 
 function UserIconCard({ name, image, onClick }) {
   return (

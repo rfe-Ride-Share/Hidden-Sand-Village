@@ -36,6 +36,7 @@ export default function SearchView() {
   //     });
   // }, []);
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   console.log(startPos, destPos);
   //   fetchDirections(startPos, destPos);
@@ -51,6 +52,23 @@ export default function SearchView() {
   //     return 0;
   //   });
   // }, [startPos, destPos]);
+=======
+  useEffect(() => {
+    console.log(startPos, destPos);
+    fetchDirections(startPos, destPos);
+    //Sort trips by distance to input locations assuming tripsResults is array of trip objects
+    // let tripsCopy = tripResults.slice();
+    // tripsCopy.sort((a, b) => {
+    //   if (totalDistance(a) < totalDistance(b)) {
+    //     return 1;
+    //   }
+    //   if (totalDistance(a) > totalDistance(b)) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // });
+  }, [startPos, destPos]);
+>>>>>>> 6e7ea9c893951162362985a2710c8767e999198a
 
   //function to calculate total distance between searched positions and trip positions card values are placeholders use
 

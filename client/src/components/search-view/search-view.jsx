@@ -1,49 +1,134 @@
 // import 'dotenv/config';
 import { useEffect, useMemo, useState } from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  DirectionsRenderer,
+} from '@react-google-maps/api';
 
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Container from '@mui/material/Container';
 
 import SearchBar from './searchBar';
 import MapDirections from './mapDirections';
+import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
 import getDistance from './helpers/getDistance';
 
-const library = ['places'];
+// const library = ['places'];
 
 export default function SearchView() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GMAPS_API_KEY,
-    libraries: library,
-  });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: 'INSERT KEY HERE',
+  //   libraries: library,
+  // });
 
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });
   const [destPos, setDestPos] = useState({ lat: 0, lng: 0 });
   const [distance, setDistance] = useState(0);
 
+  const [getDirs, setDirs] = useState(false);
+
+  const fetchDirections = (start, end) => {
+    // if (!isLoaded) {
+    //   return;
+    // }
+    const service = new google.maps.DirectionsService();
+    service.route(
+      {
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === 'OK' && result) {
+          setDirs(result);
+          let miles = result.routes[0].legs[0].distance.value / 1609.34;
+          let seconds = result.routes[0].legs[0].duration.value;
+          let startAddress = result.routes[0].legs[0].start_address;
+          let endAddress = result.routes[0].legs[0].end_address;
+          let centsPerMile = 62.5;
+          console.log('🚙', Math.round(miles));
+          console.log('⏰', seconds);
+          console.log('🚪', startAddress);
+          console.log('📍', endAddress);
+          console.log('💰', `$${((miles * centsPerMile) / 100).toFixed(2)}`);
+          console.log(result);
+        }
+      }
+    );
+  };
+
   useEffect(() => {
-    setDistance(getDistance(startPos, destPos));
+    console.log(startPos, destPos);
+    fetchDirections(startPos, destPos);
+    //Sort trips by distance to input locations assuming tripsResults is array of trip objects
+    // let tripsCopy = tripResults.slice();
+    // tripsCopy.sort((a, b) => {
+    //   if (totalDistance(a) < totalDistance(b)) {
+    //     return 1;
+    //   }
+    //   if (totalDistance(a) > totalDistance(b)) {
+    //     return -1;
+    //   }
+    //   return 0;
+    // });
   }, [startPos, destPos]);
 
-  if (!isLoaded) return <div>Loading...</div>;
+  //function to calculate total distance between searched positions and trip positions card values are placeholders use
+
+  // const totalDistance = (card) => {
+  //   let total = 0;
+  //   if (startPos.lat !== 0 && startPos.lng === 0) {
+  //     total += getDistance(startPos, card.startPos);
+  //   }
+  //   if (destPos.lat !== 0 && destPos.lng === 0) {
+  //     total += getDistance(destPos, card.destPos);
+  //   }
+  //   return total;
+  // };
+
+  // if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <>
-      <p>Distance of {distance} miles between points.</p>
-      <SearchBar
-        setPos={setStartPos}
-        name={'Start'}
-        placeholder={'Where will you be travelling from?'}
-      />
-      <br></br>
-      <SearchBar
-        setPos={setDestPos}
-        name={'Destination'}
-        placeholder={'Where will you be travelling to?'}
-      />
-      <MapDirections startPos={startPos} destPos={destPos} />
-    </>
+    <Container
+      sx={{
+        padding: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Stack sx={{ width: '80%', minWidth: '350px' }}>
+        <SearchBar
+          setPos={setStartPos}
+          name={'Start'}
+          placeholder={'Where will you be travelling from?'}
+        />
+        <br></br>
+        <SearchBar
+          setPos={setDestPos}
+          name={'Destination'}
+          placeholder={'Where will you be travelling to?'}
+        />
+      </Stack>
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <RiderCard />
+        <RiderCard />
+        <RiderCard />
+        {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
+      </Box>
+    </Container>
   );
 }
 // const testUser = {

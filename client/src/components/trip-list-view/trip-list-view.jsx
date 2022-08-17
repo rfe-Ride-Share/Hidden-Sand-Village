@@ -10,7 +10,7 @@ import PaymentButton from './buttons/payment-button';
 
 function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
   for (const trip of tripList) {
-    console.log(trip.status);
+    // console.log(trip.status);
     if (trip.status === 'pending') {
       pendingTrips.push(
         <div>

@@ -6,7 +6,7 @@ import PaymentCard from './payment-card';
 
 function Payment(props) {
   const location = useLocation();
-  console.log('state is', location.state);
+  // console.log('state is', location.state);
   const trip = location.state || { passengers: [] };
 
   const unformattedRiderCost = trip.totalCost / (trip.passengers.length + 1);

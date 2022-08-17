@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {format} from 'timeago.js';
 
 //import Moment from 'react-moment';
-import moment from 'moment';
+// import moment from 'moment';
 
 //pass in message obj and owner. classname/css changes based on sender or reciever.
 //time will be formatted based on details sent in message obj. Comment out if you want to see a preview of what the Messages will look like.

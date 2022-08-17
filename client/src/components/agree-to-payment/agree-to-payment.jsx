@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Checkbox } from '@mui/material';
 
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
+import ConfirmRequestButton from './buttons/confirm-request-button';
+import GoBackButton from './buttons/go-back-button';
 
 function AgreeToPayment({ tripInfo = {} }) {
   const cost = tripInfo.riderCostHigh || 0;
@@ -11,6 +13,20 @@ function AgreeToPayment({ tripInfo = {} }) {
   const [isAccepted, setIsAccepted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
+  if (isConfirmed) {
+    return (
+      <div>
+        <RiderCard tripInfo={tripInfo} />
+        <AgreementMessage>
+          Congratulations! Your request to join the ride has been sent to the
+          driver. The driver will message you with furher details.
+        </AgreementMessage>
+        <AgreementButtons>
+          <GoBackButton />
+        </AgreementButtons>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -23,6 +39,12 @@ function AgreeToPayment({ tripInfo = {} }) {
       <AgreementCheckbox>
         I Accept <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
       </AgreementCheckbox>
+      <AgreementButtons>
+        <ConfirmRequestButton
+          isAccepted={isAccepted}
+          setIsConfirmed={setIsConfirmed}
+        />
+      </AgreementButtons>
     </div>
   );
 }
@@ -37,6 +59,12 @@ const AgreementCheckbox = styled.div`
   justify-content: center;
   align-contnet: center;
   margin: 25px;
+`;
+
+const AgreementButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 export default AgreeToPayment;

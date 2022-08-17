@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-function ConfirmRequest({ isAccepted, setIsConfirmed }) {
+function ConfirmRequestButton({ isAccepted, setIsConfirmed }) {
   return (
       <Button
         variant="contained"
@@ -12,6 +12,7 @@ function ConfirmRequest({ isAccepted, setIsConfirmed }) {
           backgroundColor: '#DF3062',
         }}
         onClick={() => {
+          console.log('notifying the driver of a request goes here in confirm-request-button.jsx');
           if (isAccepted) {
             setIsConfirmed(true);
           }
@@ -22,4 +23,4 @@ function ConfirmRequest({ isAccepted, setIsConfirmed }) {
   );
 }
 
-export default ConfirmRequest;
+export default ConfirmRequestButton;

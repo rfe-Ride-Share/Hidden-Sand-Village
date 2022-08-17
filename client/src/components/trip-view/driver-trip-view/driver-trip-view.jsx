@@ -20,7 +20,7 @@ function getConfirmedRiders(riders) {
   });
 }
 
-function DriverTripView({ status, tripInfo }) {
+function DriverTripView({ status, tripInfo = {} }) {
   const profileInfo = {
     name: 'Nymeria',
     rating: 4.8,
@@ -39,7 +39,7 @@ function DriverTripView({ status, tripInfo }) {
   return (
     <div>
       <DriverTripViewContainer>
-        <TitleOfTrip />
+        <TitleOfTrip title={tripInfo.destination} />
         <Paper
           elevation={12}
           sx={{

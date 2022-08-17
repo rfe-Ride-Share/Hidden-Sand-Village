@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 function AskToJoin() {
   return (
@@ -15,7 +16,7 @@ function AskToJoin() {
           console.log('Ask to Join functionality goes here: asktojoin.jsx');
         }}
       >
-          Ask to Join
+          <Link to='/confirm' >Ask to Join</Link>
       </Button>
   );
 }

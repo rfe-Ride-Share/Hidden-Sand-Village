@@ -1,7 +1,13 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import {format} from 'timeago.js';
 
+//import Moment from 'react-moment';
+import moment from 'moment';
 
+//pass in message obj and owner. classname/css changes based on sender or reciever.
+//time will be formatted based on details sent in message obj. Comment out if you want to see a preview of what the Messages will look like.
+//We need users profile photo in message obj
 export default function Message({ message, own }) {
   return (
     <Messages>
@@ -9,23 +15,19 @@ export default function Message({ message, own }) {
       <div className="messageTop">
         <img
           className="messageImg"
-          src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          src={message.photo}
           alt=""
         />
-        <p className="messageText">This is a test to see if the css works</p>
+        <p className="messageText">{message.text}</p>
       </div>
-      {/* <div className="messageBottom">{format(message.createdAt)}</div> */}
 
+      <div className="messageBottom">{format(message.createdAt)}</div>
     </div>
     </Messages>
   );
 }
-
-
+// {format(message.createdAt)}
 const Messages = styled.div`
-
-
-
 .message{
   display: flex;
   flex-direction: column;
@@ -64,4 +66,9 @@ const Messages = styled.div`
 .message.own .messageText{
     background-color: rgb(245, 241, 241);
     color: black;
-}`
+}
+`
+
+
+
+

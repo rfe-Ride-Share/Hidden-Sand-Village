@@ -39,11 +39,12 @@ function deleteTrip(query) {
 }
 
 function findTrip(query) {
+  console.log("db's query is", query);
   return Trip.find(query).exec();
 }
 
-function updateTrip(id, data) {
-  return Trip.findOneAndUpdate(id, data);
+function updateTrip(query, data) {
+  return Trip.findOneAndUpdate(query, data);
 }
 
 const userSchema = new Schema({

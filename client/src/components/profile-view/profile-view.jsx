@@ -65,7 +65,7 @@ export default function ProfileView() {
 
   const handleEditBio = () => {
     axios
-      .post('/userr', userData)
+      .put('/userr', userData)
       .then(() => {
         axios.get(`/userr?email=${user.email}`);
       })

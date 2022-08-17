@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 import SubmitReviewsButton from './submit-reviews-button';
 import ReviewCard from './review-card';
 
-function ReviewView({ listOfProfiles = [] }) {
+function ReviewView() {
+  const location = useLocation();
+  const [listOfProfiles, setListOfProfiles] = useState(null);
+  const trip = location.state();
+
+  axios.get('/tripp', { _id: trip._id })
+    .then((result) => {
+      const data = results.data;
+      const newListOfProfiles = data.passengers;
+
+      const email = data.driver_email;
+      axios.get('/userr', { email: email })
+        .then((result) => {
+          const driverProfile = result.data;
+          newListOfProfiles.push(driverProfile);
+          setListOfProfiles(newListOfProfiles);
+        })
+    })
   const reviewResults = [];
 
   for (const profile of listOfProfiles) {
@@ -23,6 +41,11 @@ function ReviewView({ listOfProfiles = [] }) {
   for (let currentIndex = 0; currentIndex < reviewResults.length; currentIndex++) {
     reviewList.push(<ReviewCard profile={reviewResults[currentIndex]} />);
   }
+
+  if (listOfProfiles === null) {
+    return null;
+  }
+
   return (
     <ReviewList>
       {reviewList}

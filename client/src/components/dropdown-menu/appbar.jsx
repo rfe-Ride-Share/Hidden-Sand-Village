@@ -18,7 +18,7 @@ import AuthenticationButton from '../auth/authentication-button';
 function Appbar({ setOpen }) {
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar sx={{ backgroundColor: '#11ABC1' }}>
         <IconButton
           size="large"
           edge="start"
@@ -37,7 +37,6 @@ function Appbar({ setOpen }) {
         </Typography>
         {/* Replace with login button */}
         <AuthenticationButton />
-        <Button color="inherit">Login as a hacker</Button>
       </Toolbar>
     </AppBar>
   );

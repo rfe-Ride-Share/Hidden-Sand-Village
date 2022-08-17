@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Paper from '@mui/material/paper';
+import Paper from '@mui/material/Paper';
 
 import UserIconCard from './user-icon-card';
 

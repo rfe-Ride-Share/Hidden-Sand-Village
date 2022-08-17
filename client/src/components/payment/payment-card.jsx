@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function RiderCard({ tripInfo = {} }) {
+export default function PaymentCard({ tripInfo = {} }) {
   return (
       <Card sx={{ minWidth: 350, margin: '25px' }}>
         <CardContent>
@@ -18,10 +18,8 @@ export default function RiderCard({ tripInfo = {} }) {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             {tripInfo.startPoint}
           </Typography>
-          <Typography variant="body2">
-            Total Cost: ${tripInfo.totalCost}
-            <br />
-            Rider Cost ${tripInfo.riderCostLow} - ${tripInfo.riderCostHigh}
+          <Typography variant="h4">
+            Amount Due: ${tripInfo.riderCost}
           </Typography>
         </CardContent>
       </Card>

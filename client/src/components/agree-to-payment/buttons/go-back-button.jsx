@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-function MessageButton() {
+function GoBackButton({ trip = {}, text = 'Go Back' }) {
   return (
       <Button
         variant="contained"
@@ -10,15 +10,15 @@ function MessageButton() {
           width: '150px',
           height: '50px',
           borderRadius: '15px',
-          backgroundColor: '#11ABC1',
+          backgroundColor: '#F5B935',
         }}
         onClick={() => {
-          console.log('Message functionality goes here: trip-list-view/buttons/message-button.jsx');
+          console.log('Go Back functionality goes here: agree-to-payment/buttons/go-back-button.jsx');
         }}
       >
-          <Link to='/chat'>Message</Link>
+          <Link to='/' >{text}</Link>
       </Button>
   );
 }
 
-export default MessageButton;
+export default GoBackButton;

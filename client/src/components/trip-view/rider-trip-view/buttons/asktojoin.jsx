@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-function AskToJoin() {
+function AskToJoin({ tripInfo = {} }) {
   return (
       <Button
         variant="contained"
@@ -16,7 +16,7 @@ function AskToJoin() {
           console.log('Ask to Join functionality goes here: asktojoin.jsx');
         }}
       >
-          <Link to='/confirm' >Ask to Join</Link>
+          <Link to='/confirm' state={tripInfo}>Ask to Join</Link>
       </Button>
   );
 }

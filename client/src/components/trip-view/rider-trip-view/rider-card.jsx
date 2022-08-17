@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import axios from 'axios';
 
+import MapDirections from '../../search-view/mapDirections';
+
 export default function RiderCard({ tripInfo = {} }) {
   const [userData, setUserData] = React.useState({});
   const [rating, setRating] = React.useState(0);
@@ -32,8 +34,19 @@ export default function RiderCard({ tripInfo = {} }) {
   }, []);
 
   return (
-    <Card sx={{ width: '100%', minWidth: 350, margin: '25px' }}>
+    <Card
+      sx={{
+        width: '100%',
+        minWidth: 350,
+        margin: '25px',
+        backgroundColor: '#F7F7F7',
+      }}
+    >
       <CardContent>
+        <MapDirections
+          startPos={tripInfo.depart_coord}
+          destPos={tripInfo.dest_coord}
+        />
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {moment(tripInfo.date).format('MMM Do YY h:mm a')}
         </Typography>

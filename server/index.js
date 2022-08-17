@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
@@ -28,7 +27,6 @@ httpServer.listen(3001, () => {
 });
 
 app.use(express.json());
-// app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Appbar from './appbar.jsx';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -22,9 +24,47 @@ import CommuteIcon from '@mui/icons-material/Commute';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const DropdownMenu = () => {
+  const { user, logout } = useAuth0();
   const [open, setOpen] = useState(false);
+  // const [userData, setUserData] = useState({
+  //   user_photo: user.picture,
+  //   first_name: user.name.split(' ')[0],
+  //   last_name: user.name.split(' ')[1],
+  //   reviews: [],
+  //   bio: '',
+  //   email: user.email,
+  // });
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`/userr?email=${user.email}`)
+  //     .then((res) => {
+  //       console.log('res from email is', res);
+  //       setUserData(res.data);
+  //     })
+  //     // take care of posting on the server side?
+  //     .catch((err) => {
+  //       if (err.response.status === 400) {
+  //         axios
+  //           .post('/userr', userData)
+  //           .then(() => {
+  //             axios.get(`/userr?email=${user.email}`);
+  //           })
+  //           .catch((err) => console.error(err));
+  //       } else {
+  //         console.log(err);
+  //       }
+  //     });
+  // }, []);
+
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleLogout = () => {
+    setOpen(false);
+    logout({
+      returnTo: window.location.origin,
+    });
   };
   return (
     <Box>
@@ -35,8 +75,8 @@ const DropdownMenu = () => {
         </IconButton>
         <IconButton>
           <Avatar
-            alt="user name here"
-            src="https://picsum.photos/56"
+            alt={user ? user.name : 'Log in'}
+            src={user ? user.picture : null}
             sx={{ width: 56, height: 56 }}
           />
         </IconButton>
@@ -49,7 +89,7 @@ const DropdownMenu = () => {
             },
             { text: 'Home', icon: <HomeIcon />, link: '/' },
             { text: 'Messages', icon: <MessageIcon />, link: '/chat' },
-          ].map((item, index) => (
+          ].map((item) => (
             <ListItem key={item.text} onClick={handleClose} disablePadding>
               <Link
                 to={item.link}
@@ -88,21 +128,25 @@ const DropdownMenu = () => {
         </MUIList>
         <Divider />
         <MUIList>
-          {[{ text: 'Log Out', icon: <LogoutIcon />, link: '/' }].map(
-            (item, index) => (
-              <ListItem key={item.text} onClick={handleClose} disablePadding>
-                <Link
-                  to={item.link}
-                  style={{ textDecoration: 'none', color: 'black' }}
-                >
-                  <ListItemButton>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.text} />
-                  </ListItemButton>
-                </Link>
-              </ListItem>
-            )
-          )}
+          {[
+            {
+              text: 'Log Out',
+              icon: <LogoutIcon />,
+              link: '/',
+            },
+          ].map((item, index) => (
+            <ListItem key={item.text} onClick={handleLogout} disablePadding>
+              <Link
+                to={item.link}
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
         </MUIList>
       </Drawer>
     </Box>

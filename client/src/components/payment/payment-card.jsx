@@ -22,9 +22,6 @@ export default function PaymentCard({ tripInfo = {} }) {
             Amount Due: ${tripInfo.riderCost}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
   );
 }

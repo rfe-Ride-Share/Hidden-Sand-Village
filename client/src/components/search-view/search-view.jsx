@@ -95,7 +95,6 @@ export default function SearchView() {
           alignItems: 'center',
         }}
       >
-        <br> </br>
         {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
         <RiderCard />
         <RiderCard />

@@ -12,7 +12,17 @@ import Confirmed from './buttons/confirmed';
 import Paper from '@mui/material/Paper';
 
 function RiderTripView({ status, tripInfo = {} }) {
-  let displayButton = <AskToJoin />;
+  tripInfo = {
+    title: 'Disney World',
+    date: '8/29/2022',
+    startPoint: 'New York, NY',
+    endPoint: 'Orlando, FL',
+    totalCost: 500,
+    riderCostLow: 50,
+    riderCostHigh: 250,
+  }
+
+  let displayButton = <AskToJoin tripInfo={tripInfo} />;
 
   if (status === 'pending') {
     displayButton = <Pending />

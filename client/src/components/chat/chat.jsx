@@ -46,6 +46,7 @@ console.log(newMessage)
     user_photo: 'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
   }
 
+
   const users = [];
 
   for (let currentIndex = 0; currentIndex < 1; currentIndex++) {

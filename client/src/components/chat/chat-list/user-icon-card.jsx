@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Card from '@mui/material/card';
+import Card from '@mui/material/Card';
 
 function UserIconCard({ name, image, onClick }) {
   return (
@@ -13,7 +13,7 @@ function UserIconCard({ name, image, onClick }) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '15px',
+        borderRadius: '15pm',
         padding: '5px',
         fontSize: '12px',
       }}

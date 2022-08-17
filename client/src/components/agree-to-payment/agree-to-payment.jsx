@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import { Checkbox } from '@mui/material';
 
@@ -7,7 +8,10 @@ import RiderCard from '../trip-view/rider-trip-view/rider-card';
 import ConfirmRequestButton from './buttons/confirm-request-button';
 import GoBackButton from './buttons/go-back-button';
 
-function AgreeToPayment({ tripInfo = {} }) {
+function AgreeToPayment(props) {
+  const location = useLocation();
+
+  const tripInfo = location.state || {};
   const cost = tripInfo.riderCostHigh || 0;
 
   const [isAccepted, setIsAccepted] = useState(false);

@@ -4,10 +4,17 @@ import Message from './message.jsx'
 
 function Conversation() {
   return (
+<<<<<<< HEAD
     <Scroll className="conversation">
 
 
     </Scroll>
+=======
+    <div>
+      <input placeholder="send message..."></input>
+      <button>Send</button>
+    </div>
+>>>>>>> 73b0eff898fccfb6cf9429e774f4be5d5fb9cf3b
   );
 }
 

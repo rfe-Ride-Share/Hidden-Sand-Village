@@ -1,8 +1,14 @@
 import React from 'react';
+import Message from './Message.jsx'
 
 function Chat() {
+
+
+
   return (
-    <div>Ian is the GOAT</div>
+    <div><Message/></div>
+
+
   )
 }
 

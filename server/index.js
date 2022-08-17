@@ -34,7 +34,13 @@ const PORT = 3000;
 
 // trips
 app.get('/tripp', (req, res) => {
-  db.findTrip()
+  let query;
+  if (!req.query) {
+    query = {};
+  } else {
+    query = req.query;
+  }
+  db.findTrip(query)
     .then((trip) => res.send(trip))
     .catch((err) => res.status(400).send(err));
 });
@@ -45,14 +51,14 @@ app.post('/tripp', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.put('/tripp/:id', (req, res) => {
-  db.updateTrip(req.params.id, req.body)
+app.put('/tripp', (req, res) => {
+  db.updateTrip(req.query, req.body)
     .then((data) => res.status(201).send(data))
     .catch((err) => res.status(400).send(err));
 });
 
-app.delete('/tripp/:id', (req, res) => {
-  db.deleteTrip(req.params.id)
+app.delete('/tripp', (req, res) => {
+  db.deleteTrip(req.query)
     .then((data) => {
       data.deletedCount === 1
         ? res.status(200).send(data)
@@ -93,8 +99,8 @@ app.put('/userr', (req, res) => {
     .catch((err) => res.status(500).send('Could not create or update user ❌'));
 });
 
-app.delete('/userr/:id', (req, res) => {
-  db.deleteUser(req.params.id)
+app.delete('/userr', (req, res) => {
+  db.deleteUser(req.query)
     .then((data) => {
       data.deletedCount === 1
         ? res.status(200).send(data)

@@ -1,6 +1,8 @@
 // import 'dotenv/config';
 import axios from 'axios';
 import * as React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -45,6 +47,8 @@ function AddTripView() {
   const [title, setTitle] = React.useState('');
   const [tripValue, setTripValue] = React.useState('');
 
+  const { user } = useAuth0();
+
   ////////////////////////////////////////////
   ////           STATE OBJ                ///
   ///////////////////////////////////////////
@@ -81,6 +85,7 @@ function AddTripView() {
   const handleSubmit = (event) => {
     //event.preventDefault();
     const tripPost = {
+      driver_email: user.email,
       title: title,
       description: tripValue,
       date: new Date(),
@@ -100,7 +105,7 @@ function AddTripView() {
     console.log('tripPost', tripPost);
     console.log('add trip information', tripPost);
     axios
-      .post('/trips', tripPost)
+      .post('/tripp', tripPost)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };

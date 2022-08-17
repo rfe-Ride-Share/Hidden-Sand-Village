@@ -37,7 +37,6 @@ function Appbar({ setOpen }) {
         </Typography>
         {/* Replace with login button */}
         <AuthenticationButton />
-        <Button color="inherit">Login as a hacker</Button>
       </Toolbar>
     </AppBar>
   );

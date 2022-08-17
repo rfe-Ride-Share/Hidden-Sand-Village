@@ -38,33 +38,40 @@ export default function RiderCard({ tripInfo = {} }) {
       sx={{
         width: '100%',
         minWidth: 350,
-        margin: '25px',
+        margin: '13px',
         backgroundColor: '#F7F7F7',
+        borderRadius: '1%',
       }}
     >
-      <CardContent>
+      <CardContent sx={{ p: 0 }}>
         <MapDirections
           startPos={tripInfo.depart_coord}
           destPos={tripInfo.dest_coord}
         />
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        <Typography
+          sx={{ fontSize: 14, ml: 1.5 }}
+          color="text.secondary"
+          gutterBottom
+        >
           {moment(tripInfo.date).format('MMM Do YY h:mm a')}
         </Typography>
-        <Typography variant="h6" component="div">
-          {tripInfo.destination}
+        <Typography variant="h6" component="div" sx={{ ml: 1.5 }}>
+          {tripInfo.title}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {tripInfo.departure}
+        <Typography sx={{ m: 1.5 }} color="text.secondary">
+          From: {tripInfo.destination}
         </Typography>
-        <Typography variant="body2">
+        <Typography sx={{ m: 1.5 }} color="text.secondary">
+          To: {tripInfo.departure}
+        </Typography>
+        <Typography variant="body2" sx={{ ml: 1.5 }}>
           Total Cost: ${tripInfo.price.toFixed(2)}
           <br />
           Rider Cost $
           {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
           {(tripInfo.price / 2).toFixed(2)}
         </Typography>
-        <br></br>
-        <Typography variant="body2">
+        <Typography variant="body2" sx={{ ml: 1.5 }}>
           Driver: {`${userData.first_name} ${userData.last_name}`}
           <br />
           <Rating name="driver rating" value={rating} readOnly />

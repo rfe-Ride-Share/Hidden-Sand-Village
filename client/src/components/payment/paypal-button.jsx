@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
-function PayPalButton({ cost = 0 }) {
+function PayPalButton({ cost = 0, setHasPaid }) {
   // console.log('cost is', cost);
   return (
     <PaymentButtons>
@@ -33,6 +33,7 @@ function PayPalButton({ cost = 0 }) {
               })
               .then((orderId) => {
                 // Your code here after create the order
+                setHasPaid(true);
                 return orderId;
               });
           }}

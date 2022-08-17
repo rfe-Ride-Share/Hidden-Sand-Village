@@ -12,25 +12,25 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 const PORT = 3000;
 
 // trips
-app.get('/trips/:id', (req, res) => {
+app.get('/tripp/:id', (req, res) => {
   db.findTrip(req.params.id)
     .then((trip) => res.send(trip))
     .catch((err) => res.status(400).send(err));
 });
 
-app.post('/trips', (req, res) => {
+app.post('/tripp', (req, res) => {
   db.createTrip(req.body)
     .then((data) => res.status(201).send(data))
     .catch((err) => res.status(500).send(err));
 });
 
-app.put('/trips/:id', (req, res) => {
+app.put('/tripp/:id', (req, res) => {
   db.updateTrip(req.params.id, req.body)
     .then((data) => res.status(201).send(data))
     .catch((err) => res.status(400).send(err));
 });
 
-app.delete('/trips/:id', (req, res) => {
+app.delete('/tripp/:id', (req, res) => {
   db.deleteTrip(req.params.id)
     .then((data) => {
       data.deletedCount === 1
@@ -93,23 +93,22 @@ const testUser = {
 const sampleTrip = {
   date: '1660576677204',
   depart_time: '1660576677205',
-  departure: 'home', //
-  // lat, long
+  departure: 'home',
+  depart_coord: { lat: '123', lng: '321' },
   destination: 'home away from home',
-  // lat , long
+  dest_coord: { lat: '123', lng: '321' },
   driver: 'Carl Poole', // driver email
-  // notes
-  // distance
-  // meters
+  notes: 'Looking for an alien.',
+  distance: 1,
+  distance_str: 'one mile',
   passengers: [
     {
       Rider: { departure: 'place1', destination: 'place2', status: 'upcoming' },
     },
   ],
-  // passenger_capacity
-  // passenger?
+  passenger_capacity: 3,
   price: '2.38',
   duration: 'one hour',
-  // seconds
+  seconds: 123,
   status: 'upcoming', // pending/done/cancelled/upcoming/full/
 };

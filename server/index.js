@@ -20,6 +20,9 @@ const io = new Server(httpServer, {
 
 io.on('connection', (socket) => {
   console.log('user connected', socket.id);
+  socket.on('send_message', (data) => {
+    socket.emit('receive_message', data);
+  });
 });
 
 httpServer.listen(3001, () => {
@@ -89,6 +92,12 @@ app.delete('/user/:id', (req, res) => {
     })
     .catch((err) => console.error(err));
 });
+
+// chat endpoints below
+
+// io.on;
+
+//
 
 app.get('*', function (request, response) {
   response.sendFile(path.resolve(__dirname, '../client/dist/index.html'));

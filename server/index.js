@@ -37,8 +37,14 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 const PORT = 3000;
 
 // trips
-app.get('/tripp/:id', (req, res) => {
-  db.findTrip(req.params.id)
+app.get('/tripp', (req, res) => {
+  let query;
+  if (!req.query) {
+    query = {};
+  } else {
+    query = req.query;
+  }
+  db.findTrip(query)
     .then((trip) => res.send(trip))
     .catch((err) => res.status(400).send(err));
 });
@@ -49,14 +55,14 @@ app.post('/tripp', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.put('/tripp/:id', (req, res) => {
-  db.updateTrip(req.params.id, req.body)
+app.put('/tripp', (req, res) => {
+  db.updateTrip(req.query, req.body)
     .then((data) => res.status(201).send(data))
     .catch((err) => res.status(400).send(err));
 });
 
-app.delete('/tripp/:id', (req, res) => {
-  db.deleteTrip(req.params.id)
+app.delete('/tripp', (req, res) => {
+  db.deleteTrip(req.query)
     .then((data) => {
       data.deletedCount === 1
         ? res.status(200).send(data)
@@ -90,14 +96,15 @@ app.post('/userr', (req, res) => {
     .catch((err) => res.status(500).send('Could not create or update user ❌'));
 });
 
-app.put('/userr/:id', (req, res) => {
-  db.findOneAndUpdateUser(req.params.id, req.body)
+// /userr?email=youremail
+app.put('/userr', (req, res) => {
+  db.findOneAndUpdateUser(req.query, req.body)
     .then(() => res.status(201).send('User updated ✅'))
     .catch((err) => res.status(500).send('Could not create or update user ❌'));
 });
 
-app.delete('/userr/:id', (req, res) => {
-  db.deleteUser(req.params.id)
+app.delete('/userr', (req, res) => {
+  db.deleteUser(req.query)
     .then((data) => {
       data.deletedCount === 1
         ? res.status(200).send(data)
@@ -105,12 +112,6 @@ app.delete('/userr/:id', (req, res) => {
     })
     .catch((err) => console.error(err));
 });
-
-// chat endpoints below
-
-// io.on;
-
-//
 
 app.get('*', function (request, response) {
   response.sendFile(path.resolve(__dirname, '../client/dist/index.html'));

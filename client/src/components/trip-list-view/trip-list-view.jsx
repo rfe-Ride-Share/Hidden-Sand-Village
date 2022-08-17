@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
@@ -8,15 +8,27 @@ import MessageButton from './buttons/message-button';
 import ReviewButton from './buttons/review-button';
 import PaymentButton from './buttons/payment-button';
 
-function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
-  for (const trip of tripList) {
-    // console.log(trip.status);
+function populateLists(
+  pendingTrips,
+  upcomingTrips,
+  pastTrips,
+  tripList,
+  setListOfTrips
+) {
+  for (let currentIndex = 0; currentIndex < tripList.length; currentIndex++) {
+    const trip = tripList[currentIndex];
     if (trip.status === 'pending') {
       pendingTrips.push(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton />
+            <CancelButton
+              onClick={() => {
+                let copyOfTripList = tripList.slice();
+                copyOfTripList.splice(currentIndex, 1);
+                setListOfTrips(copyOfTripList);
+              }}
+            />
             <MessageButton />
           </ButtonRow>
         </div>
@@ -26,7 +38,13 @@ function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton />
+            <CancelButton
+              onClick={() => {
+                let copyOfTripList = tripList.slice();
+                copyOfTripList.splice(currentIndex, 1);
+                setListOfTrips(copyOfTripList);
+              }}
+            />
             <MessageButton />
           </ButtonRow>
         </div>
@@ -92,11 +110,19 @@ function TripListView() {
     listOfTrips.push(pastTrip);
   }
 
+  const [stateListOfTrips, setListOfTrips] = useState(listOfTrips);
+
   const pendingTrips = [];
   const upcomingTrips = [];
   const pastTrips = [];
 
-  populateLists(pendingTrips, upcomingTrips, pastTrips, listOfTrips);
+  populateLists(
+    pendingTrips,
+    upcomingTrips,
+    pastTrips,
+    stateListOfTrips,
+    setListOfTrips
+  );
 
   return (
     <TripList>

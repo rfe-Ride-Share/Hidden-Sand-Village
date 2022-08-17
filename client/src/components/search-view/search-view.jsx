@@ -7,6 +7,7 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api';
 import axios from 'axios';
+import moment from 'moment';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -16,6 +17,7 @@ import SearchBar from './searchBar';
 // import MapDirections from './MapDirections';
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
+// import fetchDirections from './helpers/fetchDirections';
 import getDistance from './helpers/getDistance';
 
 export default function SearchView() {
@@ -24,46 +26,47 @@ export default function SearchView() {
   const [destPos, setDestPos] = useState({ lat: 0, lng: 0 });
   const [trips, setTrips] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get('/trips')
-  //     .then((response) => {
-  //       console.log({ response });
-  //       setTrips(response);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(startPos, destPos);
-  //   fetchDirections(startPos, destPos);
-  //   //Sort trips by distance to input locations assuming tripsResults is array of trip objects
-  //   let tripsCopy = tripResults.slice();
-  //   tripsCopy.sort((a, b) => {
-  //     if (totalDistance(a) < totalDistance(b)) {
-  //       return 1;
-  //     }
-  //     if (totalDistance(a) > totalDistance(b)) {
-  //       return -1;
-  //     }
-  //     return 0;
-  //   });
-  // }, [startPos, destPos]);
+  useEffect(() => {
+    axios
+      .get('/tripp')
+      .then((response) => {
+        console.log(response.data);
+        setTrips(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   //function to calculate total distance between searched positions and trip positions card values are placeholders use
 
-  const totalDistance = (card) => {
-    let total = 0;
-    if (startPos.lat !== 0 && startPos.lng !== 0) {
-      total += getDistance(startPos, card.startPos);
-    }
-    if (destPos.lat !== 0 && destPos.lng !== 0) {
-      total += getDistance(destPos, card.destPos);
-    }
-    return total;
-  };
+  useEffect(() => {
+    console.log(startPos, destPos);
+    // fetchDirections(startPos, destPos);
+    //Sort trips by distance to input locations assuming tripsResults is array of trip objects
+    const totalDistance = (trip) => {
+      let total = 0;
+      if (startPos.lat !== 0 && startPos.lng !== 0) {
+        total += getDistance(startPos, trip.depart_coord);
+      }
+      if (destPos.lat !== 0 && destPos.lng !== 0) {
+        total += getDistance(destPos, trip.dest_coord);
+      }
+      return total;
+    };
+
+    let tripsCopy = trips.slice();
+    tripsCopy.sort((a, b) => {
+      if (totalDistance(a) > totalDistance(b)) {
+        return 1;
+      }
+      if (totalDistance(a) < totalDistance(b)) {
+        return -1;
+      }
+      return 0;
+    });
+    setTrips(tripsCopy);
+  }, [startPos, destPos]);
 
   return (
     <Container
@@ -95,10 +98,9 @@ export default function SearchView() {
           alignItems: 'center',
         }}
       >
-        {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
-        <RiderCard />
-        <RiderCard />
-        <RiderCard />
+        {trips.map((trip) => (
+          <RiderCard key={trip._id} tripInfo={trip} />
+        ))}
       </Box>
     </Container>
   );

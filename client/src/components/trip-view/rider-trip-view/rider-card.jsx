@@ -24,9 +24,6 @@ export default function RiderCard({ tripInfo = {} }) {
             Rider Cost ${tripInfo.riderCostLow} - ${tripInfo.riderCostHigh}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
   );
 }

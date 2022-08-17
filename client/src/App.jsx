@@ -11,6 +11,7 @@ import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-vie
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 import TripListView from './components/trip-list-view/trip-list-view';
 import ReviewView from './components/review-view/review-view';
+import Payment from './components/payment/payment';
 import {
   GoogleMap,
   useLoadScript,
@@ -46,6 +47,7 @@ function App() {
         <Route path="/driver-trip" element={<DriverTripView />} />
         <Route path="/trips" element={<TripListView />} />
         <Route path="/add" element={<AddTripView />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
 
       {/* <div>This is a very important message!!</div>

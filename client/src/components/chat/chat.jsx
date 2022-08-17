@@ -1,4 +1,6 @@
 import React from 'react';
+import Conversation from './conversation.jsx';
+import Message from './Message.jsx';
 
 import ChatList from './chat-list/chat-list.jsx';
 
@@ -15,8 +17,12 @@ function Chat() {
   }
 
   return (
-    <ChatList users={users} />
-  )
+    <div className="chat">
+      <ChatList users={users} />
+      <Conversation></Conversation>
+      <Message></Message>
+    </div>
+  );
 }
 
 export default Chat;

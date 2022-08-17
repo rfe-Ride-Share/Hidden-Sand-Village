@@ -13,7 +13,7 @@ function UserIconCard({ name, image, onClick }) {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '15px',
+        borderRadius: '15pm',
         padding: '5px',
         fontSize: '12px',
       }}

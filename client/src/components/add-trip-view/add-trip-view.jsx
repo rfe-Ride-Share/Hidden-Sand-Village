@@ -42,7 +42,7 @@ function AddTripView() {
 
   const [tripDetails, setTripDetails] = React.useState('');
   const [from, setFrom] = React.useState('');
-  const [to, setTo] = React.useState('');
+  const [title, setTitle] = React.useState('');
   const [tripValue, setTripValue] = React.useState('');
 
   ////////////////////////////////////////////
@@ -81,17 +81,20 @@ function AddTripView() {
   const handleSubmit = (event) => {
     //event.preventDefault();
     const tripPost = {
-      postedOn: new Date(),
-      from: directionData.startAddress,
-      to: directionData.endAddress,
-      seats: seats,
-      dateTime: value,
-      tripDetails: tripValue,
-      cost: directionData.cost,
-      miles: directionData.miles,
-      milesReadable: directionData.milesReadable,
+      title: title,
+      description: tripValue,
+      date: new Date(),
+      depart_time: value,
+      departure: directionData.startAddress,
+      depart_coord: startPos,
+      destination: directionData.endAddress,
+      dest_coord: destPos,
+      distance: directionData.miles,
+      distance_str: directionData.milesReadable,
+      passenger_capacity: seats,
+      price: directionData.cost,
+      duration: directionData.timeReadable,
       seconds: directionData.seconds,
-      timeReadable: directionData.timeReadable,
     };
 
     console.log('tripPost', tripPost);
@@ -208,7 +211,7 @@ function AddTripView() {
         <TextField
           fullWidth
           id="outlined-multiline-flexible"
-          label="Trip Details"
+          label="Trip Description"
           multiline
           maxRows={20}
           minRows={10}
@@ -274,7 +277,17 @@ function AddTripView() {
         />
 
         <br></br>
-        {/* <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br> */}
+        <TextField
+          id="outlined-basic"
+          label="Trip Title"
+          placeholder="Give your trip a title"
+          variant="outlined"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <br></br>
+        <br></br>
         <br></br>
         <TextAreaCenter>{dateTime}</TextAreaCenter>
         <br></br>
@@ -289,6 +302,7 @@ function AddTripView() {
           className="post-button"
           variant="contained"
           type="submit"
+          sx={{ backgroundColor: '#f5b935' }}
           onClick={(e) => {
             handleSubmit();
           }}
@@ -299,8 +313,9 @@ function AddTripView() {
           className="cancel-button"
           variant="contained"
           type="submit"
-          onClick={(e) => {
-            console.log('CANCEL');
+          href="/"
+          sx={{
+            backgroundColor: '#df3062',
           }}
         >
           Cancel
@@ -317,11 +332,9 @@ const ButtonCan = styled.div`
   justify-content: center;
   margin-top: 70px;
   .post-button {
-    background: #f5b935;
   }
 
   .cancel-button {
-    background: #df3062;
     margin-left: 30px;
   }
 `;

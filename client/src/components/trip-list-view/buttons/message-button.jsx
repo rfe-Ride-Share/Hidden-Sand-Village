@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 function MessageButton() {
@@ -15,7 +16,7 @@ function MessageButton() {
           console.log('Message functionality goes here: trip-list-view/buttons/message-button.jsx');
         }}
       >
-          Message
+          <Link to='/chat'>Message</Link>
       </Button>
   );
 }

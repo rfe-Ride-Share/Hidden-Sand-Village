@@ -7,6 +7,7 @@ import { Checkbox } from '@mui/material';
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 import ConfirmRequestButton from './buttons/confirm-request-button';
 import GoBackButton from './buttons/go-back-button';
+import addRiderToDatabase from './add-rider-to-db';
 
 function AgreeToPayment(props) {
   const location = useLocation();

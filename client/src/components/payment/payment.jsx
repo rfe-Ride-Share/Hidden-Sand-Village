@@ -3,8 +3,8 @@ import React from 'react';
 import PayPalButton from './paypal-button';
 import PaymentCard from './payment-card';
 
-function Payment() {
-  const sampleTrip = {
+function Payment({ trip = {} }) {
+  trip = {
     date: '4:00 PM 6/2/2023',
     startPoint: 'New York, NY',
     endPoint: 'Orlando, FL',
@@ -12,7 +12,7 @@ function Payment() {
   }
   return (
     <div>
-      <PaymentCard tripInfo={sampleTrip} />
+      <PaymentCard tripInfo={trip} />
       <PayPalButton />
     </div>
   );

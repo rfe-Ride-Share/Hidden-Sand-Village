@@ -32,12 +32,12 @@ function Appbar({ setOpen }) {
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            Home
+
           </Link>
         </Typography>
         {/* Replace with login button */}
-        <AuthenticationButton />
-        <Button color="inherit">Login as a hacker</Button>
+        {/* <AuthenticationButton /> */}
+        <Button color="inherit"></Button>
       </Toolbar>
     </AppBar>
   );

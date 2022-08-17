@@ -5,8 +5,8 @@ import Message from './message.jsx'
 function Conversation() {
   return (
     <Scroll className="conversation">
-      {/* <div>Conversation div</div> */}
-      <Message/>
+
+
     </Scroll>
   );
 }

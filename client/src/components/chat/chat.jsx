@@ -25,7 +25,19 @@ const [newMessage, setNewMessage] = useState('')
 const [currentUser, setCurrentUser] = useState('1');
 const [conversations, setConversations] = useState([]);
 const [currentChat, setCurrentChat] = useState(null);
-const [messages, setMessages] = useState([]);
+const [messages, setMessages] = useState([{
+  text: "Hey, I want to join your trip! Tell me more about it.",
+  photo: 'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg',
+  createdAt: new Date(),
+   user_id: '1',
+   conversation_id: '1'
+}, {
+  text: "Hi! We would be taking all back roads to avoid tolls. How do you feel about that?",
+  photo: 'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
+  createdAt: new Date(),
+  user_id: '2',
+  conversation_id: '1'
+}]);
 
 console.log(newMessage)
 
@@ -41,22 +53,10 @@ console.log(newMessage)
   }
 
 
-const dummy1 = {
-  text: "Hey, I want to join your trip! Tell me more about it.",
-  photo: 'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg',
-  createdAt: new Date(),
-   user_id: '1'
-}
 
-const dummy2 = {
-  text: "Hi! We would be taking all back roads to avoid tolls. How do you feel about that?",
-  photo: 'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
-  createdAt: new Date(),
-  user_id: 2
-}
 
-const own1 = false;
-const own2 = true;
+
+
 
   return (
     // <ChatWrapper>
@@ -70,8 +70,13 @@ const own2 = true;
     <div className="chatBoxWrapper">
       <div className="chatBoxTop">
 
-                <Message message={dummy1} own={own1}/>
-                <Message message={dummy2} own={own2}/>
+      {messages.map((m) => (
+
+        <Message message={m} own={m.user_id === currentUser}/>
+
+         ))}
+
+
 
           </div>
           <div className="chatBoxBottom">

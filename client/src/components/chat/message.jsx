@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import {format} from 'timeago.js';
+import styled from 'styled-components'
 
 
 export default function Message({ message, own }) {
@@ -10,19 +9,23 @@ export default function Message({ message, own }) {
       <div className="messageTop">
         <img
           className="messageImg"
-          src={message.photo}
+          src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt=""
         />
-        <p className="messageText">{message.text}</p>
+        <p className="messageText">This is a test to see if the css works</p>
       </div>
+      {/* <div className="messageBottom">{format(message.createdAt)}</div> */}
 
-      <div className="messageBottom">{format(message.createdAt)}</div>
     </div>
     </Messages>
   );
 }
-// {format(message.createdAt)}
+
+
 const Messages = styled.div`
+
+
+
 .message{
   display: flex;
   flex-direction: column;
@@ -61,5 +64,4 @@ const Messages = styled.div`
 .message.own .messageText{
     background-color: rgb(245, 241, 241);
     color: black;
-}
-`
+}`

@@ -34,7 +34,13 @@ const PORT = 3000;
 
 // trips
 app.get('/tripp', (req, res) => {
-  db.findTrip()
+  let body;
+  if (!req.body) {
+    body = {};
+  } else {
+    body = req.body;
+  }
+  db.findTrip(body)
     .then((trip) => res.send(trip))
     .catch((err) => res.status(400).send(err));
 });
@@ -93,8 +99,8 @@ app.put('/userr', (req, res) => {
     .catch((err) => res.status(500).send('Could not create or update user ❌'));
 });
 
-app.delete('/userr/:id', (req, res) => {
-  db.deleteUser(req.params.id)
+app.delete('/userr', (req, res) => {
+  db.deleteUser(req.query)
     .then((data) => {
       data.deletedCount === 1
         ? res.status(200).send(data)

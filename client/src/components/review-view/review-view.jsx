@@ -20,7 +20,7 @@ function ReviewView({ listOfProfiles = [] }) {
 
   const reviewList = [];
 
-  for (let currentIndex = 0; currentIndex < 6; currentIndex++) {
+  for (let currentIndex = 0; currentIndex < reviewResults.length; currentIndex++) {
     reviewList.push(<ReviewCard profile={reviewResults[currentIndex]} />);
   }
   return (

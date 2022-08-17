@@ -7,17 +7,14 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api';
 import axios from 'axios';
-import moment from 'moment';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 
 import SearchBar from './searchBar';
-// import MapDirections from './MapDirections';
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
-// import fetchDirections from './helpers/fetchDirections';
 import getDistance from './helpers/getDistance';
 
 export default function SearchView() {

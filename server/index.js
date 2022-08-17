@@ -33,8 +33,8 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 const PORT = 3000;
 
 // trips
-app.get('/tripp/:id', (req, res) => {
-  db.findTrip(req.params.id)
+app.get('/tripp', (req, res) => {
+  db.findTrip()
     .then((trip) => res.send(trip))
     .catch((err) => res.status(400).send(err));
 });
@@ -86,8 +86,9 @@ app.post('/userr', (req, res) => {
     .catch((err) => res.status(500).send('Could not create or update user ❌'));
 });
 
-app.put('/userr/:id', (req, res) => {
-  db.findOneAndUpdateUser(req.params.id, req.body)
+// /userr?email=youremail
+app.put('/userr', (req, res) => {
+  db.findOneAndUpdateUser(req.query, req.body)
     .then(() => res.status(201).send('User updated ✅'))
     .catch((err) => res.status(500).send('Could not create or update user ❌'));
 });

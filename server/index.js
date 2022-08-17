@@ -20,6 +20,10 @@ const io = new Server(httpServer, {
 
 io.on('connection', (socket) => {
   console.log('user connected', socket.id);
+  socket.on('send_message', (data) => {
+    //server
+    socket.emit('receive_message', data);
+  });
 });
 
 httpServer.listen(3001, () => {
@@ -34,13 +38,13 @@ const PORT = 3000;
 
 // trips
 app.get('/tripp', (req, res) => {
-  let body;
-  if (!req.body) {
-    body = {};
+  let query;
+  if (!req.query) {
+    query = {};
   } else {
-    body = req.body;
+    query = req.query;
   }
-  db.findTrip(body)
+  db.findTrip(query)
     .then((trip) => res.send(trip))
     .catch((err) => res.status(400).send(err));
 });
@@ -51,14 +55,14 @@ app.post('/tripp', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
-app.put('/tripp/:id', (req, res) => {
-  db.updateTrip(req.params.id, req.body)
+app.put('/tripp', (req, res) => {
+  db.updateTrip(req.query, req.body)
     .then((data) => res.status(201).send(data))
     .catch((err) => res.status(400).send(err));
 });
 
-app.delete('/tripp/:id', (req, res) => {
-  db.deleteTrip(req.params.id)
+app.delete('/tripp', (req, res) => {
+  db.deleteTrip(req.query)
     .then((data) => {
       data.deletedCount === 1
         ? res.status(200).send(data)

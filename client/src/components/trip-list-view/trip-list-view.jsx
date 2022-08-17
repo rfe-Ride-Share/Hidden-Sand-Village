@@ -6,6 +6,7 @@ import RiderCard from '../trip-view/rider-trip-view/rider-card';
 import CancelButton from './buttons/cancel-button';
 import MessageButton from './buttons/message-button';
 import ReviewButton from './buttons/review-button';
+import PayPalButton from './buttons/paypal-button';
 
 function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
   for (const trip of tripList) {
@@ -35,6 +36,7 @@ function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
+            <PayPalButton />
             <ReviewButton />
           </ButtonRow>
         </div>

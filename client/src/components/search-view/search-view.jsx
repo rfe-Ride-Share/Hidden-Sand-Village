@@ -20,11 +20,6 @@ import getDistance from './helpers/getDistance';
 // const library = ['places'];
 
 export default function SearchView() {
-  // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: 'INSERT KEY HERE',
-  //   libraries: library,
-  // });
-
   //Longitude & latitude setters
   const [startPos, setStartPos] = useState({ lat: 0, lng: 0 });
   const [destPos, setDestPos] = useState({ lat: 0, lng: 0 });
@@ -66,32 +61,30 @@ export default function SearchView() {
     console.log(startPos, destPos);
     fetchDirections(startPos, destPos);
     //Sort trips by distance to input locations assuming tripsResults is array of trip objects
-    // let tripsCopy = tripResults.slice();
-    // tripsCopy.sort((a, b) => {
-    //   if (totalDistance(a) < totalDistance(b)) {
-    //     return 1;
-    //   }
-    //   if (totalDistance(a) > totalDistance(b)) {
-    //     return -1;
-    //   }
-    //   return 0;
-    // });
+    let tripsCopy = tripResults.slice();
+    tripsCopy.sort((a, b) => {
+      if (totalDistance(a) < totalDistance(b)) {
+        return 1;
+      }
+      if (totalDistance(a) > totalDistance(b)) {
+        return -1;
+      }
+      return 0;
+    });
   }, [startPos, destPos]);
 
   //function to calculate total distance between searched positions and trip positions card values are placeholders use
 
-  // const totalDistance = (card) => {
-  //   let total = 0;
-  //   if (startPos.lat !== 0 && startPos.lng === 0) {
-  //     total += getDistance(startPos, card.startPos);
-  //   }
-  //   if (destPos.lat !== 0 && destPos.lng === 0) {
-  //     total += getDistance(destPos, card.destPos);
-  //   }
-  //   return total;
-  // };
-
-  // if (!isLoaded) return <div>Loading...</div>;
+  const totalDistance = (card) => {
+    let total = 0;
+    if (startPos.lat !== 0 && startPos.lng !== 0) {
+      total += getDistance(startPos, card.startPos);
+    }
+    if (destPos.lat !== 0 && destPos.lng !== 0) {
+      total += getDistance(destPos, card.destPos);
+    }
+    return total;
+  };
 
   return (
     <Container

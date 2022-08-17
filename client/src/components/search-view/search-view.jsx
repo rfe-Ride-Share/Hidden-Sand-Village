@@ -9,6 +9,7 @@ import {
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import Container from '@mui/material/Container';
 
 import SearchBar from './searchBar';
 import MapDirections from './mapDirections';
@@ -93,10 +94,15 @@ export default function SearchView() {
   // if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <>
-      {/* <p>Distance of {distance} miles between points.</p> */}
-      <br></br>
-      <Stack>
+    <Container
+      sx={{
+        padding: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Stack sx={{ width: '80%', minWidth: '350px' }}>
         <SearchBar
           setPos={setStartPos}
           name={'Start'}
@@ -111,6 +117,7 @@ export default function SearchView() {
       </Stack>
       <Box
         sx={{
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -121,7 +128,7 @@ export default function SearchView() {
         <RiderCard />
         {/* <MapDirections startPos={startPos} destPos={destPos} /> */}
       </Box>
-    </>
+    </Container>
   );
 }
 // const testUser = {

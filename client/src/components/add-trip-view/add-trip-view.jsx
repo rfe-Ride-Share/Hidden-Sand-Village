@@ -1,7 +1,9 @@
 // import 'dotenv/config';
+import axios from 'axios';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -16,33 +18,27 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import InputAdornment from '@mui/material/InputAdornment';
-import  {AdapterMoment}  from '@mui/x-date-pickers/AdapterMoment';
-import  {LocalizationProvider}  from '@mui/x-date-pickers/LocalizationProvider';
-import  {DateTimePicker}  from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import SearchBar from '../search-view/searchBar.jsx';
-import {useLoadScript} from '@react-google-maps/api';
+import { useLoadScript } from '@react-google-maps/api';
 import Autocomplete from '@mui/material/Autocomplete';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
-
-
-
+import fetchDirections from '../search-view/helpers/fetchDirections.js';
 
 import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 
-
 const library = ['places'];
 
 function AddTripView() {
-
   const [seats, setSeats] = React.useState('');
-  const [value, setValue] = React.useState(
-    new Date('2014-08-18T21:11:54')
-  );
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
   const [tripDetails, setTripDetails] = React.useState('');
   const [from, setFrom] = React.useState('');
@@ -50,250 +46,298 @@ function AddTripView() {
   const [tripValue, setTripValue] = React.useState('');
 
   ////////////////////////////////////////////
-////           STATE OBJ                ///
-///////////////////////////////////////////
+  ////           STATE OBJ                ///
+  ///////////////////////////////////////////
 
-const tripPost = {
-  from: from,
-  to: to,
-  seats: seats,
-  dateTime: value,
-  tripDetails: tripValue
+  ////////////////////////////////////////
+  //     SEND OFF DATA                 //
+  //////////////////////////////////////
+  // Trip Data
+  // sampleTrip = {
+  //   date: '1660576677204',
+  //   depart_time: '1660576677205',
+  //   origin_address: '89 E 42nd St, New York, NY 10017, USA',
+  //   origin_position: { lat: 35.3444, lng: 35.344455566 },
+  //   destination_address: '349-399 US-11, Syracuse, NY 13202, USA',
+  //   destination_position: { lat: 40.7527262, lng: -73.9772294 },
+  //   driver: 'Carl Poole',
+  //   driver_email: 'carl.poole@gmail.com',
+  //   details: 'This is going to be the best trip EVER!!!!', //from notes
+  //   distance: '3.9 miles',
+  //   total_meters: 7410,
+  //   passengers: [
+  //     {
+  //       Rider: { departure: 'place1', destination: 'place2', status: 'upcoming' },
+  //     },
+  //   ],
+  //   totalPassengers: 5,
+  //   currentPassengers: 1,
+  //   price: '2.38',
+  //   duration: 'one hour',
+  //   duration_seconds: 3600,
+  //   status: 'upcoming', // pending/done/cancelled/upcoming/full/ //is this driver status? do we need upcoming and completed?
+  //   //can the database automatically update completed and upcoming based on time, like one day after trip for completed
+  // };
+  const handleSubmit = (event) => {
+    //event.preventDefault();
+    const tripPost = {
+      from: directionData.startAddress,
+      to: directionData.endAddress,
+      seats: seats,
+      dateTime: value,
+      tripDetails: tripValue,
+      cost: directionData.cost,
+      miles: directionData.miles,
+      milesReadable: directionData.milesReadable,
+      seconds: directionData.seconds,
+      timeReadable: directionData.timeReadable,
+    };
 
-}
-
-console.log('tripPost', tripPost)
-
-////////////////////////////////////////
-//     SEND OFF DATA                 //
-//////////////////////////////////////
-
-
-const handleSubmit = (event) => {
-
-//event.preventDefault();
-console.log('add trip information', tripPost)
-
-};
-
-
+    console.log('tripPost', tripPost);
+    console.log('add trip information', tripPost);
+    axios
+      .post('/trips', tripPost)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  };
   ///////////////////////////////
   ///          TOP BAR        ///
   //////////////////////////////
   const ButtonAppBar = (
-
-
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" className="top-bar">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-
-            </Typography>
-            <Button color="inherit"></Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
-
-
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" className="top-bar">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          ></Typography>
+          <Button color="inherit"></Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 
-
-////////////////////////////////////////////////////////
-///                 PASSENGERS                      ///
-///////////////////////////////////////////////////////
-
+  ////////////////////////////////////////////////////////
+  ///                 PASSENGERS                      ///
+  ///////////////////////////////////////////////////////
 
   const handleChange = (event) => {
     setSeats(event.target.value);
   };
-  const icon =  <PersonAddAltIcon/>
+  const icon = <PersonAddAltIcon />;
   const BasicSelect = (
-
-      <FormControl sx={{m:1, minWidth: 200 }} size="small">
-        <InputLabel id="demo-simple-select-label">{icon}</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={seats}
-          label="Seats"
-          onChange={handleChange}
-        >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-          <MenuItem value={7}>7</MenuItem>
-          <MenuItem value={8}>8</MenuItem>
-          <MenuItem value={9}>9</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-        </Select>
-      </FormControl>
-
+    <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+      <InputLabel id="demo-simple-select-label">{icon}</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={seats}
+        label="Seats"
+        onChange={handleChange}
+      >
+        <MenuItem value={1}>1</MenuItem>
+        <MenuItem value={2}>2</MenuItem>
+        <MenuItem value={3}>3</MenuItem>
+        <MenuItem value={4}>4</MenuItem>
+        <MenuItem value={5}>5</MenuItem>
+        <MenuItem value={6}>6</MenuItem>
+        <MenuItem value={7}>7</MenuItem>
+        <MenuItem value={8}>8</MenuItem>
+        <MenuItem value={9}>9</MenuItem>
+        <MenuItem value={10}>10</MenuItem>
+      </Select>
+    </FormControl>
   );
 
-//////////////////////////////////////////////////
-//             DATE  AND TIME                  //
-/////////////////////////////////////////////////
-
+  //////////////////////////////////////////////////
+  //             DATE  AND TIME                  //
+  /////////////////////////////////////////////////
 
   const handleDateChange = (newValue) => {
-    setValue(newValue)
+    setValue(newValue);
   };
 
-
-
   const dateTime = (
-
     <LocalizationProvider dateAdapter={AdapterMoment}>
-
-        <DateTimePicker
-          label="Depature Date and Time"
-          value={value}
-          onChange={handleDateChange}
-          renderInput={(params) => <TextField {...params} />}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <DepartureBoardIcon />
-              </InputAdornment>  ),
-        }}/>
-
-
+      <DateTimePicker
+        label="Depature Date and Time"
+        value={value}
+        onChange={handleDateChange}
+        renderInput={(params) => <TextField {...params} fullWidth />}
+        sx={{ width: 100 }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <DepartureBoardIcon />
+            </InputAdornment>
+          ),
+        }}
+      />
     </LocalizationProvider>
   );
 
-/////////////////////////////////
-//       TRIP DETAILS         //
-///////////////////////////////
+  /////////////////////////////////
+  //       TRIP DETAILS         //
+  ///////////////////////////////
 
-    const handleTripChange = (event) => {
-      setTripValue(event.target.value);
-    };
+  const handleTripChange = (event) => {
+    setTripValue(event.target.value);
+  };
 
-    const trip = (
-      <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 1, width: '60ch'},
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div>
-          <TextField fullWidth
-            id="outlined-multiline-flexible"
-            label="Trip Details"
-            multiline
-            maxRows={20}
-            minRows={10}
-            value={tripValue}
-            onChange={handleTripChange}
-            placeholder="Tell people about your trip!"
+  const trip = (
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { width: '100%' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          fullWidth
+          id="outlined-multiline-flexible"
+          label="Trip Details"
+          multiline
+          maxRows={20}
+          minRows={10}
+          value={tripValue}
+          onChange={handleTripChange}
+          placeholder="Tell people about your trip!"
+        />
+      </div>
+    </Box>
+  );
 
-          />
-          </div>
-          </Box>
-          );
+  ///////////////////////////////////////////////////////////
+  // search function auto complete directions from Michael //
+  //////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////
-// search function auto complete directions from Michael //
-//////////////////////////////////////////////////////////
+  const [startPos, setStartPos] = React.useState({ lat: 0, lng: 0 });
+  const [destPos, setDestPos] = React.useState({ lat: 0, lng: 0 });
+  const [directionData, setDirectionData] = React.useState({
+    miles: 0,
+    seconds: 0,
+    startAddress: '',
+    endAddress: '',
+    cost: 0,
+  });
+  ///////////////////////////
+  //   RENDERED STUFFF      //
+  ///////////////////////////
 
+  React.useEffect(() => {
+    fetchDirections(startPos, destPos, setDirectionData);
+  }, [startPos, destPos]);
 
-
-
-
-
-const [startPos, setStartPos] = React.useState({ lat: 0, lng: 0 });
-const [destPos, setDestPos] = React.useState({ lat: 0, lng: 0 });
-///////////////////////////
-//   RENDERED STUFFF      //
-///////////////////////////
-
-
-
+  React.useEffect(() => {
+    console.log(directionData);
+  }, [directionData]);
 
   return (
-
-    <div>
-      <TopBar>
-      {ButtonAppBar}
-      </TopBar>
+    <Container
+      sx={{
+        padding: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      {/* <TopBar>{ButtonAppBar}</TopBar> */}
       <br></br>
-    <Stack spacing={3} sx={{m:1, width: 450}}>
+      <Stack spacing={1} sx={{ width: '80%', minWidth: '350px' }}>
+        {/* <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br> */}
+        <SearchBar
+          setPos={setStartPos}
+          name={'Start'}
+          placeholder={'Where will you be travelling from?'}
+        />
+        <IconArrow>
+          <SwapVertIcon fontSize="large" />
+        </IconArrow>
 
-    {/* <TextField id="outlined-basic" label="Leaving from..."  variant="outlined" onChange={(e) => {setFrom(e.target.value)}}/><br></br> */}
-    <SearchBar setPos={setStartPos}
-        name={'Start'}
-        placeholder={'Where will you be travelling from?'} />
-     <IconArrow>
-     <SwapVertIcon fontSize="large"/>
-     </IconArrow>
+        <SearchBar
+          setPos={setDestPos}
+          name={'Destination'}
+          placeholder={'Where will you be travelling to?'}
+        />
 
-    <SearchBar setPos={setDestPos}
-        name={'Destination'}
-        placeholder={'Where will you be travelling to?'}/>
-
-    <br></br>
-    {/* <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br> */}
-     </Stack><br></br>
-    <TextAreaCenter>
-    {dateTime}
-    </TextAreaCenter><br></br><br></br>
-    {BasicSelect}<br></br><br></br>
-    {trip}
-    <ButtonCan className="button-container">
-      <Button className="post-button" variant="contained" type="submit" onClick={(e) => {handleSubmit()}}>Add Trip</Button>
-      <Button className="cancel-button" variant="contained" type="submit" onClick={(e) => {console.log('CANCEL')}}>Cancel</Button>
-    </ButtonCan>
-    </div>
-  )
+        <br></br>
+        {/* <TextField id="outlined-basic" label="Going to..." variant="outlined" onChange={(e) => {setTo(e.target.value)}}/><br></br><br></br> */}
+        <br></br>
+        <TextAreaCenter>{dateTime}</TextAreaCenter>
+        <br></br>
+        <br></br>
+        {BasicSelect}
+        <br></br>
+        <br></br>
+        {trip}
+      </Stack>
+      <ButtonCan className="button-container">
+        <Button
+          className="post-button"
+          variant="contained"
+          type="submit"
+          onClick={(e) => {
+            handleSubmit();
+          }}
+        >
+          Add Trip
+        </Button>
+        <Button
+          className="cancel-button"
+          variant="contained"
+          type="submit"
+          onClick={(e) => {
+            console.log('CANCEL');
+          }}
+        >
+          Cancel
+        </Button>
+      </ButtonCan>
+    </Container>
+  );
 }
-
+//use directions to get info from search bar
+//axios post (or put if it's editable?)
+//
 const ButtonCan = styled.div`
-
-
   display: flex;
   justify-content: center;
   margin-top: 70px;
-  .post-button{
-    background:#F5B935;
-
+  .post-button {
+    background: #f5b935;
   }
 
-  .cancel-button{
-    background: #DF3062;
+  .cancel-button {
+    background: #df3062;
     margin-left: 30px;
-
   }
-
-`
+`;
 
 const TextAreaCenter = styled.div`
-margin-left: 8px;
-
-`
+  margin-left: 8px;
+`;
 
 const IconArrow = styled.div`
-display: flex;
-justify-content: center;
-`
+  display: flex;
+  justify-content: center;
+`;
 
 const TopBar = styled.div`
-.top-bar{
-  background: #11ABC1;
-}
-`
+  .top-bar {
+    background: #11abc1;
+  }
+`;
 
 export default AddTripView;

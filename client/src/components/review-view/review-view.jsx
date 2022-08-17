@@ -11,7 +11,7 @@ function ReviewView({ listOfProfiles = [] }) {
   for (const profile of listOfProfiles) {
     const newReview = {};
 
-    newReview.id = profile.id;
+    newReview.email = profile.email;
     newReview.name = profile.name;
     newReview.feedback = '';
 
@@ -37,12 +37,12 @@ function ReviewView({ listOfProfiles = [] }) {
             review.stars = reviewResults[currentIndex].rating;
             review.review_text = reviewResults[currentIndex].feedback;
 
-            const id = reviewResults[currentIndex].id;
+            const email = reviewResults[currentIndex].email;
 
             const reviews = listOfProfiles[currentIndex].reviews || [];
             reviews.push(review);
 
-            axios.put(`/users/${id}`, reviews)
+            axios.put(`/userr`, reviews, { email: email })
               .then((response) => {
                 console.log(response);
               });

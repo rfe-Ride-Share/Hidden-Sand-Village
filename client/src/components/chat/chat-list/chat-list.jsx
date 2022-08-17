@@ -32,7 +32,7 @@ function ChatList({ users = {} }) {
         marginTop: '10px',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
       }}
     >

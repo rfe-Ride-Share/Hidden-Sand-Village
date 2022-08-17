@@ -9,10 +9,15 @@ function Payment(props) {
   console.log('state is', location.state);
   const trip = location.state || { passengers: [] };
 
+  const unformattedRiderCost = trip.totalCost / (trip.passengers.length + 1);
+  const riderCost = (Math.ceil(unformattedRiderCost * 100)) / 100;
+
+  trip.riderCost = riderCost;
+
   return (
     <div>
       <PaymentCard tripInfo={trip} />
-      <PayPalButton />
+      <PayPalButton cost={riderCost} />
     </div>
   );
 }

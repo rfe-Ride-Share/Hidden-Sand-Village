@@ -39,7 +39,7 @@ function DriverTripView({ status, tripInfo = {} }) {
   return (
     <div>
       <DriverTripViewContainer>
-        <TitleOfTrip title={tripInfo.destination} />
+        <TitleOfTrip title={tripInfo.title} />
         <Paper
           elevation={12}
           sx={{

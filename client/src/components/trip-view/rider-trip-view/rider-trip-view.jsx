@@ -23,7 +23,7 @@ function RiderTripView({ status, tripInfo = {} }) {
   return (
     <div>
       <RiderTripViewContainer>
-        <TitleOfTrip title={tripInfo.destination} />
+        <TitleOfTrip title={tripInfo.title} />
         <Paper
           elevation={12}
           sx={{

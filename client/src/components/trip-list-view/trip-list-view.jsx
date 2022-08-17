@@ -66,6 +66,8 @@ function populateLists(
 function TripListView() {
   const listOfTrips = [];
   const pastTrip = {
+    title: 'Disney World 2022',
+    driver_email: 'doctormadam.ryderpoole@lol.com',
     date: '4:00 PM August 27th, 2022',
     startPoint: '20 W 34th St., New York, NY 10001',
     endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
@@ -77,6 +79,8 @@ function TripListView() {
   };
 
   const pendingTrip = {
+    title: 'Disney World 2022',
+    driver_email: 'doctormadam.ryderpoole@lol.com',
     date: '4:00 PM August 27th, 2022',
     startPoint: '20 W 34th St., New York, NY 10001',
     endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
@@ -88,6 +92,8 @@ function TripListView() {
   };
 
   const upcomingTrip = {
+    title: 'Disney World 2022',
+    driver_email: 'doctormadam.ryderpoole@lol.com',
     date: '4:00 PM August 27th, 2022',
     startPoint: '20 W 34th St., New York, NY 10001',
     endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',

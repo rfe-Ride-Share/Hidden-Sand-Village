@@ -329,9 +329,7 @@ function AddTripView() {
     </Container>
   );
 }
-//use directions to get info from search bar
-//axios post (or put if it's editable?)
-//
+
 const ButtonCan = styled.div`
   display: flex;
   justify-content: center;

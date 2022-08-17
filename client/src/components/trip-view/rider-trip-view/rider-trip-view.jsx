@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PlaceHolderBar from '../placeholder-bar';
 import TitleOfTrip from '../title-of-trip';
 import RiderCard from './rider-card';
+import MapDirections from '../../search-view/mapDirections';
 
 import AskToJoin from './buttons/asktojoin';
 import Pending from './buttons/pending';
@@ -20,14 +21,14 @@ function RiderTripView({ status, tripInfo = {} }) {
     totalCost: 500,
     riderCostLow: 50,
     riderCostHigh: 250,
-  }
+  };
 
   let displayButton = <AskToJoin tripInfo={tripInfo} />;
 
   if (status === 'pending') {
-    displayButton = <Pending />
+    displayButton = <Pending />;
   } else if (status === 'confirmed') {
-    displayButton = <Confirmed />
+    displayButton = <Confirmed />;
   }
 
   return (

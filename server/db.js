@@ -34,16 +34,17 @@ function createTrip(data) {
   return Trip.create(data);
 }
 
-function deleteTrip(id) {
-  return Trip.deleteOne(id).exec(); // {deletedCount: 1}
+function deleteTrip(query) {
+  return Trip.deleteOne(query).exec(); // {deletedCount: 1}
 }
 
-function findTrip(id) {
-  return Trip.findOne(id).exec();
+function findTrip(query) {
+  console.log("db's query is", query);
+  return Trip.find(query).exec();
 }
 
-function updateTrip(id, data) {
-  return Trip.findOneAndUpdate(id, data);
+function updateTrip(query, data) {
+  return Trip.findOneAndUpdate(query, data);
 }
 
 const userSchema = new Schema({
@@ -60,16 +61,16 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-function findOneAndUpdateUser(id, data) {
-  return User.findOneAndUpdate({ user_id: id }, data).exec();
+function findOneAndUpdateUser(query, data) {
+  return User.findOneAndUpdate(query, data).exec();
 }
 
 function createUser(data) {
   return User.create(data);
 }
 
-function deleteUser(id) {
-  return User.deleteOne({ user_id: id }).exec(); // {deletedCount: 1}
+function deleteUser(query) {
+  return User.deleteOne({ email: query }).exec(); // {deletedCount: 1}
 }
 
 function getProfileData(query) {

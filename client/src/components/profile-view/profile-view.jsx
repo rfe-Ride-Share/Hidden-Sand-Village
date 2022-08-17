@@ -64,8 +64,9 @@ export default function ProfileView() {
   };
 
   const handleEditBio = () => {
+    console.log(userData);
     axios
-      .put('/userr', userData)
+      .put(`/userr?email=${user.email}`, userData)
       .then(() => {
         axios.get(`/userr?email=${user.email}`);
       })

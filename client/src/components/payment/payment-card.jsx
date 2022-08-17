@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function PaymentCard({ tripInfo = {} }) {
+  const riderCost = tripInfo.totalCost / (tripInfo.passengers.length + 1);
+  const formattedRiderCost = (Math.ceil(riderCost * 100)) / 100;
+
   return (
       <Card sx={{ minWidth: 350, margin: '25px' }}>
         <CardContent>
@@ -19,7 +22,7 @@ export default function PaymentCard({ tripInfo = {} }) {
             {tripInfo.startPoint}
           </Typography>
           <Typography variant="h4">
-            Amount Due: ${tripInfo.riderCost}
+            Amount Due: ${formattedRiderCost}
           </Typography>
         </CardContent>
         <CardActions>

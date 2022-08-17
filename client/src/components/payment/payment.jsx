@@ -1,15 +1,14 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import PayPalButton from './paypal-button';
 import PaymentCard from './payment-card';
 
-function Payment({ trip = {} }) {
-  trip = {
-    date: '4:00 PM 6/2/2023',
-    startPoint: 'New York, NY',
-    endPoint: 'Orlando, FL',
-    riderCost: 50,
-  }
+function Payment(props) {
+  const location = useLocation();
+  console.log('state is', location.state);
+  const trip = location.state || { passengers: [] };
+
   return (
     <div>
       <PaymentCard tripInfo={trip} />

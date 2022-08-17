@@ -36,7 +36,7 @@ function populateLists(pendingTrips, upcomingTrips, pastTrips, tripList) {
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <PaymentButton />
+            <PaymentButton trip={trip} />
             <ReviewButton />
           </ButtonRow>
         </div>
@@ -51,10 +51,11 @@ function TripListView() {
     date: '4:00 PM August 27th, 2022',
     startPoint: '20 W 34th St., New York, NY 10001',
     endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
-    totalCost: '$250',
+    totalCost: 250,
     riderCostLow: 25,
     riderCostHigh: 125,
     status: 'past',
+    passengers: [1, 2, 3, 4, 5],
   };
 
   const pendingTrip = {
@@ -65,6 +66,7 @@ function TripListView() {
     riderCostLow: 25,
     riderCostHigh: 125,
     status: 'pending',
+    passengers: [1, 2, 3, 4, 5],
   };
 
   const upcomingTrip = {
@@ -75,6 +77,7 @@ function TripListView() {
     riderCostLow: 25,
     riderCostHigh: 125,
     status: 'upcoming',
+    passengers: [1, 2, 3, 4, 5],
   };
 
   for (let currentIndex = 0; currentIndex < 8; currentIndex++) {

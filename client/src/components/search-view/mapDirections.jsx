@@ -25,7 +25,7 @@ export default function MapDirections({ startPos, destPos }) {
       (result, status) => {
         if (status === 'OK' && result) {
           setDirections(result);
-          let miles = result.routes[0].legs[0].distance.value / 1900;
+          let miles = result.routes[0].legs[0].distance.value / 1609.34;
           let seconds = result.routes[0].legs[0].duration.value;
           let startAddress = result.routes[0].legs[0].start_address;
           let endAddress = result.routes[0].legs[0].end_address;

@@ -64,13 +64,13 @@ function AddTripView() {
   //   driver_email: 'carl.poole@gmail.com',
   //   details: 'This is going to be the best trip EVER!!!!', //from notes
   //   distance: '3.9 miles',
-  //   total_meters: 7410,
+  //   miles: 7410,
   //   passengers: [
   //     {
   //       Rider: { departure: 'place1', destination: 'place2', status: 'upcoming' },
   //     },
   //   ],
-  //   totalPassengers: 5,
+  //   seats: 5,
   //   currentPassengers: 1,
   //   price: '2.38',
   //   duration: 'one hour',
@@ -81,6 +81,7 @@ function AddTripView() {
   const handleSubmit = (event) => {
     //event.preventDefault();
     const tripPost = {
+      postedOn: new Date(),
       from: directionData.startAddress,
       to: directionData.endAddress,
       seats: seats,

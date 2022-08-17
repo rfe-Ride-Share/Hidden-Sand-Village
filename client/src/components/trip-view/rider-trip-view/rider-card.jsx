@@ -19,14 +19,11 @@ export default function RiderCard({ tripInfo = {} }) {
             {tripInfo.startPoint}
           </Typography>
           <Typography variant="body2">
-            Total Cost: {tripInfo.totalCost}
+            Total Cost: ${tripInfo.totalCost}
             <br />
             Rider Cost ${tripInfo.riderCostLow} - ${tripInfo.riderCostHigh}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
   );
 }

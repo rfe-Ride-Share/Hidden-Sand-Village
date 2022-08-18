@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Message from './Message.jsx';
 import Conversation from './conversation.jsx';
-import styled from 'styled-components'
-import axios from 'axios'
+import styled from 'styled-components';
+import axios from 'axios';
 import ChatList from './chat-list/chat-list.jsx';
 import Chatbox from './chatbox.jsx'
 import Group from './Group.jsx'
@@ -28,12 +28,11 @@ const { user } = useAuth0();
 
 console.log(user)
 
-  //grab details from login
+  //grab details from useEffect db GET
 const [currentUser, setCurrentUser] = useState('');
 
 console.log('currentUser', currentUser);
 
-const [newMessage, setNewMessage] = useState('')
 
 const [tripConversations, setTripConversations] = useState([]);
 const [currentChat, setCurrentChat] = useState('');

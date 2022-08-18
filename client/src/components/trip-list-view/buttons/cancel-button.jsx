@@ -21,12 +21,15 @@ function removeRiderFromTrip(trip, user) {
   if (trip.driver_email === user.email) {
     axios({
       url: '/tripp',
+      method: 'delete',
       params: { _id: trip._id },
     })
       .then((response) => {
+        window.location.replace('http://localhost:3000/');
         console.log(response);
       })
       .catch((error) => {
+        window.location.replace('http://localhost:3000/');
         console.log(error);
       });
   } else {
@@ -40,9 +43,11 @@ function removeRiderFromTrip(trip, user) {
     })
       .then((response) => {
         console.log(response);
+        window.location.replace('http://localhost:3000/');
       })
       .catch((error) => {
         console.log(error);
+        window.location.replace('http://localhost:3000/');
       });
   }
 }

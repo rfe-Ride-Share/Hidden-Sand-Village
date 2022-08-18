@@ -19,9 +19,9 @@ function getTripsFromUser(user, setListOfTrips) {
 
       for (const trip of responseTrips) {
         const now = new Date();
-        const tripDate = new Date(trip.date);
+        const tripDate = new Date(trip.depart_time);
 
-        const isPast = (now.getTime() - tripDate.getTime()) < 0;
+        const isPast = (now.getTime() - tripDate.getTime()) > 0;
 
         if (trip.driver_email === user.email) {
           trip.status = isPast ? 'past' : 'upcoming';

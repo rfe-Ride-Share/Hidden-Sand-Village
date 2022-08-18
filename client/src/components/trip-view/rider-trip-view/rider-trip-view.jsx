@@ -5,6 +5,7 @@ import PlaceHolderBar from '../placeholder-bar';
 import TitleOfTrip from '../title-of-trip';
 import RiderCard from './rider-card';
 import MapDirections from '../../search-view/mapDirections';
+import { useLocation } from 'react-router-dom';
 
 import AskToJoin from './buttons/asktojoin';
 import Pending from './buttons/pending';
@@ -13,15 +14,17 @@ import Confirmed from './buttons/confirmed';
 import Paper from '@mui/material/Paper';
 
 function RiderTripView({ status, tripInfo = {} }) {
-  tripInfo = {
-    title: 'Disney World',
-    date: '8/29/2022',
-    startPoint: 'New York, NY',
-    endPoint: 'Orlando, FL',
-    totalCost: 500,
-    riderCostLow: 50,
-    riderCostHigh: 250,
-  };
+  const location = useLocation();
+  tripInfo = location.state;
+  // tripInfo = {
+  //   title: 'Disney World',
+  //   date: '8/29/2022',
+  //   startPoint: 'New York, NY',
+  //   endPoint: 'Orlando, FL',
+  //   totalCost: 500,
+  //   riderCostLow: 50,
+  //   riderCostHigh: 250,
+  // };
 
   let displayButton = <AskToJoin tripInfo={tripInfo} />;
 

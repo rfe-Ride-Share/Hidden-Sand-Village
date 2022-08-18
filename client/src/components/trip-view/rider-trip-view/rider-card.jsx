@@ -35,6 +35,7 @@ export default function RiderCard({ tripInfo = {} }) {
   }, []);
 
   return (
+    <Link to="/trip" state={tripInfo}>
     <Card
       sx={{
         width: '100%',
@@ -77,19 +78,8 @@ export default function RiderCard({ tripInfo = {} }) {
           <br />
           <Rating name="driver rating" value={rating} readOnly />
         </Typography>
-        <CardActions>
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              borderRadius: '12px',
-              backgroundColor: '#F5B935',
-            }}
-          >
-            <Link to="/trip">View Details</Link>
-          </Button>
-        </CardActions>
       </CardContent>
     </Card>
+    </Link>
   );
 }

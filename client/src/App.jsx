@@ -38,17 +38,30 @@ function App() {
       <DropdownMenu></DropdownMenu>
       <Routes>
         <Route path="/" element={<SearchView />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat" element={<ProtectedRoute component={Chat} />} />
         <Route path="/trip" element={<RiderTripView />} />
         <Route
           path="/profile"
           element={<ProtectedRoute component={ProfileView} />}
         />
         <Route path="/profile" element={<ProfileView />} />
-        <Route path="/review" element={<ReviewView />} />
-        <Route path="/driver-trip" element={<DriverTripView />} />
-        <Route path="/trips" element={<TripListView />} />
-        <Route path="/add" element={<AddTripView />} />
+        <Route
+          path="/review"
+          element={<ProtectedRoute component={ReviewView} />}
+        />
+        <Route
+          path="/driver-trip"
+          element={<ProtectedRoute component={DriverTripView} />}
+        />
+        <Route
+          path="/trips"
+          element={<ProtectedRoute component={TripListView} />}
+        />
+        <Route
+          path="/add"
+          element={<ProtectedRoute component={AddTripView} />}
+        />
+        {/* <Route path="/add" element={<AddTripView />} /> */}
         <Route path="/payment" element={<Payment />} />
         <Route path="/confirm" element={<AgreeToPayment />} />
       </Routes>

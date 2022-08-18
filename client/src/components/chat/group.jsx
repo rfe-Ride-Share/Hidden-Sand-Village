@@ -7,19 +7,19 @@ export default function Group({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
 
 
-  useEffect(() => {
-    const friendId = conversation.members.find((m) => m !== currentUser._id);
+  // useEffect(() => {
+  //   const friendId = conversation.members.find((m) => m !== currentUser._id);
 
-    const getUser = async () => {
-      try {
-        const res = await axios("/users?userId=" + friendId);
-        setUser(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUser();
-  }, [currentUser, conversation]);
+  //   const getUser = async () => {
+  //     try {
+  //       const res = await axios("/users?userId=" + friendId);
+  //       setUser(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getUser();
+  // }, [currentUser, conversation]);
 
   return (
     <TripGroup>
@@ -31,7 +31,7 @@ export default function Group({ conversation, currentUser }) {
         }
         alt=""
       />
-      <span className="conversationName">{user?.username}</span>
+      <span className="conversationName">Disney Trip</span>
     </div>
     </TripGroup>
   );

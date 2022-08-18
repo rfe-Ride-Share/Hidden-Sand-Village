@@ -18,7 +18,7 @@ export default function Message({ message, own }) {
           src={message.photo}
           alt=""
         />
-        <p className="messageText">{message.text}</p>
+        <p className="messageText">{message.message}</p>
       </div>
 
       <div className="messageBottom">{format(message.createdAt)}</div>

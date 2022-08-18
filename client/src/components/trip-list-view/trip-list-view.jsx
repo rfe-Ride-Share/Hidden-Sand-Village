@@ -18,13 +18,18 @@ function getTripsFromUser(user, setListOfTrips) {
       const responseTrips = response.data;
 
       for (const trip of responseTrips) {
+        const now = new Date();
+        const tripDate = new Date(trip.date);
+
+        const isPast = (now.getTime() - tripDate.getTime()) > 0;
+
         if (trip.driver_email === user.email) {
-          trip.status = 'upcoming';
+          trip.status = isPast ? 'past' : 'upcoming';
           userTrips.push(trip);
         } else {
           for (const passenger of trip.passengers) {
             if (passenger.email === user.email) {
-              trip.status = passenger.status;
+              trip.status = isPast ? 'past' : passenger.status;
               userTrips.push(trip);
             }
           }

@@ -65,6 +65,7 @@ export default function SearchView() {
       }
       return 0;
     });
+
     setTrips(tripsCopy);
   }, [startPos, destPos]);
 
@@ -99,7 +100,7 @@ export default function SearchView() {
           alignItems: 'center',
         }}
       >
-        {trips.map((trip) => (
+        {trips.slice(0, 9).map((trip) => (
           <RiderCard key={trip._id} tripInfo={trip} />
         ))}
       </Box>

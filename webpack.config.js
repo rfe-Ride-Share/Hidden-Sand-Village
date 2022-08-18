@@ -24,10 +24,17 @@ module.exports = {
           'file-loader',
           {
             loader: 'image-webpack-loader',
+<<<<<<< HEAD
             options: {
               bypassOnDebug: true, // webpack@1.x
               disable: true,
               type: 'asset/resource', // webpack@2.x and newer
+=======
+            // type: 'asset/resource',
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+>>>>>>> f613d36c1de8c378d0d2c36966aaf4fe89baba42
             },
           },
         ],

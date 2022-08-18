@@ -17,7 +17,18 @@ function addRiderToTrip(tripInfo) {
 
   if (!userIsInTrip(user, tripInfo.passengers)) {
     tripInfo.passengers.push(newPassenger);
-    axios.put('/tripp', tripInfo.passengers, { _id: tripInfo._id })
+    axios({
+      url: '/tripp',
+      method: 'put',
+      data: { passengers: tripInfo.passengers },
+      params: { _id: tripInfo._id },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 }
 

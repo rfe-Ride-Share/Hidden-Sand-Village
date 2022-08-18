@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import MapDirections from '../../search-view/mapDirections';
 
@@ -34,6 +35,7 @@ export default function RiderCard({ tripInfo = {} }) {
   }, []);
 
   return (
+    <Link to="/trip" style={{ textDecoration: 'none'}} state={tripInfo}>
     <Card
       sx={{
         width: '100%',
@@ -78,5 +80,6 @@ export default function RiderCard({ tripInfo = {} }) {
         </Typography>
       </CardContent>
     </Card>
+    </Link>
   );
 }

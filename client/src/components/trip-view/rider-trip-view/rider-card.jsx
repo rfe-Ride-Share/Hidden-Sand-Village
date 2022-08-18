@@ -35,7 +35,7 @@ export default function RiderCard({ tripInfo = {} }) {
   }, []);
 
   return (
-    <Link to="/trip" state={tripInfo}>
+    <Link to="/trip" style={{ textDecoration: 'none'}} state={tripInfo}>
     <Card
       sx={{
         width: '100%',

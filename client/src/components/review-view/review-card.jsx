@@ -12,7 +12,7 @@ export default function ReviewCard({ profile = {} }) {
   return (
     <Card
       sx={{
-        minWidth: 400,
+        minWidth: '90%',
         marginTop: '25px',
         display: 'flex',
         flexDirection: 'row',

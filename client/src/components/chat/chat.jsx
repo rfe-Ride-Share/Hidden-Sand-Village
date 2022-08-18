@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import ChatList from './chat-list/chat-list.jsx';
 import Chatbox from './chatbox.jsx';
-import Group from './Group.jsx';
+import Group from './group.jsx';
 import { useAuth0 } from '@auth0/auth0-react';
 
 //user details from auth//
@@ -214,3 +214,4 @@ const ChatWrapper = styled.div`
 // );
 
 // module.exports = mongoose.model("Message", MessageSchema);
+export default Chat;

@@ -16,7 +16,7 @@ function ReviewButton({ trip = {} }) {
           console.log('Review functionality goes here: trip-list-view/buttons/review-button.jsx');
         }}
       >
-          <Link to='/review' state={trip}>Review</Link>
+          <Link to='/review' style={{ textDecoration: 'none', color: 'white' }} state={trip}>Review</Link>
       </Button>
   );
 }

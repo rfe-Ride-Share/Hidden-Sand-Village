@@ -9,12 +9,14 @@ function getPassengersWithoutUser(trip, user) {
   for (let currentIndex = 0; currentIndex < passengers.length; currentIndex++) {
     const passenger = passengers[currentIndex];
     if (user.email === passenger.email) {
-      passengers.splice(1, currentIndex);
+      passengers.splice(currentIndex, 1);
     }
   }
+
+  return passengers;
 }
 
-function removeRiderToTrip(trip) {
+function removeRiderFromTrip(trip) {
   const { user } = useAuth0();
 
   const newPassengers = getPassengersWithoutUser(trip, user);

@@ -55,9 +55,7 @@ const userSchema = new Schema({
   last_name: { type: String, required: true },
   reviews: [{ stars: Number, review_text: String }],
   bio: String,
-  current_trip: Schema.Types.ObjectId,
-  past_trips: [Schema.Types.ObjectId],
-  future_trips: [Schema.Types.ObjectId],
+  trips: [Schema.Types.ObjectId],
 });
 
 const User = mongoose.model('User', userSchema);

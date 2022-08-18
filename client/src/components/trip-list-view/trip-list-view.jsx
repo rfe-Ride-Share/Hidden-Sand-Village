@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
@@ -9,6 +8,10 @@ import CancelButton from './buttons/cancel-button';
 import MessageButton from './buttons/message-button';
 import ReviewButton from './buttons/review-button';
 import PaymentButton from './buttons/payment-button';
+
+function getTripsFromUser() {
+
+}
 
 function populateLists(
   pendingTrips,
@@ -66,69 +69,72 @@ function populateLists(
 }
 
 function TripListView() {
-  const listOfTrips = [];
-  const pastTrip = {
-    title: 'Disney World 2022',
-    driver_email: 'doctormadam.ryderpoole@lol.com',
-    date: '4:00 PM August 27th, 2022',
-    startPoint: '20 W 34th St., New York, NY 10001',
-    endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
-    totalCost: 250,
-    riderCostLow: 25,
-    riderCostHigh: 125,
-    status: 'past',
-    passengers: [1, 2, 3, 4, 5],
-  };
+  // const pastTrip = {
+  //   title: 'Disney World 2022',
+  //   driver_email: 'doctormadam.ryderpoole@lol.com',
+  //   date: '4:00 PM August 27th, 2022',
+  //   startPoint: '20 W 34th St., New York, NY 10001',
+  //   endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
+  //   totalCost: 250,
+  //   riderCostLow: 25,
+  //   riderCostHigh: 125,
+  //   status: 'past',
+  //   passengers: [1, 2, 3, 4, 5],
+  // };
 
-  const pendingTrip = {
-    title: 'Disney World 2022',
-    driver_email: 'doctormadam.ryderpoole@lol.com',
-    date: '4:00 PM August 27th, 2022',
-    startPoint: '20 W 34th St., New York, NY 10001',
-    endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
-    totalCost: '$250',
-    riderCostLow: 25,
-    riderCostHigh: 125,
-    status: 'pending',
-    passengers: [1, 2, 3, 4, 5],
-  };
+  // const pendingTrip = {
+  //   title: 'Disney World 2022',
+  //   driver_email: 'doctormadam.ryderpoole@lol.com',
+  //   date: '4:00 PM August 27th, 2022',
+  //   startPoint: '20 W 34th St., New York, NY 10001',
+  //   endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
+  //   totalCost: '$250',
+  //   riderCostLow: 25,
+  //   riderCostHigh: 125,
+  //   status: 'pending',
+  //   passengers: [1, 2, 3, 4, 5],
+  // };
 
-  const upcomingTrip = {
-    title: 'Disney World 2022',
-    driver_email: 'doctormadam.ryderpoole@lol.com',
-    date: '4:00 PM August 27th, 2022',
-    startPoint: '20 W 34th St., New York, NY 10001',
-    endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
-    totalCost: '$250',
-    riderCostLow: 25,
-    riderCostHigh: 125,
-    status: 'upcoming',
-    passengers: [1, 2, 3, 4, 5],
-  };
+  // const upcomingTrip = {
+  //   title: 'Disney World 2022',
+  //   driver_email: 'doctormadam.ryderpoole@lol.com',
+  //   date: '4:00 PM August 27th, 2022',
+  //   startPoint: '20 W 34th St., New York, NY 10001',
+  //   endPoint: '3701 Osceola Pkwy, Bay Lake, FL 32830',
+  //   totalCost: '$250',
+  //   riderCostLow: 25,
+  //   riderCostHigh: 125,
+  //   status: 'upcoming',
+  //   passengers: [1, 2, 3, 4, 5],
+  // };
 
-  for (let currentIndex = 0; currentIndex < 8; currentIndex++) {
-    listOfTrips.push(pendingTrip);
-  }
+  // for (let currentIndex = 0; currentIndex < 8; currentIndex++) {
+  //   listOfTrips.push(pendingTrip);
+  // }
 
-  for (let currentIndex = 0; currentIndex < 7; currentIndex++) {
-    listOfTrips.push(upcomingTrip);
-  }
+  // for (let currentIndex = 0; currentIndex < 7; currentIndex++) {
+  //   listOfTrips.push(upcomingTrip);
+  // }
 
-  for (let currentIndex = 0; currentIndex < 5; currentIndex++) {
-    listOfTrips.push(pastTrip);
-  }
+  // for (let currentIndex = 0; currentIndex < 5; currentIndex++) {
+  //   listOfTrips.push(pastTrip);
+  // }
 
-  const [stateListOfTrips, setListOfTrips] = useState(listOfTrips);
+  const [listOfTrips, setListOfTrips] = useState(null);
 
   const pendingTrips = [];
   const upcomingTrips = [];
   const pastTrips = [];
 
+  if (listOfTrips === null) {
+    return null;
+  }
+
   populateLists(
     pendingTrips,
     upcomingTrips,
     pastTrips,
-    stateListOfTrips,
+    listOfTrips,
     setListOfTrips
   );
 

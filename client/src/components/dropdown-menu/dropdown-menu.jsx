@@ -112,7 +112,7 @@ const DropdownMenu = () => {
                 icon: <TimeToLeaveIcon />,
                 link: '/add',
               },
-              { text: 'My Trips', icon: <CommuteIcon />, link: '/' },
+              { text: 'My Trips', icon: <CommuteIcon />, link: '/trips' },
             ].map((item, index) => (
               <ListItem key={item.text} onClick={handleClose} disablePadding>
                 <Link

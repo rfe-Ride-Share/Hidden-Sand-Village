@@ -11,13 +11,13 @@ import ReviewButton from './buttons/review-button';
 import PaymentButton from './buttons/payment-button';
 
 function getTripsFromUser(user, setListOfTrips) {
-  axios.get('/userr', { email : user.email })
-    .then((response) => {
-      setListOfTrips(response.data.trips);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+  // axios.get('/userr', { email : user.email })
+  //   .then((response) => {
+  //     setListOfTrips(response.data.trips);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   })
 }
 
 function populateLists(

@@ -41,13 +41,16 @@ useEffect(() => {
   const getTripConversations = async () => {
     try {
       const res = await axios.get("/conversations/" + currentUser._id);
-      setTripConversations(res.data);
+       console.log(res)
+       setTripConversations(res.data)
     } catch (err) {
       console.log(err);
     }
   };
   getTripConversations();
 }, [currentUser._id]);
+
+console.log('tripConvos', tripConversations)
 
 useEffect(()=> {
   axios

@@ -24,7 +24,7 @@ function Conversation(props) {
     const messageObj = {
       sender: props.currentUser._id,
       text: message,
-      conversationId: props.currentChat._id,
+      conversationId: '1',
     }
 
 
@@ -38,10 +38,10 @@ function Conversation(props) {
 
     });
 
-    axios.post('/messages', messageObj).then((res) => {
-      // props.setMessages([...props.messages, res.data]);
-      console.log(res)
-    })
+    // axios.post('/messages', messageObj).then((res) => {
+    //   // props.setMessages([...props.messages, res.data]);
+    //   console.log(res)
+    // })
     event.target.reset();
   };
   useEffect(() => {

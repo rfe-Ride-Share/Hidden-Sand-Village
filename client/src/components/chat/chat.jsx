@@ -29,7 +29,9 @@ const { user } = useAuth0();
 console.log(user)
 
   //grab details from login
-const [currentUser, setCurrentUser] = useState('1');
+const [currentUser, setCurrentUser] = useState('');
+
+console.log('currentUser', currentUser);
 
 const [newMessage, setNewMessage] = useState('')
 
@@ -48,6 +50,14 @@ const [currentChat, setCurrentChat] = useState('');
 //   getTripConversations();
 // }, [user._id]);
 
+useEffect(()=> {
+  axios
+      .get(`/userr?email=${user.email}`)
+      .then((res) => {
+        console.log('res from email is', res);
+        setCurrentUser(res.data)
+}).catch((err) => {console.log(err)})
+}, [user])
 
 
 const [messages, setMessages] = useState([{
@@ -60,7 +70,7 @@ const [messages, setMessages] = useState([{
   message: "Hi! We would be taking all back roads to avoid tolls. How do you feel about that?",
   photo: 'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
   createdAt: new Date(),
-  user_id: '2',
+  user_id: '62fe5eb39f6feb4f2095257b',
   conversation_id: '0'
 }]);
 
@@ -81,12 +91,12 @@ const [messages, setMessages] = useState([{
 
       {messages.map((m) => (
 
-        <Message message={m} own={m.user_id === currentUser}/>
+        <Message message={m} own={m.user_id === currentUser._id}/>
 
          ))}
           </div>
           <div className="chatBoxBottom">
-            <Conversation messages={messages} setMessages={setMessages}/>
+            <Conversation messages={messages} setMessages={setMessages} user={user} currentUser={currentUser}/>
            {/* <Chatbox setNewMessage={setNewMessage} newMessage={newMessage}/> */}
           </div>
     </div>
@@ -192,7 +202,6 @@ const ChatWrapper = styled.div`
   }
 `;
 
-<<<<<<< HEAD
 
 //SCHEMAS
 // const ConversationSchema = new mongoose.Schema(
@@ -224,7 +233,5 @@ const ChatWrapper = styled.div`
 
 
 
-=======
 export default Chat;
 // <div>Ian is the GOAT</div>
->>>>>>> 2dea9f5d9436c38f19e41e3567c8d44cb2340ec6

@@ -6,31 +6,38 @@ import { useLocation } from 'react-router-dom';
 import SubmitReviewsButton from './submit-reviews-button';
 import ReviewCard from './review-card';
 
+function getProfiles(trip, setListOfProfiles) {
+  axios.get('/tripp/', { _id: trip._id })
+  .then((result) => {
+    const data = result;
+    const newListOfProfiles = data.passengers || [];
+
+    const email = data.driver_email;
+    axios.get('/userr', { email: email })
+      .then((result) => {
+        const driverProfile = result.data;
+        newListOfProfiles.push(driverProfile);
+        setListOfProfiles(newListOfProfiles);
+      })
+  })
+}
+
 function ReviewView() {
   const location = useLocation();
   const [listOfProfiles, setListOfProfiles] = useState(null);
-  const trip = location.state();
-
-  axios.get('/tripp', { _id: trip._id })
-    .then((result) => {
-      const data = result.data;
-      const newListOfProfiles = data.passengers;
-
-      const email = data.driver_email;
-      axios.get('/userr', { email: email })
-        .then((result) => {
-          const driverProfile = result.data;
-          newListOfProfiles.push(driverProfile);
-          setListOfProfiles(newListOfProfiles);
-        })
-    })
+  const trip = location.state;
   const reviewResults = [];
+
+  if (listOfProfiles === null) {
+    getProfiles(trip, setListOfProfiles);
+    return null;
+  }
 
   for (const profile of listOfProfiles) {
     const newReview = {};
 
     newReview.email = profile.email;
-    newReview.name = profile.name;
+    newReview.name = profile.first_name + ' ' + profile.last_name;
     newReview.feedback = '';
 
     reviewResults.push(newReview);
@@ -40,10 +47,6 @@ function ReviewView() {
 
   for (let currentIndex = 0; currentIndex < reviewResults.length; currentIndex++) {
     reviewList.push(<ReviewCard profile={reviewResults[currentIndex]} />);
-  }
-
-  if (listOfProfiles === null) {
-    return null;
   }
 
   return (

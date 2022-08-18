@@ -91,3 +91,15 @@
 //   getProfileData,
 //   deleteUser,
 // };
+
+function postProfileData(data) {}
+// user
+//  picture
+//  name
+//  reviews
+//  bio
+// current past and future trips
+// chat
+
+/////////////////////////
+////   CHAT STUFFF   ///

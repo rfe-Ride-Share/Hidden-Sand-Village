@@ -30,6 +30,7 @@ const io = new Server(httpServer, {
 io.on('connection', (socket) => {
   console.log('user connected', socket.id);
   socket.on('send_message', (data) => {
+    console.log('socket', data, 'socket_id:', socket.id);
     //server
     socket.emit('receive_message', data);
   });
@@ -47,6 +48,7 @@ const PORT = 3000;
 
 app.use('/userr', userRoute);
 app.use('/tripp', tripRoute);
+
 
 // trips
 // app.get('/tripp', (req, res) => {

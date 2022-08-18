@@ -88,7 +88,7 @@ function populateLists(
           <RiderCard tripInfo={trip} />
           <ButtonRow>
             <PaymentButton trip={trip} />
-            <ReviewButton />
+            <ReviewButton trip={trip} />
           </ButtonRow>
         </div>
       );

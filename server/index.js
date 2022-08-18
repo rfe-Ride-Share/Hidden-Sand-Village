@@ -56,6 +56,8 @@ app.post('/tripp', (req, res) => {
 });
 
 app.put('/tripp', (req, res) => {
+  console.log(req.query);
+  console.log(req.body);
   db.updateTrip(req.query, req.body)
     .then((data) => res.status(201).send(data))
     .catch((err) => res.status(400).send(err));

@@ -9,7 +9,7 @@ function Payment(props) {
   console.log('state is', location.state);
   const trip = location.state || { passengers: [] };
 
-  const unformattedRiderCost = trip.totalCost / (trip.passengers.length + 1);
+  const unformattedRiderCost = trip.price / (trip.passengers.length + 1);
   const riderCost = (Math.ceil(unformattedRiderCost * 100)) / 100;
 
   trip.riderCost = riderCost;
@@ -17,7 +17,7 @@ function Payment(props) {
   return (
     <div>
       <PaymentCard tripInfo={trip} />
-      <PayPalButton cost={riderCost} />
+      <PayPalButton cost={riderCost} setHasPaid={() => console.log('Yaya')} />
     </div>
   );
 }

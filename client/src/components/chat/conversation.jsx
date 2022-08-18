@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios'
+
+
+
 
 const { io } = require('socket.io-client');
 const socket = io.connect('http://localhost:3001');
@@ -16,6 +20,15 @@ function Conversation(props) {
 
   const sendMessage = (event) => {
     event.preventDefault();
+
+    const messageObj = {
+      sender: props.currentUser._id,
+      text: message,
+      conversationId: '1',
+    }
+
+
+
     socket.emit('send_message', {
       message: message,
       sender: props.currentUser._id,
@@ -25,13 +38,17 @@ function Conversation(props) {
 
     });
 
+    // axios.post('/messages', messageObj).then((res) => {
+    //   // props.setMessages([...props.messages, res.data]);
+    //   console.log(res)
+    // })
     event.target.reset();
   };
   useEffect(() => {
     socket.on('receive_message', (data) => {
       setmessageReceived(data.message);
       console.log('data bounced back', data)
-      props.setMessages(props.messages.concat(data))
+      // props.setMessages(props.messages.concat(data))
 
     });
   }, [socket]);

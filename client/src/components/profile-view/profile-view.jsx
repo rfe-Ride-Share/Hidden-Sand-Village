@@ -62,26 +62,39 @@ export default function ProfileView() {
   const handleMessage = () => {
     console.log('message me!');
     //on click get that person's info from database
-    const otherPersonEmail = 'michael.schoenecker@gmail.com';
-    axios
-      .get(`/userr?email=${otherPersonEmail}`)
+    const otherPersonEmail = 'meinkappa@gmail.com';
+    Promise.all([
+      axios.get(`/userr?email=${otherPersonEmail}`),
+      axios.get(`/userr?email=${user.email}`),
+    ])
       .then((res) => {
-        console.log('res from email is', res);
-        const otherPersonData = res.data;
+        console.log(res);
+        const convo = { sender: res[1].data, receiver: res[0].data };
+        console.log('convo', convo);
 
-        //then using current user's details and person of interest, create new conversation in db.
-        const convo = [user, otherPersonData];
-        console.log(convo);
-        //   axios.post(`/conversations`, convo).then((res)=> {
-        //      //if successful, route user to messages page - on that page useEffect will grab that conversation just posted from the database and create the sidebar profile pic with other persons photo.
-        //      console.log(res)
-        // }).catch((err) => {
-        //   console.log(err)
-        // })
+        axios
+          .post(`/conversations`, convo)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
+
+    //   //then using current user's details and person of interest, create new conversation in db.
+    //   const convo = {sender: user, receiver: otherPersonData}
+    //   console.log(convo)
+    //   axios.post(`/conversations`, convo).then((res)=> {
+    //      //if successful, route user to messages page - on that page useEffect will grab that conversation just posted from the database and create the sidebar profile pic with other persons photo.
+    //      console.log(res)
+    // }).catch((err) => {
+    //   console.log(err)
+    // })
+    // }).catch((err) => {console.log(err)})
   };
   let reviewAvg;
   if (userData.reviews.length > 0) {

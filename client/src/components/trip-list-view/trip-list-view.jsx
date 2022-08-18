@@ -19,7 +19,7 @@ function getTripsFromUser(user, setListOfTrips) {
 
       for (const trip of responseTrips) {
         const now = new Date();
-        const tripDate = new Date(trip.date);
+        const tripDate = new Date(trip.depart_time);
 
         const isPast = (now.getTime() - tripDate.getTime()) > 0;
 
@@ -55,13 +55,7 @@ function populateLists(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton
-              onClick={() => {
-                let copyOfTripList = tripList.slice();
-                copyOfTripList.splice(currentIndex, 1);
-                setListOfTrips(copyOfTripList);
-              }}
-            />
+            <CancelButton trip={trip} />
             <MessageButton />
           </ButtonRow>
         </div>
@@ -71,13 +65,7 @@ function populateLists(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton
-              onClick={() => {
-                let copyOfTripList = tripList.slice();
-                copyOfTripList.splice(currentIndex, 1);
-                setListOfTrips(copyOfTripList);
-              }}
-            />
+            <CancelButton trip={trip} />
             <MessageButton />
           </ButtonRow>
         </div>

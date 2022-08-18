@@ -87,6 +87,10 @@ function postProfileData(data) {}
 //  bio
 // current past and future trips
 // chat
+
+/////////////////////////
+////   CHAT STUFFF   ///
+
 module.exports = {
   createTrip,
   deleteTrip,

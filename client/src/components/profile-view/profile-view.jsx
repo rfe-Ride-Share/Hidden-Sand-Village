@@ -61,6 +61,27 @@ export default function ProfileView() {
 
   const handleMessage = () => {
     console.log('message me!');
+    //on click get that person's info from database
+    // const otherPersonEmail = 'michael.schoenecker@gmail.com'
+    // axios
+    //   .get(`/userr?email=${otherPersonEmail}`)
+    //   .then((res) => {
+    //     console.log('res from email is', res);
+    //     const otherPersonData = res.data;
+
+    //     //then using current user's details and person of interest, create new conversation in db.
+    //     const convo = [user, otherPersonData]
+    //     axios.post(`/conversations`, convo).then((res)=> {
+    //        //if successful, route user to messages page - on that page useEffect will grab that conversation just posted from the database and create the sidebar profile pic with other persons photo.
+    //        console.log(res)
+    //   }).catch((err) => {
+    //     console.log(err)
+    //   })
+    //   }).catch((err) => {console.log(err)})
+
+
+
+
   };
 
   const handleEditBio = () => {

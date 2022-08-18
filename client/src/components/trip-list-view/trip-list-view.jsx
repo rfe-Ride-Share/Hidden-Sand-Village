@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
@@ -9,8 +10,14 @@ import MessageButton from './buttons/message-button';
 import ReviewButton from './buttons/review-button';
 import PaymentButton from './buttons/payment-button';
 
-function getTripsFromUser() {
-
+function getTripsFromUser(user, setListOfTrips) {
+  axios.get('/userr', { email : user.email })
+    .then((response) => {
+      setListOfTrips(response.data.trips);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
 }
 
 function populateLists(
@@ -69,6 +76,7 @@ function populateLists(
 }
 
 function TripListView() {
+  const { user } = useAuth0();
   // const pastTrip = {
   //   title: 'Disney World 2022',
   //   driver_email: 'doctormadam.ryderpoole@lol.com',
@@ -127,6 +135,7 @@ function TripListView() {
   const pastTrips = [];
 
   if (listOfTrips === null) {
+    getTripsFromUser(user, setListOfTrips);
     return null;
   }
 

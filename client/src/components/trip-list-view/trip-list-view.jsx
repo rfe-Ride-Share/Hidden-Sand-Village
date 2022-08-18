@@ -21,7 +21,7 @@ function getTripsFromUser(user, setListOfTrips) {
         const now = new Date();
         const tripDate = new Date(trip.date);
 
-        const isPast = (now.getTime() - tripDate.getTime()) > 0;
+        const isPast = (now.getTime() - tripDate.getTime()) < 0;
 
         if (trip.driver_email === user.email) {
           trip.status = isPast ? 'past' : 'upcoming';
@@ -55,7 +55,7 @@ function populateLists(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton tripInfo={trip} />
+            <CancelButton trip={trip} />
             <MessageButton />
           </ButtonRow>
         </div>
@@ -65,7 +65,7 @@ function populateLists(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton tripInfo={trip} />
+            <CancelButton trip={trip} />
             <MessageButton />
           </ButtonRow>
         </div>

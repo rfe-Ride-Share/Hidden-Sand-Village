@@ -1,8 +1,7 @@
 const Trip = require('../models/Trip');
 const router = require('express').Router();
-console.log('Trip is ', Trip);
+
 // Read trip
-Trip.find().then((res) => console.log('Tripfind is', res));
 
 router.get('/', async (req, res) => {
   try {

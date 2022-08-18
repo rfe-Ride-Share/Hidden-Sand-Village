@@ -31,12 +31,12 @@ function Appbar({ setOpen }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          vROOm
           <Link
             to="/"
             style={{ textDecoration: 'none', color: 'inherit' }}
           ></Link>
         </Typography>
-        {/* Replace with login button */}
         <AuthenticationButton />
       </Toolbar>
     </AppBar>

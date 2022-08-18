@@ -9,6 +9,7 @@ mongoose
 
 const tripSchema = new Schema({
   depart_coord: { lat: Number, lng: Number },
+  title: String,
   description: String,
   dest_coord: { lat: Number, lng: Number },
   distance: Number,
@@ -19,7 +20,7 @@ const tripSchema = new Schema({
   destination: { type: String, required: true },
   driver_email: { type: String, required: true },
   passengers: [
-    { name: { departure: String, destination: String, status: String } },
+    { email: String, departure: String, destination: String, status: String },
   ],
   passenger_capacity: Number,
   price: Number,

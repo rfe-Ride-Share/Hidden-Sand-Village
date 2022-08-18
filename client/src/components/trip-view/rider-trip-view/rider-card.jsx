@@ -17,6 +17,10 @@ export default function RiderCard({ tripInfo = {} }) {
   const [userData, setUserData] = React.useState({});
   const [rating, setRating] = React.useState(0);
 
+  const acceptedRiders = tripInfo.passengers.filter(
+    (rider) => rider.status === 'accepted'
+  );
+
   React.useEffect(() => {
     axios
       .get(`/userr?email=${tripInfo.driver_email}`)
@@ -74,6 +78,9 @@ export default function RiderCard({ tripInfo = {} }) {
             Rider Cost $
             {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
             {(tripInfo.price / 2).toFixed(2)}
+            <br />
+            Remaining Seats:{' '}
+            {tripInfo.passenger_capacity - acceptedRiders.length}
           </Typography>
           <Typography variant="body2" sx={{ m: 1.5 }}>
             Driver: {`${userData.first_name} ${userData.last_name}`}

@@ -162,7 +162,7 @@ export default function TripView({ tripInfo = {} }) {
             color="text.secondary"
             gutterBottom
           >
-            Date: {moment(tripInfo.date).format('MMM Do YY h:mm a')}
+            Date: {moment(tripInfo.depart_time).format('MMM Do YY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}
@@ -176,7 +176,11 @@ export default function TripView({ tripInfo = {} }) {
             Rider Cost $
             {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
             {(tripInfo.price / 2).toFixed(2)}
+            <br />
+            Remaining Seats:{' '}
+            {tripInfo.passenger_capacity - acceptedRiders.length}
           </Typography>
+          <br />
           <Typography variant="body2" sx={{ ml: 1.5 }}>
             Driver: {`${userData.first_name} ${userData.last_name}`}
             <br />

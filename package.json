@@ -64,6 +64,7 @@
     "@testing-library/dom": "^8.17.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
+    "image-webpack-loader": "^8.1.0",
     "react-error-overlay": "^6.0.9"
   }
 }

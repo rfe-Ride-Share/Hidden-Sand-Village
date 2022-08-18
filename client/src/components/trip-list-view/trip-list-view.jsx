@@ -11,13 +11,29 @@ import ReviewButton from './buttons/review-button';
 import PaymentButton from './buttons/payment-button';
 
 function getTripsFromUser(user, setListOfTrips) {
-  // axios.get('/userr', { email : user.email })
-  //   .then((response) => {
-  //     setListOfTrips(response.data.trips);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   })
+  axios.get('/tripp/')
+    .then((response) => {
+      const userTrips = [];
+
+      const responseTrips = response.data;
+
+      for (const trip of responseTrips) {
+        if (trip.driver_email === user.email) {
+          trip.status = 'upcoming';
+          userTrips.push(trip);
+        } else {
+          for (const passenger of trip.passengers) {
+            if (passenger.email === user.email) {
+              trip.status = passenger.status;
+              userTrips.push(trip);
+            }
+          }
+        }
+      }
+
+      setListOfTrips(userTrips);
+    })
+
 }
 
 function populateLists(

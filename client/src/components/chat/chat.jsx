@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Message from './Message.jsx';
+import Message from './message.jsx';
 import Conversation from './conversation.jsx';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -40,7 +40,7 @@ const [currentChat, setCurrentChat] = useState('');
 useEffect(() => {
   const getTripConversations = async () => {
     try {
-      const res = await axios.get("/tripConversations/" + currentUser._id);
+      const res = await axios.get("/conversations/" + currentUser._id);
       setTripConversations(res.data);
     } catch (err) {
       console.log(err);

@@ -37,17 +37,17 @@ console.log('currentUser', currentUser);
 const [tripConversations, setTripConversations] = useState([]);
 const [currentChat, setCurrentChat] = useState('');
 
-// useEffect(() => {
-//   const getTripConversations = async () => {
-//     try {
-//       const res = await axios.get("/tripConversations/" + user._id);
-//       setTripConversations(res.data);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-//   getTripConversations();
-// }, [user._id]);
+useEffect(() => {
+  const getTripConversations = async () => {
+    try {
+      const res = await axios.get("/tripConversations/" + currentUser._id);
+      setTripConversations(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  getTripConversations();
+}, [currentUser._id]);
 
 useEffect(()=> {
   axios
@@ -95,7 +95,7 @@ const [messages, setMessages] = useState([{
          ))}
           </div>
           <div className="chatBoxBottom">
-            <Conversation messages={messages} setMessages={setMessages} user={user} currentUser={currentUser}/>
+            <Conversation messages={messages} setMessages={setMessages} user={user} currentUser={currentUser} messages={messages}/>
            {/* <Chatbox setNewMessage={setNewMessage} newMessage={newMessage}/> */}
           </div>
     </div>

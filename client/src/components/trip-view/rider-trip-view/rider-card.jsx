@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 import moment from 'moment';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -54,15 +55,11 @@ export default function RiderCard({ tripInfo = {} }) {
             startPos={tripInfo.depart_coord}
             destPos={tripInfo.dest_coord}
           />
-          <Typography
-            sx={{ fontSize: 14, ml: 1.5 }}
-            color="text.secondary"
-            gutterBottom
-          >
-            {moment(tripInfo.date).format('MMM Do YY h:mm a')}
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ ml: 1.5 }}>
+          <Typography variant="h6" component="div" sx={{ m: 1.5, mb: 0.25 }}>
             {tripInfo.title}
+          </Typography>
+          <Typography sx={{ ml: 1.5 }} color="text.secondary" gutterBottom>
+            Date: {moment(tripInfo.date).format('MMM Do YY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}
@@ -70,14 +67,14 @@ export default function RiderCard({ tripInfo = {} }) {
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             To: {tripInfo.departure}
           </Typography>
-          <Typography variant="body2" sx={{ ml: 1.5 }}>
+          <Typography variant="body2" sx={{ m: 1.5 }}>
             Total Cost: ${tripInfo.price.toFixed(2)}
             <br />
             Rider Cost $
             {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
             {(tripInfo.price / 2).toFixed(2)}
           </Typography>
-          <Typography variant="body2" sx={{ ml: 1.5 }}>
+          <Typography variant="body2" sx={{ m: 1.5 }}>
             Driver: {`${userData.first_name} ${userData.last_name}`}
             <br />
             <Rating name="driver rating" value={rating} readOnly />
@@ -87,3 +84,18 @@ export default function RiderCard({ tripInfo = {} }) {
     </Card>
   );
 }
+
+function ProfileImage({ image }) {
+  return <ProfileImageComponent image={image} />;
+}
+
+const ProfileImageComponent = styled.div`
+  background-color: #ccc;
+  background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 85px;
+  width: 85px;
+  margin: 10px;
+  border-radius: 10px;
+`;

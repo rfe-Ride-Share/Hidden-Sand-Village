@@ -35,7 +35,7 @@ export default function RiderCard({ profile = {}, status }) {
           <Typography sx={{ fontSize: 14 }} gutterBottom>
             {profile.name}
           </Typography>
-          <RatingStars rating={profile.rating} />
+          <RatingStars rating={5} />
         </CardContent>
         <ButtonRow status={status} />
       </MainCardContainer>

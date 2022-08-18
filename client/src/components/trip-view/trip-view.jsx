@@ -199,3 +199,8 @@ function RiderList({ pendingRiders, acceptedRiders, tripInfo }) {
 //we need to change the ask to join button when riders >= seats
 //const acceptedRiders = tripInfo.passengers.filter(rider.status === 'accepted')
 //const pendingRiders = tripInfo.passengers.filter(rider.status === 'pending')
+
+// const now = new Date();
+//         const tripDate = new Date(trip.date);
+
+//         const isPast = (now.getTime() - tripDate.getTime()) > 0;

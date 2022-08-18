@@ -6,20 +6,23 @@ const socket = io.connect('http://localhost:3001');
 
 
 function Conversation(props) {
+
+  const currUser = props.user;
+  console.log(currUser)
   const [message, setMessage] = useState('');
   const [messageReceived, setmessageReceived] = useState('');
-  const { user } = useAuth0();
+
   const [conversation_id, setConversationId] = useState('');
 
   const sendMessage = (event) => {
     event.preventDefault();
     socket.emit('send_message', {
       message: message,
-      sender: 'Whoever is logged in',
+      sender: props.currentUser._id,
       conversation_id: '2',
-      photo: 'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
+      photo: props.currentUser.user_photo,
       createdAt: new Date(),
-      user_id: '1'
+
     });
 
     event.target.reset();

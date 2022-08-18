@@ -1,8 +1,17 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const userRoute = require('./routes/users');
+const tripRoute = require('./routes/trips');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const db = require('./db');
+// const db = require('./db');
+
+mongoose
+  .connect(process.env.MONGO)
+  .then(() => console.log('connected to MongoDB...'))
+  .catch((err) => console.log(err));
 
 const app = express();
 app.use(cors());
@@ -36,82 +45,85 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 const PORT = 3000;
 
+app.use('/userr', userRoute);
+app.use('/tripp', tripRoute);
+
 // trips
-app.get('/tripp', (req, res) => {
-  let query;
-  if (!req.query) {
-    query = {};
-  } else {
-    query = req.query;
-  }
-  db.findTrip(query)
-    .then((trip) => res.send(trip))
-    .catch((err) => res.status(400).send(err));
-});
+// app.get('/tripp', (req, res) => {
+//   let query;
+//   if (!req.query) {
+//     query = {};
+//   } else {
+//     query = req.query;
+//   }
+//   db.findTrip(query)
+//     .then((trip) => res.send(trip))
+//     .catch((err) => res.status(400).send(err));
+// });
 
-app.post('/tripp', (req, res) => {
-  db.createTrip(req.body)
-    .then((data) => res.status(201).send(data))
-    .catch((err) => res.status(500).send(err));
-});
+// app.post('/tripp', (req, res) => {
+//   db.createTrip(req.body)
+//     .then((data) => res.status(201).send(data))
+//     .catch((err) => res.status(500).send(err));
+// });
 
-app.put('/tripp', (req, res) => {
-  db.updateTrip(req.query, req.body)
-    .then((data) => res.status(201).send(data))
-    .catch((err) => res.status(400).send(err));
-});
+// app.put('/tripp', (req, res) => {
+//   db.updateTrip(req.query, req.body)
+//     .then((data) => res.status(201).send(data))
+//     .catch((err) => res.status(400).send(err));
+// });
 
-app.delete('/tripp', (req, res) => {
-  db.deleteTrip(req.query)
-    .then((data) => {
-      data.deletedCount === 1
-        ? res.status(200).send(data)
-        : res.status(400).send(data);
-    })
-    .catch((err) => res.status(500).send());
-});
+// app.delete('/tripp', (req, res) => {
+//   db.deleteTrip(req.query)
+//     .then((data) => {
+//       data.deletedCount === 1
+//         ? res.status(200).send(data)
+//         : res.status(400).send(data);
+//     })
+//     .catch((err) => res.status(500).send());
+// });
 
-// user
-app.get('/userr/', (req, res) => {
-  console.log('get user', req.query);
-  db.getProfileData(req.query)
-    .then((response) => {
-      console.log('response is', response);
-      if (!response) {
-        res.status(400).send('User not found ❌');
-      } else {
-        res.send(response);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send(err);
-    });
-});
+// // user
+// app.get('/userr/', (req, res) => {
+//   console.log('get user', req.query);
+//   db.getProfileData(req.query)
+//     .then((response) => {
+//       console.log('response is', response);
+//       if (!response) {
+//         res.status(400).send('User not found ❌');
+//       } else {
+//         res.send(response);
+//       }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(500).send(err);
+//     });
+// });
 
-app.post('/userr', (req, res) => {
-  console.log('creating user', req.body);
-  db.createUser(req.body)
-    .then(() => res.status(201).send('User created ✅'))
-    .catch((err) => res.status(500).send('Could not create or update user ❌'));
-});
+// app.post('/userr', (req, res) => {
+//   console.log('creating user', req.body);
+//   db.createUser(req.body)
+//     .then(() => res.status(201).send('User created ✅'))
+//     .catch((err) => res.status(500).send('Could not create or update user ❌'));
+// });
 
-// /userr?email=youremail
-app.put('/userr', (req, res) => {
-  db.findOneAndUpdateUser(req.query, req.body)
-    .then(() => res.status(201).send('User updated ✅'))
-    .catch((err) => res.status(500).send('Could not create or update user ❌'));
-});
+// // /userr?email=youremail
+// app.put('/userr', (req, res) => {
+//   db.findOneAndUpdateUser(req.query, req.body)
+//     .then(() => res.status(201).send('User updated ✅'))
+//     .catch((err) => res.status(500).send('Could not create or update user ❌'));
+// });
 
-app.delete('/userr', (req, res) => {
-  db.deleteUser(req.query)
-    .then((data) => {
-      data.deletedCount === 1
-        ? res.status(200).send(data)
-        : res.status(400).send(data);
-    })
-    .catch((err) => console.error(err));
-});
+// app.delete('/userr', (req, res) => {
+//   db.deleteUser(req.query)
+//     .then((data) => {
+//       data.deletedCount === 1
+//         ? res.status(200).send(data)
+//         : res.status(400).send(data);
+//     })
+//     .catch((err) => console.error(err));
+// });
 
 app.get('*', function (request, response) {
   response.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
@@ -120,46 +132,3 @@ app.get('*', function (request, response) {
 // chat??
 app.listen(PORT);
 console.log('Server listening at http://localhost:3000');
-
-const testUser = {
-  email: 'ss@n.com',
-  user_photo: 'fakeUrl.picture',
-  first_name: 'IAN',
-  last_name: 'ZUBER',
-  reviews: [
-    { stars: 1, review_text: 'So wack' },
-    { stars: 5, review_text: 'wonderful' },
-  ],
-  bio: 'Just a small town girl, livin in a lonely world',
-};
-// possibly change driver and passengers based on userid
-
-const sampleTrip = {
-  title: 'Alien hunting trip',
-  description:
-    'Aliens make too much environment issues and need to be restrained',
-  date: '1660576677204',
-  depart_time: '1660576677205',
-  departure: 'home',
-  depart_coord: { lat: '123', lng: '321' },
-  destination: 'home away from home',
-  dest_coord: { lat: '123', lng: '321' },
-  driver: 'CarlPoole@mail.com', // driver email
-  distance: 1,
-  distance_str: 'one mile',
-  passengers: [
-    {
-      Rider1: {
-        departure: 'place1',
-        destination: 'place2',
-        status: 'upcoming',
-        email: 'forThe@environment.com',
-      },
-    },
-  ],
-  passenger_capacity: 3,
-  price: '2.38',
-  duration: 'one hour',
-  seconds: 123,
-  status: 'upcoming', // pending/done/cancelled/upcoming/full/
-};

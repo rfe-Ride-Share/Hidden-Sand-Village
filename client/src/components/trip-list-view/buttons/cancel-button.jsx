@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function getPassengersWithoutUser(trip, user) {
@@ -45,9 +46,9 @@ function CancelButton({ trip }) {
         borderRadius: '15px',
         backgroundColor: '#DF3062',
       }}
-      onClick={() => console.log('cancel goes here')}
+      onClick={() => removeRiderFromTrip(trip)}
     >
-      Cancel
+      <Link to='/trips' style={{ textDecoration: 'none', color: 'white' }} >Cancel</Link>
     </Button>
   );
 }

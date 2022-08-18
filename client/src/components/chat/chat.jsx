@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Message from './Message.jsx';
 import Conversation from './conversation.jsx';
-import styled from 'styled-components'
-import axios from 'axios'
+import styled from 'styled-components';
+import axios from 'axios';
 import ChatList from './chat-list/chat-list.jsx';
-import Chatbox from './chatbox.jsx'
-import Group from './Group.jsx'
+import Chatbox from './chatbox.jsx';
+import Group from './Group.jsx';
 import { useAuth0 } from '@auth0/auth0-react';
 
 //user details from auth//
@@ -20,80 +20,75 @@ import { useAuth0 } from '@auth0/auth0-react';
 // sub: "google-oauth2|103152931685808757218"
 // updated_at: "2022-08-17T20:32:24.841Z"
 
-
-
 function Chat() {
+  const { user } = useAuth0();
 
-const { user } = useAuth0();
-
-console.log(user)
+  console.log(user);
 
   //grab details from login
-const [currentUser, setCurrentUser] = useState('1');
+  const [currentUser, setCurrentUser] = useState('1');
 
-const [newMessage, setNewMessage] = useState('')
+  const [newMessage, setNewMessage] = useState('');
 
-const [tripConversations, setTripConversations] = useState([]);
-const [currentChat, setCurrentChat] = useState('');
+  const [tripConversations, setTripConversations] = useState([]);
+  const [currentChat, setCurrentChat] = useState('');
 
-// useEffect(() => {
-//   const getTripConversations = async () => {
-//     try {
-//       const res = await axios.get("/tripConversations/" + user._id);
-//       setTripConversations(res.data);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-//   getTripConversations();
-// }, [user._id]);
+  // useEffect(() => {
+  //   const getTripConversations = async () => {
+  //     try {
+  //       const res = await axios.get("/tripConversations/" + user._id);
+  //       setTripConversations(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getTripConversations();
+  // }, [user._id]);
 
-
-
-const [messages, setMessages] = useState([{
-  message: "Hey, I want to join your trip! Tell me more about it.",
-  photo: 'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg',
-  createdAt: new Date(),
-   user_id: '1',
-   conversation_id: '1'
-}, {
-  message: "Hi! We would be taking all back roads to avoid tolls. How do you feel about that?",
-  photo: 'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
-  createdAt: new Date(),
-  user_id: '2',
-  conversation_id: '0'
-}]);
-
-
+  const [messages, setMessages] = useState([
+    {
+      message: 'Hey, I want to join your trip! Tell me more about it.',
+      photo:
+        'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg',
+      createdAt: new Date(),
+      user_id: '1',
+      conversation_id: '1',
+    },
+    {
+      message:
+        'Hi! We would be taking all back roads to avoid tolls. How do you feel about that?',
+      photo:
+        'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
+      createdAt: new Date(),
+      user_id: '2',
+      conversation_id: '0',
+    },
+  ]);
 
   return (
-  <ChatWrapper>
-    <div className="messenger">
-    {/* {tripConversations.map((c) => (
+    <ChatWrapper>
+      <div className="messenger">
+        {/* {tripConversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Group conversation={c} currentUser={user} />
               </div>
             ))} */}
-   {/* <Group /> */}
-  <div className="chatBox">
-    <div className="chatBoxWrapper">
-      <div className="chatBoxTop">
-
-      {messages.map((m) => (
-
-        <Message message={m} own={m.user_id === currentUser}/>
-
-         ))}
+        {/* <Group /> */}
+        <div className="chatBox">
+          <div className="chatBoxWrapper">
+            <div className="chatBoxTop">
+              {messages.map((m) => (
+                <Message message={m} own={m.user_id === currentUser} />
+              ))}
+            </div>
+            <div className="chatBoxBottom">
+              <Conversation messages={messages} setMessages={setMessages} />
+              {/* <Chatbox setNewMessage={setNewMessage} newMessage={newMessage}/> */}
+            </div>
           </div>
-          <div className="chatBoxBottom">
-            <Conversation messages={messages} setMessages={setMessages}/>
-           {/* <Chatbox setNewMessage={setNewMessage} newMessage={newMessage}/> */}
-          </div>
-    </div>
-  </div>
-
-  </div>
-  </ChatWrapper>
+        </div>
+      </div>
+    </ChatWrapper>
   );
 }
 
@@ -192,8 +187,6 @@ const ChatWrapper = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-
 //SCHEMAS
 // const ConversationSchema = new mongoose.Schema(
 //   {
@@ -221,10 +214,3 @@ const ChatWrapper = styled.div`
 // );
 
 // module.exports = mongoose.model("Message", MessageSchema);
-
-
-
-=======
-export default Chat;
-// <div>Ian is the GOAT</div>
->>>>>>> 2dea9f5d9436c38f19e41e3567c8d44cb2340ec6

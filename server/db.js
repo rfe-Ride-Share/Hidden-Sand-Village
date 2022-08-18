@@ -81,26 +81,6 @@
 //   return User.findOne(query).exec();
 // }
 
-// module.exports = {
-//   createTrip,
-//   deleteTrip,
-//   findTrip,
-//   updateTrip,
-//   createUser,
-//   findOneAndUpdateUser,
-//   getProfileData,
-//   deleteUser,
-// };
-
-// function postProfileData(data) {}
-// user
-//  picture
-//  name
-//  reviews
-//  bio
-// current past and future trips
-// chat
-
 /////////////////////////
 ////   CHAT STUFFF   ///
 

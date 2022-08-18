@@ -146,12 +146,12 @@ function AddTripView() {
   const icon = <PersonAddAltIcon />;
   const BasicSelect = (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-      <InputLabel id="demo-simple-select-label">{icon} </InputLabel>
+      <InputLabel id="demo-simple-select-label"> Passenger Seats </InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={seats}
-        label="Available Seats"
+        label="Passenger Seats"
         onChange={handleChange}
       >
         <MenuItem value={1}>1</MenuItem>

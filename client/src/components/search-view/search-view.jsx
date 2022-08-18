@@ -12,6 +12,7 @@ import moment from 'moment';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 
 import SearchBar from './searchBar';
 // import MapDirections from './MapDirections';
@@ -19,6 +20,7 @@ import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
 // import fetchDirections from './helpers/fetchDirections';
 import getDistance from './helpers/getDistance';
+import SwipeableEdgeDrawer from './helpers/SwipeableEdgeDrawer';
 
 export default function SearchView() {
   //Longitude & latitude setters
@@ -90,6 +92,21 @@ export default function SearchView() {
           placeholder={'Where will you be travelling to?'}
         />
       </Stack>
+      <Button
+        variant="contained"
+        size="small"
+        sx={{
+          borderRadius: '12px',
+          backgroundColor: '#F5B935',
+        }}
+        onClick={() => {
+          console.log(
+            'Accept rider functionality placeholder for Driver View. need to change accept-button.jsx'
+          );
+        }}
+      >
+        Filter Button
+      </Button>
       <Box
         sx={{
           width: '100%',
@@ -102,6 +119,7 @@ export default function SearchView() {
           <RiderCard key={trip._id} tripInfo={trip} />
         ))}
       </Box>
+      <SwipeableEdgeDrawer />
     </Container>
   );
 }

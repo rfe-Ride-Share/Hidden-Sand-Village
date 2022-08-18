@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import MapDirections from '../../search-view/mapDirections';
 
@@ -59,7 +60,7 @@ export default function RiderCard({ tripInfo = {} }) {
             {tripInfo.title}
           </Typography>
           <Typography sx={{ ml: 1.5 }} color="text.secondary" gutterBottom>
-            Date: {moment(tripInfo.date).format('MMM Do YY h:mm a')}
+            Date: {moment(tripInfo.depart_time).format('MMM Do YY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}
@@ -99,3 +100,26 @@ const ProfileImageComponent = styled.div`
   margin: 10px;
   border-radius: 10px;
 `;
+
+// import { useAuth0 } from '@auth0/auth0-react';
+// import Button from '@mui/material/Button';
+
+// const LoginButton = () => {
+//   const { loginWithRedirect } = useAuth0();
+//   return (
+//     <Button
+//       color="inherit"
+//       className="btn btn-primary btn-block"
+//       onClick={() => loginWithRedirect()}
+//     >
+//       Log In
+//     </Button>
+//   );
+// };
+// const AuthenticationButton = () => {
+//   const { isAuthenticated } = useAuth0();
+
+//   return isAuthenticated ? <LogoutButton /> : <LoginButton />;
+// };
+//if is logged in to = '/trip'
+//if not logged in to = ''

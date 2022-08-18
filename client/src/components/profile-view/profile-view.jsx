@@ -62,7 +62,7 @@ export default function ProfileView() {
   const handleMessage = () => {
     console.log('message me!');
     //on click get that person's info from database
-    const otherPersonEmail = 'michael.schoenecker@gmail.com'
+    const otherPersonEmail = 'michael.schoenecker@gmail.com';
     axios
       .get(`/userr?email=${otherPersonEmail}`)
       .then((res) => {
@@ -70,23 +70,35 @@ export default function ProfileView() {
         const otherPersonData = res.data;
 
         //then using current user's details and person of interest, create new conversation in db.
-        const convo = [user, otherPersonData]
-        console.log(convo)
-      //   axios.post(`/conversations`, convo).then((res)=> {
-      //      //if successful, route user to messages page - on that page useEffect will grab that conversation just posted from the database and create the sidebar profile pic with other persons photo.
-      //      console.log(res)
-      // }).catch((err) => {
-      //   console.log(err)
-      // })
-      }).catch((err) => {console.log(err)})
-
-
-
-
+        const convo = [user, otherPersonData];
+        console.log(convo);
+        //   axios.post(`/conversations`, convo).then((res)=> {
+        //      //if successful, route user to messages page - on that page useEffect will grab that conversation just posted from the database and create the sidebar profile pic with other persons photo.
+        //      console.log(res)
+        // }).catch((err) => {
+        //   console.log(err)
+        // })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
+  let reviewAvg;
+  if (userData.reviews.length > 0) {
+    reviewAvg = userData.reviews.reduce(
+      (a, b) => {
+        console.log('a:', a);
+        console.log('b:', b);
+        return { stars: a.stars + b.stars };
+      },
+      { stars: 0 }
+    );
+    reviewAvg = reviewAvg.stars / userData.reviews.length;
+    console.log('reviews are', reviewAvg);
+  } else {
+    reviewAvg = 0;
+  }
   const handleEditBio = () => {
-    console.log(userData);
     axios
       .put(`/userr?email=${user.email}`, userData)
       .then(() => {
@@ -112,8 +124,8 @@ export default function ProfileView() {
           </Typography>
           <Typography>My Reviews</Typography>
           <Item>
-            <Rating name="read-only" value={5} readOnly />
-            <div>100 reviews</div>
+            <Rating name="read-only" value={reviewAvg} readOnly />
+            <div>{userData.reviews.length} reviews</div>
           </Item>
           <Typography>
             Bio

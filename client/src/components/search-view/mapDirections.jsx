@@ -42,27 +42,28 @@ export default function MapDirections({ startPos, destPos }) {
     mapTypeControl: false,
     fullscreenControl: false,
     draggable: false,
-    // styles: [
-    //   // {
-    //   //   featureType: 'all',
-    //   //   stylers: [{ color: '#C0C0C0' }],
-    //   // },
-    //   {
-    //     featureType: 'road',
-    //     stylers: [{ color: '#F5B935' }],
-    //   },
-    //   // {
-    //   //   featureType: 'landscape',
-    //   //   elementType: 'labels',
-    //   //   stylers: [{ visibility: 'off' }],
-    //   // },
-    //   {
-    //     featureType: 'landscape',
-    //     elementType: 'geometry',
-    //     stylers: [{ color: '#F6C7D4' }],
-    //   },
-    //   { featureType: 'water', stylers: [{ color: '#11ABC1' }] },
-    // ],
+    keyboardShortcuts: false,
+    styles: [
+      // {
+      //   featureType: 'all',
+      //   stylers: [{ color: '#C0C0C0' }],
+      // },
+      {
+        featureType: 'road',
+        stylers: [{ color: '#F7F7F7' }],
+      },
+      // {
+      //   featureType: 'landscape',
+      //   elementType: 'labels',
+      //   stylers: [{ visibility: 'off' }],
+      // },
+      // {
+      //   featureType: 'landscape',
+      //   elementType: 'geometry',
+      //   stylers: [{ color: '#F6C7D4' }],
+      // },
+      { featureType: 'water', stylers: [{ color: '#11ABC1' }] },
+    ],
     //https://developers.google.com/maps/documentation/javascript/style-reference
   }));
 
@@ -72,7 +73,7 @@ export default function MapDirections({ startPos, destPos }) {
         sx={{
           display: 'flex',
           justifyContent: 'space-around',
-          width: '300px',
+          width: '100%',
           height: '300px',
         }}
       >
@@ -82,6 +83,7 @@ export default function MapDirections({ startPos, destPos }) {
           mapContainerStyle={{
             width: '100%',
             height: '100%',
+            // borderRadius: '2%',
           }}
           options={options}
         >

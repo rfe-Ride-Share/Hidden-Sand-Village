@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function RiderCard({ tripInfo = {} }) {
   const [userData, setUserData] = React.useState({});
@@ -46,6 +47,16 @@ export default function RiderCard({ tripInfo = {} }) {
           {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
           {(tripInfo.price / 2).toFixed(2)}
         </Typography>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{
+            borderRadius: '12px',
+            backgroundColor: '#F5B935',
+          }}
+        >
+          <Link to='/trip'>View Details</Link>
+        </Button>
       </CardContent>
     </Card>
   );

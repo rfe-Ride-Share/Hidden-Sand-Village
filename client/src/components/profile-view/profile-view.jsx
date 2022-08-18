@@ -86,7 +86,7 @@ export default function ProfileView() {
         <Stack spacing={2} justifyContent="space-between">
           <Typography>
             {/* {userData.first_name + ' ' + userData.last_name} */}
-            {user.name + ' ' + userData.last_name}
+            {user.name}
           </Typography>
           <Typography>My Reviews</Typography>
           <Item>

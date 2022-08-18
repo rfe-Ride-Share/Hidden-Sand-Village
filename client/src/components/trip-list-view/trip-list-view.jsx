@@ -55,13 +55,7 @@ function populateLists(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton
-              onClick={() => {
-                let copyOfTripList = tripList.slice();
-                copyOfTripList.splice(currentIndex, 1);
-                setListOfTrips(copyOfTripList);
-              }}
-            />
+            <CancelButton tripInfo={trip} />
             <MessageButton />
           </ButtonRow>
         </div>
@@ -71,13 +65,7 @@ function populateLists(
         <div>
           <RiderCard tripInfo={trip} />
           <ButtonRow>
-            <CancelButton
-              onClick={() => {
-                let copyOfTripList = tripList.slice();
-                copyOfTripList.splice(currentIndex, 1);
-                setListOfTrips(copyOfTripList);
-              }}
-            />
+            <CancelButton tripInfo={trip} />
             <MessageButton />
           </ButtonRow>
         </div>

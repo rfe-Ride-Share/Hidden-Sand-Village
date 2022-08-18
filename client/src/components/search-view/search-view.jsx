@@ -17,7 +17,8 @@ import SearchBar from './searchBar';
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
 import getDistance from './helpers/getDistance';
-import SwipeableEdgeDrawer from './helpers/SwipeableEdgeDrawer';
+// import SwipeableEdgeDrawer from './helpers/SwipeableEdgeDrawer';
+import FilterModal from './helpers/filterModal';
 
 export default function SearchView() {
   //Longitude & latitude setters
@@ -89,21 +90,7 @@ export default function SearchView() {
           placeholder={'Where will you be travelling to?'}
         />
       </Stack>
-      <Button
-        variant="contained"
-        size="small"
-        sx={{
-          borderRadius: '12px',
-          backgroundColor: '#F5B935',
-        }}
-        onClick={() => {
-          console.log(
-            'Accept rider functionality placeholder for Driver View. need to change accept-button.jsx'
-          );
-        }}
-      >
-        Filter Button
-      </Button>
+      <FilterModal />
       <Box
         sx={{
           width: '100%',
@@ -116,7 +103,7 @@ export default function SearchView() {
           <RiderCard key={trip._id} tripInfo={trip} />
         ))}
       </Box>
-      <SwipeableEdgeDrawer />
+      {/* <SwipeableEdgeDrawer /> */}
     </Container>
   );
 }

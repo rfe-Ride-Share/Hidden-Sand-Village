@@ -16,7 +16,7 @@ function MessageButton() {
           console.log('Message functionality goes here: trip-list-view/buttons/message-button.jsx');
         }}
       >
-          <Link to='/chat'>Message</Link>
+          <Link to='/chat' style={{ textDecoration: 'none', color: 'white' }}>Message</Link>
       </Button>
   );
 }

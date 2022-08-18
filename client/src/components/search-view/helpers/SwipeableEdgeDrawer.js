@@ -10,6 +10,8 @@ import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
+import DiscreteSlider from './DiscreteSlider';
+
 const drawerBleeding = 56;
 
 const Root = styled('div')(({ theme }) => ({
@@ -42,13 +44,17 @@ function SwipeableEdgeDrawer(props) {
     setOpen(newOpen);
   };
 
+  // This is used only for the example
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
   return (
     <Root>
       <CssBaseline />
       <Global
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(75% - ${drawerBleeding}px)`,
+            height: `calc(70% - ${drawerBleeding}px)`,
             overflow: 'visible',
           },
         }}
@@ -57,7 +63,7 @@ function SwipeableEdgeDrawer(props) {
         <Button onClick={toggleDrawer(true)}>Open</Button>
       </Box>
       <SwipeableDrawer
-        // container={container}
+        container={container}
         anchor="bottom"
         open={open}
         onClose={toggleDrawer(false)}
@@ -92,10 +98,15 @@ function SwipeableEdgeDrawer(props) {
             overflow: 'auto',
           }}
         >
+          {/* Distance, price, desitnation, departure */}
           <Typography sx={{ p: 4, color: 'text.primary' }}>
             Filter Trips
           </Typography>
-          <Skeleton variant="rectangular" height="100%" />
+          <DiscreteSlider filterType={'Distance'} />
+          <DiscreteSlider filterType={'Price'} />
+          <DiscreteSlider filterType={'Destination'} />
+          <DiscreteSlider filterType={'Departure'} />
+          {/* <Skeleton variant="rectangular" height="100%" /> */}
         </StyledBox>
       </SwipeableDrawer>
     </Root>

@@ -307,6 +307,7 @@ function AddTripView() {
           className="post-button"
           variant="contained"
           type="submit"
+          href="/"
           sx={{ backgroundColor: '#f5b935' }}
           onClick={(e) => {
             handleSubmit();

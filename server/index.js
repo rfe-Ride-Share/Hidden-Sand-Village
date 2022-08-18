@@ -4,6 +4,9 @@ const cors = require('cors');
 const userRoute = require('./routes/users');
 const tripRoute = require('./routes/trips');
 const mongoose = require('mongoose');
+const conversationRoute = require('./routes/conversations');
+const messageRoute = require('./routes/messages');
+
 require('dotenv').config();
 
 mongoose
@@ -46,6 +49,8 @@ const PORT = 3000;
 
 app.use('/userr', userRoute);
 app.use('/tripp', tripRoute);
+app.use('/conversations', conversationRoute);
+app.use('/messages', messageRoute);
 
 app.get('*', function (request, response) {
   response.sendFile(path.resolve(__dirname, '../client/dist/index.html'));

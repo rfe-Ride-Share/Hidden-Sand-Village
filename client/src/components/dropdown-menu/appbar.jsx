@@ -14,10 +14,10 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AuthenticationButton from '../auth/authentication-button';
-
+import VroomIcon from './LogoSample_ByTailorBrands (7).png';
 function Appbar({ setOpen }) {
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{ overflow: 'hidden', maxHeight: '55px' }}>
       <Toolbar sx={{ backgroundColor: '#11ABC1' }}>
         <IconButton
           size="large"
@@ -31,10 +31,23 @@ function Appbar({ setOpen }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          vROOm
+          <img
+            src={VroomIcon}
+            alt="vROOm"
+            style={{
+              height: '6em',
+              position: 'relative',
+              right: '60%',
+              left: '30%',
+              top: '5px',
+            }}
+          />
           <Link
             to="/"
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
           ></Link>
         </Typography>
         <AuthenticationButton />

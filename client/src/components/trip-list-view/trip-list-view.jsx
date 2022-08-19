@@ -130,6 +130,31 @@ function TripListView() {
     listOfTrips,
     setListOfTrips
   );
+  let pendingHeader, upcomingHeader, pastHeader;
+  if (pendingTrips.length > 0) {
+    pendingHeader = (
+      <Typography variant="h6" component="div" sx={{ m: 1.5, mb: 0 }}>
+        Pending Trips
+        <br />
+      </Typography>
+    );
+  }
+  if (upcomingTrips.length > 0) {
+    upcomingHeader = (
+      <Typography variant="h6" component="div" sx={{ m: 1.5 }}>
+        Upcoming Trips
+        <br />
+      </Typography>
+    );
+  }
+  if (pastTrips.length > 0) {
+    pastHeader = (
+      <Typography variant="h6" component="div" sx={{ m: 1.5, mb: 0 }}>
+        Past Trips
+        <br />
+      </Typography>
+    );
+  }
 
   return (
     <Container
@@ -148,20 +173,13 @@ function TripListView() {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h6" component="div" sx={{ m: 1.5, mb: 0 }}>
-          Pending Trips
-        </Typography>
+        {pendingHeader}
         {pendingTrips}
         <br />
-        <Typography variant="h6" component="div" sx={{ m: 1.5 }}>
-          Upcoming Trips
-          <br />
-        </Typography>
+        {upcomingHeader}
         {upcomingTrips}
         <br />
-        <Typography variant="h6" component="div" sx={{ m: 1.5 }}>
-          Past Trips
-        </Typography>
+        {pastHeader}
         {pastTrips}
       </Box>
     </Container>

@@ -54,6 +54,7 @@ function populateLists(
     if (trip.status === 'pending') {
       pendingTrips.push(
         <Box
+          key={trip._id}
           sx={{
             width: '100%',
             display: 'flex',
@@ -71,6 +72,7 @@ function populateLists(
     } else if (trip.status === 'upcoming') {
       upcomingTrips.push(
         <Box
+          key={trip._id}
           sx={{
             width: '100%',
             display: 'flex',
@@ -88,6 +90,7 @@ function populateLists(
     } else {
       pastTrips.push(
         <Box
+          key={trip._id}
           sx={{
             width: '100%',
             display: 'flex',

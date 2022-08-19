@@ -18,7 +18,7 @@ export default function RiderCard({ tripInfo = {} }) {
   const [rating, setRating] = React.useState(null);
 
   const acceptedRiders = tripInfo.passengers.filter(
-    (rider) => rider.status === 'accepted'
+    (rider) => rider.status === 'upcoming'
   );
 
   React.useEffect(() => {

@@ -27,7 +27,13 @@ function getTripsFromUser(user, setListOfTrips) {
 
       if (trip.driver_email === user.email) {
         trip.status = isPast ? 'past' : 'upcoming';
-        userTrips.push(trip);
+
+        const acceptedRiders = trip.passengers.filter(
+          (rider) => rider.status === 'upcoming'
+        );
+        if (acceptedRiders.length) {
+          userTrips.push(trip);
+        }
       } else {
         for (const passenger of trip.passengers) {
           if (passenger.email === user.email) {

@@ -31,7 +31,7 @@ function getTripsFromUser(user, setListOfTrips) {
         const acceptedRiders = trip.passengers.filter(
           (rider) => rider.status === 'upcoming'
         );
-        if (acceptedRiders.length) {
+        if (acceptedRiders.length || !isPast) {
           userTrips.push(trip);
         }
       } else {

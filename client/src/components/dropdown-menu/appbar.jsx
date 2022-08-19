@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -31,17 +32,20 @@ function Appbar({ setOpen }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <img
-            src={VroomIcon}
-            alt="vROOm"
-            style={{
-              height: '6em',
-              position: 'relative',
-              right: '60%',
-              left: '30%',
-              top: '5px',
-            }}
-          />
+          <LogoWrapper>
+            <img
+              className="logo"
+              src={VroomIcon}
+              alt="vROOm"
+              // style={{
+              //   height: '6em',
+              //   position: 'relative',
+              //   right: '60%',
+              //   left: '30%',
+              //   top: '5px',
+              // }}
+            />
+          </LogoWrapper>
           <Link
             to="/"
             style={{
@@ -55,5 +59,22 @@ function Appbar({ setOpen }) {
     </AppBar>
   );
 }
-
 export default Appbar;
+const LogoWrapper = styled.div`
+  .logo {
+    height: 6em;
+    position: relative;
+    right: 60%;
+    left: 45%;
+    top: 5px;
+  }
+  @media screen and (max-width: 500px) {
+    .logo {
+      height: 6em;
+      position: relative;
+      right: 60%;
+      left: 30%;
+      top: 5px;
+    }
+  }
+`;

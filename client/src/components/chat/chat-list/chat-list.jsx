@@ -9,16 +9,16 @@ import UserIconCard from './user-icon-card';
 function getFriends(conversations, setFriends, currentUser) {
   console.log('friends function being entered');
   const friendsAlreadyAdded = {};
-  const conversationIds = {};
+  const memberConversations = [];
   const promises = [];
 
   for (const conversation of conversations) {
     for (const memberId of conversation.members) {
       if (memberId !== currentUser._id && !friendsAlreadyAdded[memberId]) {
-        conversationIds[memberId] = conversation._id;
+        memberConversations.push(conversation);
 
         // comment this line out to allow duplicates
-        friendsAlreadyAdded[memberId] = true;
+        // friendsAlreadyAdded[memberId] = true;
 
         console.log('member id is', memberId);
         promises.push(
@@ -37,11 +37,14 @@ function getFriends(conversations, setFriends, currentUser) {
       console.log('results in chat list below');
       console.log(results);
       const newFriends = [];
-      for (const result of results) {
+      for (let currentIndex = 0; currentIndex < results.length; currentIndex++) {
+        const result = results[currentIndex];
+        const conversation = memberConversations[currentIndex];
+
         const newFriend = result.data;
-        newFriend.conversation_id = conversationIds[newFriend._id];
-        console.log('new conversation id is', newFriend.conversation_id);
-        newFriends.push(result.data);
+        newFriend.conversation = conversation;
+        console.log('new conversation id is', newFriend.conversation);
+        newFriends.push(newFriend);
       }
 
       setFriends(newFriends);
@@ -72,7 +75,7 @@ function ChatList({ conversations, currentUser, setCurrentChat }) {
       <UserIconCard
         image={friend.user_photo}
         name={friend.first_name}
-        onClick={() => setCurrentChat(friend)}
+        onClick={() => setCurrentChat(friend.conversation)}
 
       />
     );

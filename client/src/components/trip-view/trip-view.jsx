@@ -137,13 +137,18 @@ export default function TripView({ tripInfo = {} }) {
           );
         } else if (status === 'pending') {
           riderButtons = (
-            <Button
-              sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
-              variant="contained"
-              onClick={() => removeRiderFromTrip(tripInfo, user)}
+            <Link
+              to="/confirm-cancel"
+              state={tripInfo}
+              style={{ 'text-decoration': 'none', color: 'white' }}
             >
-              Cancel Request
-            </Button>
+              <Button
+                sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
+                variant="contained"
+              >
+                Cancel Request
+              </Button>
+            </Link>
           );
         } else if (status === 'upcoming') {
           riderButtons = (

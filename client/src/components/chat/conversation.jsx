@@ -139,6 +139,7 @@ function Conversation({currentUser, currentChat, setMessages, messages}) {
     } catch (err) {
       console.log(err);
     }
+    e.target.reset();
   };
 
   return (

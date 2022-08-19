@@ -18,7 +18,7 @@ export default function Chatbox(props) {
           className="chat-input"
           onChange={(e)=> props.setNewMessage( e.target.value)}
         />
-        <Button variant="contained" size="small" className="send" defaultValue="...." onClick={() =>{console.log(props.newMessage)}}>
+        <Button variant="contained" size="small" className="send" defaultValue="...." onClick={() =>console.log('new message:',props.newMessage)}>
           Send
         </Button>
 

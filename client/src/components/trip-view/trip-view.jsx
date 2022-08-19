@@ -11,6 +11,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import moment from 'moment';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import MapDirections from '../search-view/mapDirections';
 import RiderEntry from './rider-entry';
@@ -29,22 +30,25 @@ export default function TripView({ tripInfo = {} }) {
   const { user } = useAuth0();
 
   React.useEffect(() => {
-    axios
-      .get(`/userr?email=${tripInfo.driver_email}`)
-      .then((response) => {
-        setUserData(response.data);
-        let reviews = response.data.reviews;
-        let count = reviews.length;
+    const dataHasNotBeenSet = Object.keys(userData).length === 0;
+    if (dataHasNotBeenSet) {
+      axios
+        .get(`/userr?email=${tripInfo.driver_email}`)
+        .then((response) => {
+          setUserData(response.data);
+          let reviews = response.data.reviews;
+          let count = reviews.length;
 
-        if (count > 0) {
-          let total = 0;
-          reviews.forEach((review) => {
-            total += review.rating;
-          });
-          setRating(total / count);
-        }
-      })
-      .catch((err) => console.log(err));
+          if (count > 0) {
+            let total = 0;
+            reviews.forEach((review) => {
+              total += review.rating;
+            });
+            setRating(total / count);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   const acceptedRiders = tripInfo.passengers.filter(

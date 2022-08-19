@@ -197,10 +197,10 @@ export default function TripView({ tripInfo = {} }) {
             Date: {moment(tripInfo.depart_time).format('MMM Do YYYY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
-            From: {tripInfo.destination}
+            From: {tripInfo.departure}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
-            To: {tripInfo.departure}
+            To: {tripInfo.destination}
           </Typography>
           <Typography variant="body2" sx={{ ml: 1.5 }}>
             Total Cost: ${tripInfo.price.toFixed(2)}

@@ -23,6 +23,10 @@ export default function TripView({ tripInfo = {} }) {
   const [rating, setRating] = React.useState(0);
   const [status, setStatus] = React.useState('nope');
 
+  const now = new Date();
+  const tripDate = new Date(tripInfo.depart_time);
+  const isPast = now.getTime() - tripDate.getTime() > 0;
+
   const { user } = useAuth0();
 
   React.useEffect(() => {
@@ -59,6 +63,7 @@ export default function TripView({ tripInfo = {} }) {
   if (user.email) {
     let isDriver = user.email === tripInfo.driver_email;
     if (isDriver) {
+<<<<<<< HEAD
       riderList = (
         <RiderList
           tripInfo={tripInfo}
@@ -96,16 +101,73 @@ export default function TripView({ tripInfo = {} }) {
           >
             Cancel Request
           </Button>
+=======
+      if (!isPast) {
+        riderList = (
+          <RiderList
+            acceptedRiders={acceptedRiders}
+            pendingRiders={pendingRiders}
+            isPast={isPast}
+          />
+>>>>>>> 2083f9d6ead188f9bb743de0f0ff5199a7c7049b
         );
-      } else if (status === 'upcoming') {
+      } else {
         riderButtons = (
           <Button
-            sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
+            sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
             variant="contained"
           >
-            Leave Trip
+            Review
           </Button>
         );
+      }
+    } else {
+      tripInfo.passengers.forEach((rider) => {
+        if (rider.email === user.email) {
+          setStatus(rider.status);
+        }
+      });
+
+      if (isPast) {
+        if (status !== 'nope') {
+          riderButtons = (
+            <Button
+              sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
+              variant="contained"
+            >
+              Review
+            </Button>
+          );
+        }
+      } else {
+        if (status === 'nope') {
+          riderButtons = (
+            <Button
+              sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
+              variant="contained"
+            >
+              Ask to Join
+            </Button>
+          );
+        } else if (status === 'pending') {
+          riderButtons = (
+            <Button
+              sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
+              variant="contained"
+            >
+              Cancel Request
+            </Button>
+          );
+        } else if (status === 'upcoming') {
+          riderButtons = (
+            <Button
+              sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
+              variant="contained"
+            >
+              Leave Trip
+            </Button>
+          );
+        }
       }
     }
   }
@@ -144,7 +206,7 @@ export default function TripView({ tripInfo = {} }) {
             color="text.secondary"
             gutterBottom
           >
-            Date: {moment(tripInfo.date).format('MMM Do YY h:mm a')}
+            Date: {moment(tripInfo.depart_time).format('MMM Do YY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}
@@ -158,7 +220,11 @@ export default function TripView({ tripInfo = {} }) {
             Rider Cost $
             {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
             {(tripInfo.price / 2).toFixed(2)}
+            <br />
+            Remaining Seats:{' '}
+            {tripInfo.passenger_capacity - acceptedRiders.length}
           </Typography>
+          <br />
           <Typography variant="body2" sx={{ ml: 1.5 }}>
             Driver: {`${userData.first_name} ${userData.last_name}`}
             <br />
@@ -172,7 +238,7 @@ export default function TripView({ tripInfo = {} }) {
   );
 }
 
-function RiderList({ pendingRiders, acceptedRiders, tripInfo }) {
+function RiderList({ pendingRiders, acceptedRiders }) {
   let pending;
   if (pendingRiders.length > 0) {
     pending = (
@@ -194,23 +260,15 @@ function RiderList({ pendingRiders, acceptedRiders, tripInfo }) {
   return (
     <>
       {pending}
-      {tripInfo.passengers.map((rider) => {
+      {pendingRiders.map((rider) => {
         return <RiderEntry key={rider._id} rider={rider} />;
       })}
       {accepted}
-      {tripInfo.passengers.map((rider) => {
+      {acceptedRiders.map((rider) => {
         <RiderEntry key={rider._id} rider={rider} />;
       })}
     </>
   );
 }
-//we need total seats
-//current riders
-//we need to change the ask to join button when riders >= seats
-//const acceptedRiders = tripInfo.passengers.filter(rider.status === 'accepted')
-//const pendingRiders = tripInfo.passengers.filter(rider.status === 'pending')
-
-// const now = new Date();
-//         const tripDate = new Date(trip.date);
-
-//         const isPast = (now.getTime() - tripDate.getTime()) > 0;
+//still might want to add seats (seats remaining) 👍👍
+//also need to do conditional stuff for the link on the trip card in search view if you are not logged in

@@ -23,16 +23,32 @@ function AgreeToPayment(props) {
   if (isConfirmed) {
     addRiderToTrip(tripInfo);
     return (
-      <div>
-        <RiderCard tripInfo={tripInfo} />
-        <AgreementMessage>
-          Congratulations! Your request to join the ride has been sent to the
-          driver. The driver will message you with furher details.
-        </AgreementMessage>
-        <AgreementButtons>
-          <GoBackButton />
-        </AgreementButtons>
-      </div>
+      <Container
+        sx={{
+          padding: '1px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <RiderCard tripInfo={tripInfo} />
+          <AgreementMessage>
+            Congratulations! Your request to join the ride has been sent to the
+            driver. The driver will message you with furher details.
+          </AgreementMessage>
+          <AgreementButtons>
+            <GoBackButton />
+          </AgreementButtons>
+        </Box>
+      </Container>
     );
   }
 

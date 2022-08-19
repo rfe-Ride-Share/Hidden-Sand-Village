@@ -2,33 +2,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from 'styled-components'
 
-
-export default function Group({ convo, currentUser }) {
-  const [friend, setFriend] = useState({first_name: '',
-  last_name: '',
-  user_photo: '',
-});
+// import ChatList from './chat-list/chat-list';
 
 
-  useEffect(() => {
+export default function Group({ convo, currentUser, friend, setFriend }) {
+//   const [friend, setFriend] = useState({first_name: '',
+//   last_name: '',
+//   user_photo: '',
+// });
+
+   useEffect(() => {
 
     console.log('convo is: ',convo)
     console.log('currentUser._id: ', currentUser._id);
 
-    // const friendId = convo.members.find((m) => m !== currentUser._id);
-    // const friendId = convo.members.filter((m) => m !== currentUser._id);
 
-    const friendId = [];
+    const friendId = convo.members.filter((m) => m !== currentUser._id);
 
-    for (const member of convo.members) {
-      console.log('member is', member);
-      console.log('current user id is', currentUser._id);
 
-      if (member !== currentUser._id) {
-        console.log('member is passing the test check');
-        friendId.push(member);
-      }
-    }
+
+
 
     console.log('friendId', friendId);
 
@@ -48,7 +41,7 @@ export default function Group({ convo, currentUser }) {
 
    getUser();
 
-  }, [currentUser, convo]);
+  }, [currentUser, convo, setFriend]);
 
   return (
     <TripGroup>
@@ -70,6 +63,7 @@ const TripGroup = styled.div`
 
 .conversation {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 10px;
   cursor: pointer;
@@ -92,7 +86,7 @@ const TripGroup = styled.div`
   font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 718px) {
   .conversationName {
     display: none;
   }

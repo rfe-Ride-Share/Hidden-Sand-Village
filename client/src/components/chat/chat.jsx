@@ -7,6 +7,7 @@ import ChatList from './chat-list/chat-list.jsx';
 import Chatbox from './chatbox.jsx';
 import Group from './group.jsx';
 import { useAuth0 } from '@auth0/auth0-react';
+import {io} from 'socket.io-client';
 
 //user details from auth//
 // email: "cheyenne.cornett22@gmail.com"
@@ -30,10 +31,15 @@ function Chat() {
 
   console.log('currentUser', currentUser);
 
-  const [tripConversations, setTripConversations] = useState([]);
+  const [tripConversations, setTripConversations] = useState(null);
   const [currentChat, setCurrentChat] = useState('');
 
   console.log('current chat', currentChat)
+
+  const [friend, setFriend] = useState({first_name: '',
+  last_name: '',
+  user_photo: '',
+});
 
   useEffect(() => {
     const getTripConversations = async () => {
@@ -62,60 +68,66 @@ function Chat() {
       });
   }, [user]);
 
+
   useEffect(() => {
+
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?._id);
+        const res = await axios.get("/messages/" + currentChat?.conversation_id);
         setMessages(res.data);
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     };
     getMessages();
-  }, [currentChat]);
 
-  const [messages, setMessages] = useState([
-    {
-      message: 'Hey, I want to join your trip! Tell me more about it.',
-      photo:
-        'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg',
-      createdAt: new Date(),
-      user_id: '1',
-      conversation_id: '1',
-    },
-    {
-      message:
-        'Hi! We would be taking all back roads to avoid tolls. How do you feel about that?',
-      photo:
-        'https://res.cloudinary.com/dr8hijrgb/image/upload/v1660703247/C547C05C-D21D-47E6-9916-1C2A1C8DE2F7_1_105_c_i9v47y.jpg',
-      createdAt: new Date(),
-      user_id: '62fe5eb39f6feb4f2095257b',
-      conversation_id: '0',
-    },
-  ]);
 
-  return (
+}, [currentChat]);
+
+  const [messages, setMessages] = useState([]);
+
+  // {tripConversations.map((c) => (
+  //   <div onClick={() => {setCurrentChat(c)}}>
+  //   <Group convo={c} currentUser={currentUser} friend={friend} setFriend={setFriend}/>
+  //   </div>
+  //    ))}
+return tripConversations === null ? <p>TEST</p> : (
   <ChatWrapper>
     <div className="messenger">
-
-   {tripConversations.map((c) => (
-<div onClick={() => {setCurrentChat(c)}}>
-<Group convo={c} currentUser={currentUser}/>
-</div>
- ))}
+ <div className="chatMenu">
+  <div className="chatMenuWrapper">
+    <ChatList
+      conversations={tripConversations}
+      currentUser={currentUser}
+      setCurrentChat={setCurrentChat}
+      />
+        {/* {tripConversations.map((c) => (
+    <div onClick={() => {setCurrentChat(c)}}>
+    <Group convo={c} currentUser={currentUser} friend={friend} setFriend={setFriend}/>
+    </div>
+     ))} */}
+  </div>
+ </div>
   <div className="chatBox">
     <div className="chatBoxWrapper">
       <div className="chatBoxTop">
-
       {messages.map((m) => (
 
-        <Message message={m} own={m.user_id === currentUser._id}/>
+        <Message message={m} own={m.sender === currentUser._id} currentUser={currentUser} friend={friend}/>
 
          ))}
           </div>
+          <div className="chatBoxBottom">
+
+          <Conversation currentUser={currentUser} currentChat={currentChat} setMessages={setMessages} messages={messages}/>
+          </div>
+
         </div>
+
       </div>
       </div>
+
+
     </ChatWrapper>
   );
 }

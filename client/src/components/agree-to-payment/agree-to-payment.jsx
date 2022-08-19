@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
 import { Checkbox } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 import ConfirmRequestButton from './buttons/confirm-request-button';
@@ -35,23 +37,39 @@ function AgreeToPayment(props) {
   }
 
   return (
-    <div>
-      <RiderCard tripInfo={tripInfo} />
-      <AgreementMessage>
-        By clicking {'"I Accept"'} the user fully agrees to split the cost of
-        the trip up to and including the amount of ${cost} if accepted by the
-        driver and not cancelled within 24 hours of departure.
-      </AgreementMessage>
-      <AgreementCheckbox>
-        I Accept <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
-      </AgreementCheckbox>
-      <AgreementButtons>
-        <ConfirmRequestButton
-          isAccepted={isAccepted}
-          setIsConfirmed={setIsConfirmed}
-        />
-      </AgreementButtons>
-    </div>
+    <Container
+      sx={{
+        padding: '1px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <RiderCard tripInfo={tripInfo} />
+        <AgreementMessage>
+          By clicking {'"I Accept"'} the user fully agrees to split the cost of
+          the trip up to and including the amount of ${cost} if accepted by the
+          driver and not cancelled within 24 hours of departure.
+        </AgreementMessage>
+        <AgreementCheckbox>
+          I Accept <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
+        </AgreementCheckbox>
+        <AgreementButtons>
+          <ConfirmRequestButton
+            isAccepted={isAccepted}
+            setIsConfirmed={setIsConfirmed}
+          />
+        </AgreementButtons>
+      </Box>
+    </Container>
   );
 }
 

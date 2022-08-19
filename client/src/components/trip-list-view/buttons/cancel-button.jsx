@@ -70,7 +70,7 @@ function CancelButton({ trip, isAccepted = null, setIsConfirmed }) {
 
   if (isAccepted === null) {
     return (
-      <Link to="/confirm-delete">
+      <Link to='/confirm-cancel' state={trip} style={{'text-decoration': 'none', color: 'white' }}>
         <Button
           variant="contained"
           sx={{
@@ -80,7 +80,7 @@ function CancelButton({ trip, isAccepted = null, setIsConfirmed }) {
             backgroundColor: '#DF3062',
           }}
         >
-          <Link to='/confirm-cancel' state={trip} style={{'text-decoration': 'none', color: 'white' }}>Cancel</Link>
+          Cancel
         </Button>
       </Link>
     );

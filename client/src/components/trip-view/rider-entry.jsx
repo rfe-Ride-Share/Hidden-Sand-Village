@@ -26,6 +26,7 @@ export default function RiderEntry({
     status: 'pending',
     _id: '62fe5f8996b965d3df1e58db',
   },
+  tripInfo,
 }) {
   const [userData, setUserData] = React.useState({});
   const [rating, setRating] = React.useState(0);
@@ -50,9 +51,12 @@ export default function RiderEntry({
   }, []);
 
   let acceptedButton;
-  if (rider.status !== 'accepted') {
+  if (rider.status !== 'upcoming') {
     acceptedButton = (
-      <Button sx={{ backgroundColor: '#11ABC1' }}>
+      <Button
+        onClick={() => confirmRiderToTrip(tripInfo, rider)}
+        sx={{ backgroundColor: '#11ABC1' }}
+      >
         <CheckIcon sx={{ color: 'white' }} />
       </Button>
     );
@@ -100,7 +104,10 @@ export default function RiderEntry({
             <Button href="/chat" sx={{ backgroundColor: '#F5B935' }}>
               <MessageIcon sx={{ color: 'white' }} />
             </Button>
-            <Button sx={{ backgroundColor: '#DF3062' }}>
+            <Button
+              onClick={() => removeRiderFromTrip(tripInfo, rider)}
+              sx={{ backgroundColor: '#DF3062' }}
+            >
               <ClearIcon sx={{ color: 'white' }} />
             </Button>
             {acceptedButton}
@@ -125,3 +132,81 @@ const ProfileImageComponent = styled.div`
   margin: 10px;
   border-radius: 10px;
 `;
+
+function removeRiderFromTrip(trip, user) {
+  if (trip.driver_email === user.email) {
+    axios({
+      url: '/tripp',
+      method: 'delete',
+      params: { _id: trip._id },
+    })
+      .then((response) => {
+        window.location.replace('http://localhost:3000/');
+        console.log(response);
+      })
+      .catch((error) => {
+        window.location.replace('http://localhost:3000/');
+        console.log(error);
+      });
+  } else {
+    const newPassengers = getPassengersWithoutUser(trip, user);
+
+    axios({
+      url: '/tripp',
+      method: 'put',
+      data: { passengers: newPassengers },
+      params: { _id: trip._id },
+    })
+      .then((response) => {
+        console.log(response);
+        window.location.replace('http://localhost:3000/');
+      })
+      .catch((error) => {
+        console.log(error);
+        window.location.replace('http://localhost:3000/');
+      });
+  }
+}
+function getPassengersWithoutUser(trip, user) {
+  let passengers = trip.passengers;
+
+  for (let currentIndex = 0; currentIndex < passengers.length; currentIndex++) {
+    const passenger = passengers[currentIndex];
+    if (user.email === passenger.email) {
+      passengers.splice(currentIndex, 1);
+    }
+  }
+
+  return passengers;
+}
+
+function changeUserStatusOnTrip(trip, user) {
+  let passengers = trip.passengers;
+
+  for (let currentIndex = 0; currentIndex < passengers.length; currentIndex++) {
+    const passenger = passengers[currentIndex];
+    if (user.email === passenger.email) {
+      passenger.status = 'upcoming';
+    }
+  }
+
+  return passengers;
+}
+
+function confirmRiderToTrip(trip, user) {
+  const newPassengers = changeUserStatusOnTrip(trip, user);
+  axios({
+    url: '/tripp',
+    method: 'put',
+    data: { passengers: newPassengers },
+    params: { _id: trip._id },
+  })
+    .then((response) => {
+      console.log(response);
+      window.location.replace('http://localhost:3000/');
+    })
+    .catch((error) => {
+      console.log(error);
+      window.location.replace('http://localhost:3000/');
+    });
+}

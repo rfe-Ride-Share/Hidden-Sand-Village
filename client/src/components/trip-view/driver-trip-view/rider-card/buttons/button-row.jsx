@@ -11,7 +11,7 @@ import RejectButton from './reject-button';
 import AcceptButton from './accept-button';
 import RemoveRiderButton from './remove-rider-button';
 
-function ButtonRow({ status }) {
+function ButtonRow({ trip, status, user }) {
   if (status === 'confirmed') {
     return (
       <CardButtonContainer>
@@ -26,8 +26,8 @@ function ButtonRow({ status }) {
       <CardButtonContainer>
         <CardActions>
           <MessageButton />
-          <RejectButton />
-          <AcceptButton />
+          <RejectButton user={user} trip={trip} />
+          <AcceptButton user={user} trip={trip} />
         </CardActions>
       </CardButtonContainer>
     );

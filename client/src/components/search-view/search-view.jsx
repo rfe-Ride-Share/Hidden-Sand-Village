@@ -99,7 +99,7 @@ export default function SearchView() {
           placeholder={'Where will you be travelling to?'}
         />
       </Stack>
-      <FilterModal />
+      {/* {<FilterModal />}{' '} */}
       <Box
         sx={{
           width: '100%',

@@ -12,7 +12,7 @@ const socket = io.connect('http://localhost:3001');
 function Conversation(props) {
 
   const currUser = props.user;
-  console.log(currUser)
+  console.log('Current user:',currUser)
   const [message, setMessage] = useState('');
   const [messageReceived, setmessageReceived] = useState('');
 

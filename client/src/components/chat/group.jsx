@@ -4,23 +4,50 @@ import styled from 'styled-components'
 
 
 export default function Group({ convo, currentUser }) {
-  const [friend, setFriend] = useState(null);
+  const [friend, setFriend] = useState({first_name: '',
+  last_name: '',
+  user_photo: '',
+});
 
 
   useEffect(() => {
-    const friendId = convo.members.find((m) => m !== currentUser._id);
+
+    console.log('convo is: ',convo)
+    console.log('currentUser._id: ', currentUser._id);
+
+    // const friendId = convo.members.find((m) => m !== currentUser._id);
+    // const friendId = convo.members.filter((m) => m !== currentUser._id);
+
+    const friendId = [];
+
+    for (const member of convo.members) {
+      console.log('member is', member);
+      console.log('current user id is', currentUser._id);
+
+      if (member !== currentUser._id) {
+        console.log('member is passing the test check');
+        friendId.push(member);
+      }
+    }
+
     console.log('friendId', friendId);
+
 
     const getUser = async () => {
       try {
         const res = await axios.get("/userr?_id=" + friendId)
         console.log('friendData', res.data)
-        setFriend(res.data);
+        if (res.data._id !== currentUser._id) {
+          setFriend(res.data);
+        }
+
       } catch (err) {
         console.log(err);
       }
     };
-    getUser();
+
+   getUser();
+
   }, [currentUser, convo]);
 
   return (
@@ -29,10 +56,10 @@ export default function Group({ convo, currentUser }) {
       <img
         className="conversationImg"
         src={
-          friend.user_photo}
+           friend.user_photo}
         alt=""
       />
-      <span className="conversationName">{friend.first_name + " " + friend.last_name}</span>
+      <span className="conversationName">TEST</span>
     </div>
     </TripGroup>
   );

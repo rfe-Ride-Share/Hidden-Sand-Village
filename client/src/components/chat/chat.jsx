@@ -23,7 +23,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 function Chat() {
   const { user } = useAuth0();
 
-  console.log(user);
+  // console.log(user);
 
   //grab details from useEffect db GET
   const [currentUser, setCurrentUser] = useState('');
@@ -33,11 +33,13 @@ function Chat() {
   const [tripConversations, setTripConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState('');
 
+  console.log('current chat', currentChat)
+
   useEffect(() => {
     const getTripConversations = async () => {
       try {
         const res = await axios.get('/conversations/' + currentUser._id);
-        console.log(res);
+        // console.log(res);
         setTripConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -59,6 +61,18 @@ function Chat() {
         console.log(err);
       });
   }, [user]);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("/messages/" + currentChat?._id);
+        setMessages(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
 
   const [messages, setMessages] = useState([
     {
@@ -86,7 +100,7 @@ function Chat() {
 
    {tripConversations.map((c) => (
 <div onClick={() => {setCurrentChat(c)}}>
-<Group convo={c} currentUser={user}/>
+<Group convo={c} currentUser={currentUser}/>
 </div>
  ))}
   <div className="chatBox">

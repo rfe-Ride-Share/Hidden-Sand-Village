@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 import CancelButton from './cancel-button.jsx';
 import GoBackButton from '../../agree-to-payment/buttons/go-back-button';
@@ -70,10 +71,15 @@ function ConfirmationPageDelete(props) {
         }}
       >
         <AgreementMessage>
-          Are you sure you want to cancel?
+          <Typography variant="body1">
+            Are you sure you want to cancel?
+          </Typography>
         </AgreementMessage>
         <AgreementCheckbox>
-          Yes I want to cancel <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
+          <Typography variant="body1">
+            Yes I want to cancel{' '}
+            <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
+          </Typography>
         </AgreementCheckbox>
         <AgreementButtons>
           <CancelButton

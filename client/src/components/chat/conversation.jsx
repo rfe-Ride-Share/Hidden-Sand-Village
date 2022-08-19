@@ -34,10 +34,26 @@ function Conversation(props) {
   }, []);
 
   useEffect(() => {
+    socket.current.on('welcome', (message) => {
+      console.log(message);
+    });
+  });
+
+  useEffect(() => {
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
       props.setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current.emit('addUser', user._id);
+    socket.current.on('getUsers', (users) => {
+      console.log('users:', users);
+      // setOnlineUsers(
+      //   user.followings.filter((f) => users.some((u) => u.userId === f))
+      // );
+    });
+  }, [user]);
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -48,6 +64,11 @@ function Conversation(props) {
       conversationId: props.currentChat._id,
     };
 
+    // socket.current.emit("sendMessage", {
+    //   senderId: user._id,
+    //   receiverId,
+    //   text: newMessage,
+    // });
     // socket.emit('send_message', {
     //   text: message,
     //   sender: props.currentUser._id,
@@ -57,6 +78,7 @@ function Conversation(props) {
     axios
       .post('/messages', messageObj)
       .then((res) => {
+        console.log('message response: ', messageObj);
         props.setMessages(props.messages.concat(res.data));
         console.log(res);
       })

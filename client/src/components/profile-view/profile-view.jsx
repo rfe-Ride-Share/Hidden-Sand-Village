@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -160,9 +160,10 @@ export default function ProfileView() {
             <Item>{userData.bio}</Item>
           )}
           <Typography>Contact</Typography>
-          <Item onClick={handleMessage} style={{}}>
-            Message Me
+          <Item onClick={handleMessage} style={{}} >
+          <Link to='/chat' style={{ textDecoration: 'none', color: 'white' }}>Message</Link>
           </Item>
+
         </Stack>
       </Box>
     </Container>

@@ -7,15 +7,15 @@ import RiderCard from './rider-card/rider-card';
 import MapDirections from '../../search-view/mapDirections';
 import Paper from '@mui/material/Paper';
 
-function getPendingRiders(riders) {
+function getPendingRiders(riders, tripInfo) {
   return riders.map((riderInfo) => {
-    return <RiderCard profile={riderInfo} status="pending" />;
+    return <RiderCard profile={riderInfo} trip={tripInfo} status="pending" />;
   });
 }
 
-function getConfirmedRiders(riders) {
+function getConfirmedRiders(riders, tripInfo) {
   return riders.map((riderInfo) => {
-    return <RiderCard profile={riderInfo} status="confirmed" />;
+    return <RiderCard profile={riderInfo} trip={tripInfo} status="confirmed" />;
   });
 }
 
@@ -33,8 +33,8 @@ function DriverTripView({ status, tripInfo = {} }) {
     riders.push(profileInfo);
   }
 
-  const pendingRiders = getPendingRiders(riders);
-  const confirmedRiders = getConfirmedRiders(riders);
+  const pendingRiders = getPendingRiders(riders, tripInfo);
+  const confirmedRiders = getConfirmedRiders(riders, tripInfo);
 
   return (
     <div>

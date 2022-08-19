@@ -26,12 +26,20 @@ export default function SearchView() {
   const [destPos, setDestPos] = useState({ lat: 0, lng: 0 });
   const [trips, setTrips] = useState([]);
 
+  const now = new Date();
+
   useEffect(() => {
     axios
       .get('/tripp')
       .then((response) => {
         console.log(response.data);
-        setTrips(response.data);
+        let responseCopy = response.data.slice();
+        responseCopy = responseCopy.filter((trip) => {
+          const tripDate = new Date(trip.depart_time);
+          const isPast = now.getTime() - tripDate.getTime() > 0;
+          return !isPast;
+        });
+        setTrips(responseCopy);
       })
       .catch((err) => {
         console.log(err);
@@ -56,6 +64,7 @@ export default function SearchView() {
     };
 
     let tripsCopy = trips.slice();
+
     tripsCopy.sort((a, b) => {
       if (totalDistance(a) > totalDistance(b)) {
         return 1;
@@ -90,7 +99,7 @@ export default function SearchView() {
           placeholder={'Where will you be travelling to?'}
         />
       </Stack>
-      <FilterModal />
+      {/* {<FilterModal />}{' '} */}
       <Box
         sx={{
           width: '100%',
@@ -99,7 +108,7 @@ export default function SearchView() {
           alignItems: 'center',
         }}
       >
-        {trips.map((trip) => (
+        {trips.slice(0, 9).map((trip) => (
           <RiderCard key={trip._id} tripInfo={trip} />
         ))}
       </Box>

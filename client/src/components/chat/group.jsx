@@ -14,7 +14,7 @@ export default function Group({ convo, currentUser }) {
     const getUser = async () => {
       try {
         const res = await axios.get("/userr?_id=" + friendId)
-        console.log(res.data)
+        console.log('friendData', res.data)
         setFriend(res.data);
       } catch (err) {
         console.log(err);
@@ -29,10 +29,10 @@ export default function Group({ convo, currentUser }) {
       <img
         className="conversationImg"
         src={
-          user.user_photo}
+          friend.user_photo}
         alt=""
       />
-      <span className="conversationName">{user.first_name + " " + user.last_name}</span>
+      <span className="conversationName">{friend.first_name + " " + friend.last_name}</span>
     </div>
     </TripGroup>
   );

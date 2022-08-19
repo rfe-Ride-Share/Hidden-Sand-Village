@@ -33,7 +33,7 @@ export default function RiderCard({ tripInfo = {} }) {
           if (count > 0) {
             let total = 0;
             reviews.forEach((review) => {
-              total += review.rating;
+              total += review.stars;
             });
             setRating(total / count);
           }

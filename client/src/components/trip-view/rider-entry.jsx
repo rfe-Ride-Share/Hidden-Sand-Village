@@ -39,12 +39,13 @@ export default function RiderEntry({
       .then((response) => {
         setUserData(response.data);
         let reviews = response.data.reviews;
+        console.log(reviews);
         let count = reviews.length;
 
         if (count > 0) {
           let total = 0;
           reviews.forEach((review) => {
-            total += review.rating;
+            total += review.stars;
           });
           setRating(total / count);
         }

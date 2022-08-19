@@ -64,11 +64,11 @@ function Conversation(props) {
 
 
     axios.post('/messages', messageObj).then((res) => {
-      props.setMessages(props.messages.concat(res.data))
+       props.setMessages(props.messages.concat(res.data));
       console.log(res)
     })
     setMessage();
-     event.target.reset();
+    event.target.reset();
   };
   // useEffect(() => {
   //   socket.on('receive_message', (data) => {

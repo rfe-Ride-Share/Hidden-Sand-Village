@@ -113,7 +113,7 @@ return tripConversations === null ? <p>TEST</p> : (
       <div className="chatBoxTop">
       {messages.map((m) => (
 
-        <Message message={m} own={m.sender === currentUser._id} currentUser={currentUser} friend={friend}/>
+        <Message message={m} own={m.sender === currentUser._id} currentUser={currentUser} currentChat={currentChat}/>
 
          ))}
           </div>

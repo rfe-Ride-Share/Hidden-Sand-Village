@@ -34,9 +34,12 @@ export default function ReviewCard({ profile = {} }) {
           <RatingStars profile={profile} />
         </CardContent>
         <TextField
+          fullWidth
           id="outlined-basic"
           label="Feedback"
-          variant="outlined"
+          multiline
+          maxRows={20}
+          minRows={10}
           sx={{
             margin: '20px',
             borderRadius: '20px',

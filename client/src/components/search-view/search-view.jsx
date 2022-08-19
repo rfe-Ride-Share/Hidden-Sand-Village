@@ -39,6 +39,16 @@ export default function SearchView() {
           const isPast = now.getTime() - tripDate.getTime() > 0;
           return !isPast;
         });
+        let notFullList = [];
+        responseCopy.forEach((trip) => {
+          const acceptedRiders = trip.passengers.filter(
+            (rider) => rider.status === 'upcoming'
+          );
+
+          if (trip.passenger_capacity !== acceptedRiders.length) {
+            notFullList.push(trip);
+          }
+        });
         setTrips(responseCopy);
       })
       .catch((err) => {

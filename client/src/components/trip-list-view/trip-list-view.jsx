@@ -149,10 +149,13 @@ function TripListView() {
           Pending Trips
         </Typography>
         {pendingTrips}
+        <br />
         <Typography variant="h6" component="div" sx={{ m: 1.5 }}>
           Upcoming Trips
+          <br />
         </Typography>
         {upcomingTrips}
+        <br />
         <Typography variant="h6" component="div" sx={{ m: 1.5 }}>
           Past Trips
         </Typography>
@@ -170,7 +173,7 @@ const TripList = styled.div`
 
 const ButtonRow = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   flex-direction: row;
   justify-content: space-around;
 `;

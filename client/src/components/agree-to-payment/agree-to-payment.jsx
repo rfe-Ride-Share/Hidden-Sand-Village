@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 import ConfirmRequestButton from './buttons/confirm-request-button';
@@ -41,8 +42,10 @@ function AgreeToPayment(props) {
         >
           <RiderCard tripInfo={tripInfo} />
           <AgreementMessage>
-            Congratulations! Your request to join the ride has been sent to the
-            driver. The driver will message you with furher details.
+            <Typography variant="body1">
+              Congratulations! Your request to join the ride has been sent to
+              the driver. The driver will message you with furher details.
+            </Typography>
           </AgreementMessage>
           <AgreementButtons>
             <GoBackButton />
@@ -71,12 +74,16 @@ function AgreeToPayment(props) {
       >
         <RiderCard tripInfo={tripInfo} />
         <AgreementMessage>
-          By clicking {'"I Accept"'} the user fully agrees to split the cost of
-          the trip up to and including the amount of ${cost} if accepted by the
-          driver and not cancelled within 24 hours of departure.
+          <Typography variant="body1">
+            By clicking {'"I Accept"'} the user fully agrees to split the cost
+            of the trip up to and including the amount of ${cost} if accepted by
+            the driver and not cancelled within 24 hours of departure.
+          </Typography>
         </AgreementMessage>
         <AgreementCheckbox>
-          I Accept <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
+          <Typography variant="body1">
+            I Accept <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
+          </Typography>
         </AgreementCheckbox>
         <AgreementButtons>
           <ConfirmRequestButton

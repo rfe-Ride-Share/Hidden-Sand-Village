@@ -7,17 +7,19 @@ import { Checkbox } from '@mui/material';
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 import ConfirmRequestButton from './buttons/confirm-request-button';
 import GoBackButton from './buttons/go-back-button';
+import addRiderToTrip from './add-rider-to-trip';
 
 function AgreeToPayment(props) {
   const location = useLocation();
 
   const tripInfo = location.state || {};
-  const cost = tripInfo.riderCostHigh || 0;
+  const cost = tripInfo.price || 0;
 
   const [isAccepted, setIsAccepted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   if (isConfirmed) {
+    addRiderToTrip(tripInfo);
     return (
       <div>
         <RiderCard tripInfo={tripInfo} />

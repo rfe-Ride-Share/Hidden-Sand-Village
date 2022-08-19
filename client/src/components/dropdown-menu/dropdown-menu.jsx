@@ -67,89 +67,91 @@ const DropdownMenu = () => {
     });
   };
   return (
-    <Box>
+    <>
       <Appbar setOpen={setOpen}></Appbar>
-      <Drawer open={open} onBackdropClick={() => setOpen(false)}>
-        <IconButton onClick={handleClose}>
-          <ChevronLeftIcon></ChevronLeftIcon>
-        </IconButton>
-        <IconButton>
-          <Avatar
-            alt={user ? user.name : 'Log in'}
-            src={user ? user.picture : null}
-            sx={{ width: 56, height: 56 }}
-          />
-        </IconButton>
-        <MUIList>
-          {[
-            {
-              text: 'View Profile',
-              icon: <AccountCircleIcon />,
-              link: '/profile',
-            },
-            { text: 'Home', icon: <HomeIcon />, link: '/' },
-            { text: 'Messages', icon: <MessageIcon />, link: '/chat' },
-          ].map((item) => (
-            <ListItem key={item.text} onClick={handleClose} disablePadding>
-              <Link
-                to={item.link}
-                style={{ textDecoration: 'none', color: 'black' }}
-              >
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </MUIList>
-        <Divider />
-        <MUIList>
-          {[
-            {
-              text: 'Create Trips',
-              icon: <TimeToLeaveIcon />,
-              link: '/add',
-            },
-            { text: 'My Trips', icon: <CommuteIcon />, link: '/' },
-          ].map((item, index) => (
-            <ListItem key={item.text} onClick={handleClose} disablePadding>
-              <Link
-                to={item.link}
-                style={{ textDecoration: 'none', color: 'black' }}
-              >
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </MUIList>
-        <Divider />
-        <MUIList>
-          {[
-            {
-              text: 'Log Out',
-              icon: <LogoutIcon />,
-              link: '/',
-            },
-          ].map((item, index) => (
-            <ListItem key={item.text} onClick={handleLogout} disablePadding>
-              <Link
-                to={item.link}
-                style={{ textDecoration: 'none', color: 'black' }}
-              >
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </MUIList>
-      </Drawer>
-    </Box>
+      <Box>
+        <Drawer open={open} onBackdropClick={() => setOpen(false)}>
+          <IconButton onClick={handleClose}>
+            <ChevronLeftIcon></ChevronLeftIcon>
+          </IconButton>
+          <IconButton>
+            <Avatar
+              alt={user ? user.name : 'Log in'}
+              src={user ? user.picture : null}
+              sx={{ width: 56, height: 56 }}
+            />
+          </IconButton>
+          <MUIList>
+            {[
+              {
+                text: 'View Profile',
+                icon: <AccountCircleIcon />,
+                link: '/profile',
+              },
+              { text: 'Home', icon: <HomeIcon />, link: '/' },
+              { text: 'Messages', icon: <MessageIcon />, link: '/chat' },
+            ].map((item) => (
+              <ListItem key={item.text} onClick={handleClose} disablePadding>
+                <Link
+                  to={item.link}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            ))}
+          </MUIList>
+          <Divider />
+          <MUIList>
+            {[
+              {
+                text: 'Create Trips',
+                icon: <TimeToLeaveIcon />,
+                link: '/add',
+              },
+              { text: 'My Trips', icon: <CommuteIcon />, link: '/trips' },
+            ].map((item, index) => (
+              <ListItem key={item.text} onClick={handleClose} disablePadding>
+                <Link
+                  to={item.link}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            ))}
+          </MUIList>
+          <Divider />
+          <MUIList>
+            {[
+              {
+                text: 'Log Out',
+                icon: <LogoutIcon />,
+                link: '/',
+              },
+            ].map((item, index) => (
+              <ListItem key={item.text} onClick={handleLogout} disablePadding>
+                <Link
+                  to={item.link}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            ))}
+          </MUIList>
+        </Drawer>
+      </Box>
+    </>
   );
 };
 

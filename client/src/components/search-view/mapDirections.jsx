@@ -25,17 +25,6 @@ export default function MapDirections({ startPos, destPos }) {
       (result, status) => {
         if (status === 'OK' && result) {
           setDirections(result);
-          let miles = result.routes[0].legs[0].distance.value / 1609.34;
-          let seconds = result.routes[0].legs[0].duration.value;
-          let startAddress = result.routes[0].legs[0].start_address;
-          let endAddress = result.routes[0].legs[0].end_address;
-          let centsPerMile = 62.5;
-          console.log('🚙', Math.round(miles));
-          console.log('⏰', seconds);
-          console.log('🚪', startAddress);
-          console.log('📍', endAddress);
-          console.log('💰', `$${((miles * centsPerMile) / 100).toFixed(2)}`);
-          console.log(result);
         }
       }
     );
@@ -53,27 +42,28 @@ export default function MapDirections({ startPos, destPos }) {
     mapTypeControl: false,
     fullscreenControl: false,
     draggable: false,
-    // styles: [
-    //   // {
-    //   //   featureType: 'all',
-    //   //   stylers: [{ color: '#C0C0C0' }],
-    //   // },
-    //   {
-    //     featureType: 'road',
-    //     stylers: [{ color: '#F5B935' }],
-    //   },
-    //   // {
-    //   //   featureType: 'landscape',
-    //   //   elementType: 'labels',
-    //   //   stylers: [{ visibility: 'off' }],
-    //   // },
-    //   {
-    //     featureType: 'landscape',
-    //     elementType: 'geometry',
-    //     stylers: [{ color: '#F6C7D4' }],
-    //   },
-    //   { featureType: 'water', stylers: [{ color: '#11ABC1' }] },
-    // ],
+    keyboardShortcuts: false,
+    styles: [
+      // {
+      //   featureType: 'all',
+      //   stylers: [{ color: '#C0C0C0' }],
+      // },
+      {
+        featureType: 'road',
+        stylers: [{ color: '#F7F7F7' }],
+      },
+      // {
+      //   featureType: 'landscape',
+      //   elementType: 'labels',
+      //   stylers: [{ visibility: 'off' }],
+      // },
+      // {
+      //   featureType: 'landscape',
+      //   elementType: 'geometry',
+      //   stylers: [{ color: '#F6C7D4' }],
+      // },
+      { featureType: 'water', stylers: [{ color: '#11ABC1' }] },
+    ],
     //https://developers.google.com/maps/documentation/javascript/style-reference
   }));
 
@@ -83,7 +73,7 @@ export default function MapDirections({ startPos, destPos }) {
         sx={{
           display: 'flex',
           justifyContent: 'space-around',
-          width: '300px',
+          width: '100%',
           height: '300px',
         }}
       >
@@ -93,6 +83,7 @@ export default function MapDirections({ startPos, destPos }) {
           mapContainerStyle={{
             width: '100%',
             height: '100%',
+            // borderRadius: '2%',
           }}
           options={options}
         >

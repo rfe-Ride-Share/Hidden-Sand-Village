@@ -16,7 +16,7 @@ function PaymentButton({ trip = {} }) {
           console.log('Payment functionality goes here: trip-list-view/buttons/payment-button.jsx');
         }}
       >
-          <Link to='/payment' state={trip}>Pay now</Link>
+          <Link to='/payment' style={{ textDecoration: 'none', color: 'white' }} state={trip}>Pay now</Link>
       </Button>
   );
 }

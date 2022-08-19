@@ -40,7 +40,7 @@ const library = ['places'];
 
 function AddTripView() {
   const [seats, setSeats] = React.useState('');
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [value, setValue] = React.useState(new Date());
 
   const [tripDetails, setTripDetails] = React.useState('');
   const [from, setFrom] = React.useState('');
@@ -146,12 +146,12 @@ function AddTripView() {
   const icon = <PersonAddAltIcon />;
   const BasicSelect = (
     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-      <InputLabel id="demo-simple-select-label">{icon}</InputLabel>
+      <InputLabel id="demo-simple-select-label"> Passenger Seats </InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={seats}
-        label="Seats"
+        label="Passenger Seats"
         onChange={handleChange}
       >
         <MenuItem value={1}>1</MenuItem>
@@ -307,6 +307,7 @@ function AddTripView() {
           className="post-button"
           variant="contained"
           type="submit"
+          href="/"
           sx={{ backgroundColor: '#f5b935' }}
           onClick={(e) => {
             handleSubmit();
@@ -329,9 +330,7 @@ function AddTripView() {
     </Container>
   );
 }
-//use directions to get info from search bar
-//axios post (or put if it's editable?)
-//
+
 const ButtonCan = styled.div`
   display: flex;
   justify-content: center;

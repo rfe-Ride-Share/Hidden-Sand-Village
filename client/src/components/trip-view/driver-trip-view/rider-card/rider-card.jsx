@@ -11,7 +11,7 @@ import ButtonRow from './buttons/button-row';
 import ProfileImage from './profile-image';
 import RatingStars from './stars/rating-stars';
 
-export default function RiderCard({ profile = {}, status }) {
+export default function RiderCard({ profile = {}, status, trip }) {
   return (
     <Card
       sx={{
@@ -35,9 +35,9 @@ export default function RiderCard({ profile = {}, status }) {
           <Typography sx={{ fontSize: 14 }} gutterBottom>
             {profile.name}
           </Typography>
-          <RatingStars rating={profile.rating} />
+          <RatingStars rating={5} />
         </CardContent>
-        <ButtonRow status={status} />
+        <ButtonRow status={status} user={profile} trip={trip} />
       </MainCardContainer>
     </Card>
   );

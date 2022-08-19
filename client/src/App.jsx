@@ -7,7 +7,7 @@ import Chat from './components/chat/chat';
 import DropdownMenu from './components/dropdown-menu/dropdown-menu';
 import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
-import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
+import TripView from './components/trip-view/trip-view';
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 import TripListView from './components/trip-list-view/trip-list-view';
 import ReviewView from './components/review-view/review-view';
@@ -38,17 +38,30 @@ function App() {
       <DropdownMenu></DropdownMenu>
       <Routes>
         <Route path="/" element={<SearchView />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/trip" element={<RiderTripView />} />
+        <Route path="/chat" element={<ProtectedRoute component={Chat} />} />
+        <Route path="/trip" element={<TripView />} />
         <Route
           path="/profile"
           element={<ProtectedRoute component={ProfileView} />}
         />
         <Route path="/profile" element={<ProfileView />} />
-        <Route path="/review" element={<ReviewView />} />
-        <Route path="/driver-trip" element={<DriverTripView />} />
-        <Route path="/trips" element={<TripListView />} />
-        <Route path="/add" element={<AddTripView />} />
+        <Route
+          path="/review"
+          element={<ProtectedRoute component={ReviewView} />}
+        />
+        <Route
+          path="/driver-trip"
+          element={<ProtectedRoute component={DriverTripView} />}
+        />
+        <Route
+          path="/trips"
+          element={<ProtectedRoute component={TripListView} />}
+        />
+        <Route
+          path="/add"
+          element={<ProtectedRoute component={AddTripView} />}
+        />
+        {/* <Route path="/add" element={<AddTripView />} /> */}
         <Route path="/payment" element={<Payment />} />
         <Route path="/confirm" element={<AgreeToPayment />} />
       </Routes>

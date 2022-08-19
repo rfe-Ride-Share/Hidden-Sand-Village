@@ -10,12 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useAuth0 } from '@auth0/auth0-react';
 import moment from 'moment';
 import axios from 'axios';
-<<<<<<< HEAD
 import { useLocation, Link } from 'react-router-dom';
-=======
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
->>>>>>> efc3995ef51308844ebd207ca84b2c84de12e489
 
 import MapDirections from '../search-view/mapDirections';
 import RiderEntry from './rider-entry';

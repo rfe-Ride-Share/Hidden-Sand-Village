@@ -63,45 +63,6 @@ export default function TripView({ tripInfo = {} }) {
   if (user.email) {
     let isDriver = user.email === tripInfo.driver_email;
     if (isDriver) {
-<<<<<<< HEAD
-      riderList = (
-        <RiderList
-          tripInfo={tripInfo}
-          acceptedRiders={acceptedRiders}
-          pendingRiders={pendingRiders}
-        />
-      );
-    } else {
-      tripInfo.passengers.forEach((rider) => {
-        if (rider.email === user.email) {
-          setStatus(rider.status);
-        }
-      });
-
-      if (status === 'nope') {
-        riderButtons = (
-          <Button
-            sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
-            variant="contained"
-          >
-            <Link
-              to="/confirm"
-              style={{ textDecoration: 'none', color: 'white' }}
-              state={tripInfo}
-            >
-              Ask to Join
-            </Link>
-          </Button>
-        );
-      } else if (status === 'pending') {
-        riderButtons = (
-          <Button
-            sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
-            variant="contained"
-          >
-            Cancel Request
-          </Button>
-=======
       if (!isPast) {
         riderList = (
           <RiderList
@@ -109,7 +70,6 @@ export default function TripView({ tripInfo = {} }) {
             pendingRiders={pendingRiders}
             isPast={isPast}
           />
->>>>>>> 2083f9d6ead188f9bb743de0f0ff5199a7c7049b
         );
       } else {
         riderButtons = (

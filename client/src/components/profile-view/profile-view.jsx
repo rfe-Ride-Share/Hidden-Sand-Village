@@ -62,7 +62,7 @@ export default function ProfileView() {
   const handleMessage = () => {
     console.log('message me!');
     //on click get that person's info from database
-    const otherPersonEmail = 'ianzuber221@gmail.com';
+    const otherPersonEmail = 'rikkizhang08@gmail.com';
     Promise.all([
       axios.get(`/userr?email=${otherPersonEmail}`),
       axios.get(`/userr?email=${user.email}`),

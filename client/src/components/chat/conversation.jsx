@@ -24,7 +24,6 @@ function Conversation({ currentUser, currentChat, setMessages, messages }) {
   useEffect(() => {
     socket.current = io('ws://localhost:8900');
     socket.current.on('getMessage', (data) => {
-      console.log('message receive', data);
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,

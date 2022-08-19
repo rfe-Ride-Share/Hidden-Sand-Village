@@ -14,25 +14,27 @@ import MapDirections from '../../search-view/mapDirections';
 
 export default function RiderCard({ tripInfo = {} }) {
   const [userData, setUserData] = React.useState({});
-  const [rating, setRating] = React.useState(0);
+  const [rating, setRating] = React.useState(null);
 
   React.useEffect(() => {
-    axios
-      .get(`/userr?email=${tripInfo.driver_email}`)
-      .then((response) => {
-        setUserData(response.data);
-        let reviews = response.data.reviews;
-        let count = reviews.length;
+    if (rating === null) {
+      axios
+        .get(`/userr?email=${tripInfo.driver_email}`)
+        .then((response) => {
+          setUserData(response.data);
+          let reviews = response.data.reviews;
+          let count = reviews.length;
 
-        if (count > 0) {
-          let total = 0;
-          reviews.forEach((review) => {
-            total += review.rating;
-          });
-          setRating(total / count);
-        }
-      })
-      .catch((err) => console.log(err));
+          if (count > 0) {
+            let total = 0;
+            reviews.forEach((review) => {
+              total += review.rating;
+            });
+            setRating(total / count);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (

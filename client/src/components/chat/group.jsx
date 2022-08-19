@@ -3,23 +3,52 @@ import { useEffect, useState } from "react";
 import styled from 'styled-components'
 
 
-export default function Group({ conversation, currentUser }) {
-  const [user, setUser] = useState(null);
+export default function Group({ convo, currentUser }) {
+  const [friend, setFriend] = useState({first_name: '',
+  last_name: '',
+  user_photo: '',
+});
 
 
-  // useEffect(() => {
-  //   const friendId = conversation.members.find((m) => m !== currentUser._id);
+  useEffect(() => {
 
-  //   const getUser = async () => {
-  //     try {
-  //       const res = await axios("/users?userId=" + friendId);
-  //       setUser(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getUser();
-  // }, [currentUser, conversation]);
+    console.log('convo is: ',convo)
+    console.log('currentUser._id: ', currentUser._id);
+
+    // const friendId = convo.members.find((m) => m !== currentUser._id);
+    // const friendId = convo.members.filter((m) => m !== currentUser._id);
+
+    const friendId = [];
+
+    for (const member of convo.members) {
+      console.log('member is', member);
+      console.log('current user id is', currentUser._id);
+
+      if (member !== currentUser._id) {
+        console.log('member is passing the test check');
+        friendId.push(member);
+      }
+    }
+
+    console.log('friendId', friendId);
+
+
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/userr?_id=" + friendId)
+        console.log('friendData', res.data)
+        if (res.data._id !== currentUser._id) {
+          setFriend(res.data);
+        }
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+   getUser();
+
+  }, [currentUser, convo]);
 
   return (
     <TripGroup>
@@ -27,11 +56,10 @@ export default function Group({ conversation, currentUser }) {
       <img
         className="conversationImg"
         src={
-          'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg'
-        }
+           friend.user_photo}
         alt=""
       />
-      <span className="conversationName">Disney Trip</span>
+      <span className="conversationName">TEST</span>
     </div>
     </TripGroup>
   );

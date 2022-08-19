@@ -23,7 +23,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 function Chat() {
   const { user } = useAuth0();
 
-  console.log(user);
+  // console.log(user);
 
   //grab details from useEffect db GET
   const [currentUser, setCurrentUser] = useState('');
@@ -33,11 +33,13 @@ function Chat() {
   const [tripConversations, setTripConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState('');
 
+  console.log('current chat', currentChat)
+
   useEffect(() => {
     const getTripConversations = async () => {
       try {
         const res = await axios.get('/conversations/' + currentUser._id);
-        console.log(res);
+        // console.log(res);
         setTripConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -60,6 +62,18 @@ function Chat() {
       });
   }, [user]);
 
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("/messages/" + currentChat?._id);
+        setMessages(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
+
   const [messages, setMessages] = useState([
     {
       message: 'Hey, I want to join your trip! Tell me more about it.',
@@ -81,33 +95,26 @@ function Chat() {
   ]);
 
   return (
-    <ChatWrapper>
-      <div className="messenger">
-        {/* {tripConversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
-                <Group conversation={c} currentUser={user} />
-              </div>
-            ))} */}
-        {/* <Group /> */}
-        <div className="chatBox">
-          <div className="chatBoxWrapper">
-            <div className="chatBoxTop">
-              {messages.map((m) => (
-                <Message message={m} own={m.user_id === currentUser._id} />
-              ))}
-            </div>
-            <div className="chatBoxBottom">
-              <Conversation
-                messages={messages}
-                setMessages={setMessages}
-                user={user}
-                currentUser={currentUser}
-                messages={messages}
-              />
-              {/* <Chatbox setNewMessage={setNewMessage} newMessage={newMessage}/> */}
-            </div>
+  <ChatWrapper>
+    <div className="messenger">
+
+   {tripConversations.map((c) => (
+<div onClick={() => {setCurrentChat(c)}}>
+<Group convo={c} currentUser={currentUser}/>
+</div>
+ ))}
+  <div className="chatBox">
+    <div className="chatBoxWrapper">
+      <div className="chatBoxTop">
+
+      {messages.map((m) => (
+
+        <Message message={m} own={m.user_id === currentUser._id}/>
+
+         ))}
           </div>
         </div>
+      </div>
       </div>
     </ChatWrapper>
   );

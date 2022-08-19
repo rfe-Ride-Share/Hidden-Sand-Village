@@ -10,8 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useAuth0 } from '@auth0/auth0-react';
 import moment from 'moment';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import MapDirections from '../search-view/mapDirections';
 import RiderEntry from './rider-entry';
@@ -30,29 +29,26 @@ export default function TripView({ tripInfo = {} }) {
   const { user } = useAuth0();
 
   React.useEffect(() => {
-    const dataHasNotBeenSet = Object.keys(userData).length === 0;
-    if (dataHasNotBeenSet) {
-      axios
-        .get(`/userr?email=${tripInfo.driver_email}`)
-        .then((response) => {
-          setUserData(response.data);
-          let reviews = response.data.reviews;
-          let count = reviews.length;
+    axios
+      .get(`/userr?email=${tripInfo.driver_email}`)
+      .then((response) => {
+        setUserData(response.data);
+        let reviews = response.data.reviews;
+        let count = reviews.length;
 
-          if (count > 0) {
-            let total = 0;
-            reviews.forEach((review) => {
-              total += review.rating;
-            });
-            setRating(total / count);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+        if (count > 0) {
+          let total = 0;
+          reviews.forEach((review) => {
+            total += review.rating;
+          });
+          setRating(total / count);
+        }
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const acceptedRiders = tripInfo.passengers.filter(
-    (rider) => rider.status === 'accepted'
+    (rider) => rider.status === 'upcoming'
   );
   const pendingRiders = tripInfo.passengers.filter(
     (rider) => rider.status === 'pending'
@@ -69,51 +65,82 @@ export default function TripView({ tripInfo = {} }) {
             acceptedRiders={acceptedRiders}
             pendingRiders={pendingRiders}
             isPast={isPast}
+            tripInfo={tripInfo}
           />
+        );
+        riderButtons = (
+          <Button
+            sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
+            variant="contained"
+            onClick={() => removeRiderFromTrip(tripInfo, user)}
+          >
+            Cancel Trip
+          </Button>
         );
       } else {
         riderButtons = (
-          <Button
-            sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
-            variant="contained"
+          <Link
+            to="/review"
+            style={{ textDecoration: 'none', color: 'white' }}
+            state={tripInfo}
           >
-            Review
-          </Button>
-        );
-      }
-    } else {
-      tripInfo.passengers.forEach((rider) => {
-        if (rider.email === user.email) {
-          setStatus(rider.status);
-        }
-      });
-
-      if (isPast) {
-        if (status !== 'nope') {
-          riderButtons = (
             <Button
               sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
               variant="contained"
             >
               Review
             </Button>
+          </Link>
+        );
+      }
+    } else {
+      React.useEffect(() => {
+        tripInfo.passengers.forEach((rider) => {
+          if (rider.email === user.email) {
+            setStatus(rider.status);
+          }
+        });
+      }, []);
+
+      if (isPast) {
+        if (status !== 'nope') {
+          riderButtons = (
+            <Link
+              to="/review"
+              style={{ textDecoration: 'none', color: 'white' }}
+              state={tripInfo}
+            >
+              <Button
+                sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
+                variant="contained"
+              >
+                Review
+              </Button>
+            </Link>
           );
         }
       } else {
         if (status === 'nope') {
           riderButtons = (
-            <Button
-              sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
-              variant="contained"
+            <Link
+              to="/confirm"
+              state={tripInfo}
+              style={{ textDecoration: 'none', color: 'white' }}
             >
-              Ask to Join
-            </Button>
+              <Button
+                sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
+                variant="contained"
+              >
+                Ask to Join
+              </Button>
+            </Link>
           );
         } else if (status === 'pending') {
           riderButtons = (
             <Button
               sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
               variant="contained"
+              onClick={() => removeRiderFromTrip(tripInfo, user)}
             >
               Cancel Request
             </Button>
@@ -123,6 +150,7 @@ export default function TripView({ tripInfo = {} }) {
             <Button
               sx={{ backgroundColor: '#DF3062', borderRadius: 2 }}
               variant="contained"
+              onClick={() => removeRiderFromTrip(tripInfo, user)}
             >
               Leave Trip
             </Button>
@@ -166,7 +194,7 @@ export default function TripView({ tripInfo = {} }) {
             color="text.secondary"
             gutterBottom
           >
-            Date: {moment(tripInfo.depart_time).format('MMM Do YY h:mm a')}
+            Date: {moment(tripInfo.depart_time).format('MMM Do YYYY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}
@@ -192,13 +220,13 @@ export default function TripView({ tripInfo = {} }) {
           </Typography>
         </CardContent>
       </Card>
-      {riderList}
       {riderButtons}
+      {riderList}
     </Container>
   );
 }
 
-function RiderList({ pendingRiders, acceptedRiders }) {
+function RiderList({ pendingRiders, acceptedRiders, tripInfo }) {
   let pending;
   if (pendingRiders.length > 0) {
     pending = (
@@ -210,7 +238,6 @@ function RiderList({ pendingRiders, acceptedRiders }) {
 
   let accepted;
   if (acceptedRiders.length > 0) {
-    console.log(acceptedRiders);
     accepted = (
       <Typography variant="h6" component="div" sx={{ m: 1.5 }}>
         Accepted Riders
@@ -221,14 +248,60 @@ function RiderList({ pendingRiders, acceptedRiders }) {
     <>
       {pending}
       {pendingRiders.map((rider) => {
-        return <RiderEntry key={rider._id} rider={rider} />;
+        return <RiderEntry key={rider._id} rider={rider} tripInfo={tripInfo} />;
       })}
       {accepted}
       {acceptedRiders.map((rider) => {
-        <RiderEntry key={rider._id} rider={rider} />;
+        return <RiderEntry key={rider._id} rider={rider} tripInfo={tripInfo} />;
       })}
     </>
   );
 }
 //still might want to add seats (seats remaining) 👍👍
 //also need to do conditional stuff for the link on the trip card in search view if you are not logged in
+function removeRiderFromTrip(trip, user) {
+  if (trip.driver_email === user.email) {
+    axios({
+      url: '/tripp',
+      method: 'delete',
+      params: { _id: trip._id },
+    })
+      .then((response) => {
+        window.location.replace('http://localhost:3000/');
+        console.log(response);
+      })
+      .catch((error) => {
+        window.location.replace('http://localhost:3000/');
+        console.log(error);
+      });
+  } else {
+    const newPassengers = getPassengersWithoutUser(trip, user);
+
+    axios({
+      url: '/tripp',
+      method: 'put',
+      data: { passengers: newPassengers },
+      params: { _id: trip._id },
+    })
+      .then((response) => {
+        console.log(response);
+        window.location.replace('http://localhost:3000/');
+      })
+      .catch((error) => {
+        console.log(error);
+        window.location.replace('http://localhost:3000/');
+      });
+  }
+}
+function getPassengersWithoutUser(trip, user) {
+  let passengers = trip.passengers;
+
+  for (let currentIndex = 0; currentIndex < passengers.length; currentIndex++) {
+    const passenger = passengers[currentIndex];
+    if (user.email === passenger.email) {
+      passengers.splice(currentIndex, 1);
+    }
+  }
+
+  return passengers;
+}

@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import MessageIcon from '@mui/icons-material/Message';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
 
 import moment from 'moment';
 import axios from 'axios';
@@ -73,8 +75,17 @@ export default function RiderEntry({
       }}
     >
       <CardContent sx={{ display: 'flex', flexDirection: 'row' }}>
-        <Box sx={{ width: '40%' }}>
-          <ProfileImage image={userData.user_photo} />
+        <Box sx={{ width: '40%', display: 'flex', flexDirection: 'column' }}>
+          <IconButton>
+            <img
+              referrerPolicy="no-referrer"
+              alt={userData ? `${userData.first_name}'s photo` : null}
+              src={userData ? userData.user_photo : null}
+              style={{ width: 85, height: 85, borderRadius: '15px', mr: 0.5 }}
+            />
+          </IconButton>
+          {/* <ProfileImage image={userData.user_photo} /> */}
+          {console.log('photo link', userData)}
           <Rating
             sx={{ maxWidth: '100%' }}
             name="rating"
@@ -132,7 +143,16 @@ const ProfileImageComponent = styled.div`
   margin: 10px;
   border-radius: 10px;
 `;
-
+const ProfileImageNotDiv = styled.div`
+  background-color: #ccc;
+  background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 85px;
+  width: 85px;
+  margin: 10px;
+  border-radius: 10px;
+`;
 function removeRiderFromTrip(trip, user) {
   if (trip.driver_email === user.email) {
     axios({

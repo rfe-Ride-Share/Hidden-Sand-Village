@@ -31,6 +31,8 @@ router.get('/', (req, res) => {
 // Update user
 // /userr?email=youremail
 router.put('/', (req, res) => {
+  console.log('review query is', req.query);
+  console.log('review body is', req.body);
   User.findOneAndUpdate(req.query, req.body)
     .exec()
     .then(() => res.status(201).send('User updated ✅'))

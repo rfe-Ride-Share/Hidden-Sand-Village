@@ -52,7 +52,7 @@ function removeRiderFromTrip(trip, user) {
   }
 }
 
-function CancelButton({ trip }) {
+function CancelButton({ trip, isAccepted = null, setIsConfirmed }) {
   // const [buttonTrip, setButtonTrip] = useState(trip);
 
   // console.log(buttonTrip);
@@ -60,27 +60,49 @@ function CancelButton({ trip }) {
   // if (buttonTrip === undefined && trip !== undefined) {
   //   setButtonTrip(trip);
   // }
+  const [isClicked, setIsClicked] = useState(false);
 
   console.log(trip);
 
+  // () => removeRiderFromTrip(trip, user)
+
   const { user } = useAuth0();
 
-  if (trip !== undefined) {
+  if (isAccepted === null) {
     return (
-      <Button
-        variant="contained"
-        sx={{
-          width: '150px',
-          height: '50px',
-          borderRadius: '15px',
-          backgroundColor: '#DF3062',
-        }}
-        onClick={() => removeRiderFromTrip(trip, user)}
-      >
-        Cancel
-      </Button>
+      <Link to='/confirm-cancel' state={trip} style={{'text-decoration': 'none', color: 'white' }}>
+        <Button
+          variant="contained"
+          sx={{
+            width: '150px',
+            height: '50px',
+            borderRadius: '15px',
+            backgroundColor: '#DF3062',
+          }}
+        >
+          Cancel
+        </Button>
+      </Link>
     );
   }
+
+  return (
+    <Button
+      variant="contained"
+      sx={{
+        width: '150px',
+        height: '50px',
+        borderRadius: '15px',
+        backgroundColor: '#DF3062',
+      }}
+      onClick={() => {
+        removeRiderFromTrip(trip, user);
+        setIsConfirmed(true);
+      }}
+    >
+      Cancel
+    </Button>
+  );
 }
 
 export default CancelButton;

@@ -113,6 +113,7 @@ function ReviewView() {
             axios
               ({
                 url: `/userr/`,
+                method: 'put',
                 data: reviews,
                 params: { email: email },
               })

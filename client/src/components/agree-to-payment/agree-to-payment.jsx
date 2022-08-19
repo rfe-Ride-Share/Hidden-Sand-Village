@@ -13,7 +13,6 @@ function AgreeToPayment(props) {
   const location = useLocation();
 
   const tripInfo = location.state || {};
-  console.log(tripInfo);
   const cost = tripInfo.price || 0;
 
   const [isAccepted, setIsAccepted] = useState(false);

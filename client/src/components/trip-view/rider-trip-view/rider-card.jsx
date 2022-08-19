@@ -66,7 +66,7 @@ export default function RiderCard({ tripInfo = {} }) {
             {tripInfo.title}
           </Typography>
           <Typography sx={{ ml: 1.5 }} color="text.secondary" gutterBottom>
-            Date: {moment(tripInfo.depart_time).format('MMM Do YY h:mm a')}
+            Date: {moment(tripInfo.depart_time).format('MMM Do YYYY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}

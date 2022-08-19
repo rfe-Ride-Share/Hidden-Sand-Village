@@ -97,7 +97,7 @@ export default function RiderEntry({
               alignItems: 'flex-end',
             }}
           >
-            <Button sx={{ backgroundColor: '#F5B935' }}>
+            <Button href="/chat" sx={{ backgroundColor: '#F5B935' }}>
               <MessageIcon sx={{ color: 'white' }} />
             </Button>
             <Button sx={{ backgroundColor: '#DF3062' }}>

@@ -10,8 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useAuth0 } from '@auth0/auth0-react';
 import moment from 'moment';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import MapDirections from '../search-view/mapDirections';
 import RiderEntry from './rider-entry';
@@ -102,12 +101,18 @@ export default function TripView({ tripInfo = {} }) {
       } else {
         if (status === 'nope') {
           riderButtons = (
-            <Button
-              sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
-              variant="contained"
+            <Link
+              to="/confirm"
+              state={tripInfo}
+              style={{ textDecoration: 'none', color: 'white' }}
             >
-              Ask to Join
-            </Button>
+              <Button
+                sx={{ backgroundColor: '#F5B935', borderRadius: 2 }}
+                variant="contained"
+              >
+                Ask to Join
+              </Button>
+            </Link>
           );
         } else if (status === 'pending') {
           riderButtons = (
@@ -166,7 +171,7 @@ export default function TripView({ tripInfo = {} }) {
             color="text.secondary"
             gutterBottom
           >
-            Date: {moment(tripInfo.depart_time).format('MMM Do YY h:mm a')}
+            Date: {moment(tripInfo.depart_time).format('MMM Do YYYY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
             From: {tripInfo.destination}

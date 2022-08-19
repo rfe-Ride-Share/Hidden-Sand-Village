@@ -1,30 +1,28 @@
 const router = require('express').Router();
 const Message = require('../models/Message');
 
-//add
-
-router.post('/', async (req, res) => {
-  const newMessage = new Message(req.body);
-
-  try {
-    const savedMessage = await newMessage.save();
-    res.status(200).json(savedMessage);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+// Create message
+router.post('/', (req, res) => {
+  Message.create(req.body)
+    .then((mes) => {
+      res.status(200).json(mes);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
-//get
-
-router.get('/:conversationId', async (req, res) => {
-  try {
-    const messages = await Message.find({
-      conversationId: req.params.conversationId,
+// Read message
+router.get('/:conversationId', (req, res) => {
+  Message.find({
+    conversationId: req.params.conversationId,
+  })
+    .then((mes) => {
+      res.status(200).json(mes);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
     });
-    res.status(200).json(messages);
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
 module.exports = router;

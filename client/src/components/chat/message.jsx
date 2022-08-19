@@ -8,17 +8,22 @@ import moment from 'moment';
 //pass in message obj and owner. classname/css changes based on sender or reciever.
 //time will be formatted based on details sent in message obj. Comment out if you want to see a preview of what the Messages will look like.
 //We need users profile photo in message obj
-export default function Message({ message, own }) {
+export default function Message({ message, own, currentUser, currentChat}) {
+   let photo = currentUser.user_photo;
+  if (!own) {
+    photo = currentChat.user_photo;
+  }
+
   return (
     <Messages>
     <div className={own ? "message own" : "message"}>
       <div className="messageTop">
         <img
           className="messageImg"
-          src={message.photo}
+          src={photo}
           alt=""
         />
-        <p className="messageText">{message.message}</p>
+        <p className="messageText">{message.text}</p>
       </div>
 
       <div className="messageBottom">{format(message.createdAt)}</div>

@@ -5,33 +5,41 @@ import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import styled from 'styled-components';
 import moment from 'moment';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import MapDirections from '../../search-view/mapDirections';
 
 export default function RiderCard({ tripInfo = {} }) {
   const [userData, setUserData] = React.useState({});
-  const [rating, setRating] = React.useState(0);
+  const [rating, setRating] = React.useState(null);
+
+  const acceptedRiders = tripInfo.passengers.filter(
+    (rider) => rider.status === 'upcoming'
+  );
 
   React.useEffect(() => {
-    axios
-      .get(`/userr?email=${tripInfo.driver_email}`)
-      .then((response) => {
-        setUserData(response.data);
-        let reviews = response.data.reviews;
-        let count = reviews.length;
+    if (rating === null) {
+      axios
+        .get(`/userr?email=${tripInfo.driver_email}`)
+        .then((response) => {
+          setUserData(response.data);
+          let reviews = response.data.reviews;
+          let count = reviews.length;
 
-        if (count > 0) {
-          let total = 0;
-          reviews.forEach((review) => {
-            total += review.rating;
-          });
-          setRating(total / count);
-        }
-      })
-      .catch((err) => console.log(err));
+          if (count > 0) {
+            let total = 0;
+            reviews.forEach((review) => {
+              total += review.stars;
+            });
+            setRating(total / count);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
@@ -54,30 +62,29 @@ export default function RiderCard({ tripInfo = {} }) {
             startPos={tripInfo.depart_coord}
             destPos={tripInfo.dest_coord}
           />
-          <Typography
-            sx={{ fontSize: 14, ml: 1.5 }}
-            color="text.secondary"
-            gutterBottom
-          >
-            {moment(tripInfo.date).format('MMM Do YY h:mm a')}
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ ml: 1.5 }}>
+          <Typography variant="h6" component="div" sx={{ m: 1.5, mb: 0.25 }}>
             {tripInfo.title}
           </Typography>
-          <Typography sx={{ m: 1.5 }} color="text.secondary">
-            From: {tripInfo.destination}
+          <Typography sx={{ ml: 1.5 }} color="text.secondary" gutterBottom>
+            Date: {moment(tripInfo.depart_time).format('MMM Do YYYY h:mm a')}
           </Typography>
           <Typography sx={{ m: 1.5 }} color="text.secondary">
-            To: {tripInfo.departure}
+            From: {tripInfo.departure}
           </Typography>
-          <Typography variant="body2" sx={{ ml: 1.5 }}>
+          <Typography sx={{ m: 1.5 }} color="text.secondary">
+            To: {tripInfo.destination}
+          </Typography>
+          <Typography variant="body2" sx={{ m: 1.5 }}>
             Total Cost: ${tripInfo.price.toFixed(2)}
             <br />
             Rider Cost $
             {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
             {(tripInfo.price / 2).toFixed(2)}
+            <br />
+            Remaining Seats:{' '}
+            {tripInfo.passenger_capacity - acceptedRiders.length}
           </Typography>
-          <Typography variant="body2" sx={{ ml: 1.5 }}>
+          <Typography variant="body2" sx={{ m: 1.5 }}>
             Driver: {`${userData.first_name} ${userData.last_name}`}
             <br />
             <Rating name="driver rating" value={rating} readOnly />
@@ -87,3 +94,41 @@ export default function RiderCard({ tripInfo = {} }) {
     </Card>
   );
 }
+
+function ProfileImage({ image }) {
+  return <ProfileImageComponent image={image} />;
+}
+
+const ProfileImageComponent = styled.div`
+  background-color: #ccc;
+  background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 85px;
+  width: 85px;
+  margin: 10px;
+  border-radius: 10px;
+`;
+
+// import { useAuth0 } from '@auth0/auth0-react';
+// import Button from '@mui/material/Button';
+
+// const LoginButton = () => {
+//   const { loginWithRedirect } = useAuth0();
+//   return (
+//     <Button
+//       color="inherit"
+//       className="btn btn-primary btn-block"
+//       onClick={() => loginWithRedirect()}
+//     >
+//       Log In
+//     </Button>
+//   );
+// };
+// const AuthenticationButton = () => {
+//   const { isAuthenticated } = useAuth0();
+
+//   return isAuthenticated ? <LogoutButton /> : <LoginButton />;
+// };
+//if is logged in to = '/trip'
+//if not logged in to = ''

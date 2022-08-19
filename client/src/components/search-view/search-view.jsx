@@ -17,7 +17,8 @@ import SearchBar from './searchBar';
 import RiderCard from '../trip-view/rider-trip-view/rider-card';
 
 import getDistance from './helpers/getDistance';
-import SwipeableEdgeDrawer from './helpers/SwipeableEdgeDrawer';
+// import SwipeableEdgeDrawer from './helpers/SwipeableEdgeDrawer';
+import FilterModal from './helpers/filterModal';
 
 export default function SearchView() {
   //Longitude & latitude setters
@@ -25,12 +26,30 @@ export default function SearchView() {
   const [destPos, setDestPos] = useState({ lat: 0, lng: 0 });
   const [trips, setTrips] = useState([]);
 
+  const now = new Date();
+
   useEffect(() => {
     axios
       .get('/tripp')
       .then((response) => {
         console.log(response.data);
-        setTrips(response.data);
+        let responseCopy = response.data.slice();
+        responseCopy = responseCopy.filter((trip) => {
+          const tripDate = new Date(trip.depart_time);
+          const isPast = now.getTime() - tripDate.getTime() > 0;
+          return !isPast;
+        });
+        let notFullList = [];
+        responseCopy.forEach((trip) => {
+          const acceptedRiders = trip.passengers.filter(
+            (rider) => rider.status === 'upcoming'
+          );
+
+          if (trip.passenger_capacity !== acceptedRiders.length) {
+            notFullList.push(trip);
+          }
+        });
+        setTrips(responseCopy);
       })
       .catch((err) => {
         console.log(err);
@@ -55,6 +74,7 @@ export default function SearchView() {
     };
 
     let tripsCopy = trips.slice();
+
     tripsCopy.sort((a, b) => {
       if (totalDistance(a) > totalDistance(b)) {
         return 1;
@@ -89,21 +109,7 @@ export default function SearchView() {
           placeholder={'Where will you be travelling to?'}
         />
       </Stack>
-      <Button
-        variant="contained"
-        size="small"
-        sx={{
-          borderRadius: '12px',
-          backgroundColor: '#F5B935',
-        }}
-        onClick={() => {
-          console.log(
-            'Accept rider functionality placeholder for Driver View. need to change accept-button.jsx'
-          );
-        }}
-      >
-        Filter Button
-      </Button>
+      {/* {<FilterModal />}{' '} */}
       <Box
         sx={{
           width: '100%',
@@ -112,11 +118,11 @@ export default function SearchView() {
           alignItems: 'center',
         }}
       >
-        {trips.map((trip) => (
+        {trips.slice(0, 9).map((trip) => (
           <RiderCard key={trip._id} tripInfo={trip} />
         ))}
       </Box>
-      <SwipeableEdgeDrawer />
+      {/* <SwipeableEdgeDrawer /> */}
     </Container>
   );
 }

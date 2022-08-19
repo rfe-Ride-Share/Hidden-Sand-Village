@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -62,31 +62,47 @@ export default function ProfileView() {
   const handleMessage = () => {
     console.log('message me!');
     //on click get that person's info from database
-    const otherPersonEmail = 'michael.schoenecker@gmail.com'
-    axios
-      .get(`/userr?email=${otherPersonEmail}`)
+    const otherPersonEmail = 'rikkizhang08@gmail.com';
+    Promise.all([
+      axios.get(`/userr?email=${otherPersonEmail}`),
+      axios.get(`/userr?email=${user.email}`),
+    ])
       .then((res) => {
-        console.log('res from email is', res);
-        const otherPersonData = res.data;
+        console.log(res);
+        const convo = {senderId: res[1].data._id, receiverId: res[0].data._id };
+        console.log('convo', convo);
 
-        //then using current user's details and person of interest, create new conversation in db.
-        const convo = [user, otherPersonData]
-        console.log(convo)
-      //   axios.post(`/conversations`, convo).then((res)=> {
-      //      //if successful, route user to messages page - on that page useEffect will grab that conversation just posted from the database and create the sidebar profile pic with other persons photo.
-      //      console.log(res)
-      // }).catch((err) => {
-      //   console.log(err)
-      // })
-      }).catch((err) => {console.log(err)})
-
-
+        axios
+          .post(`/conversations`, convo)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
 
   };
-
+  let reviewAvg;
+  if (userData.reviews.length > 0) {
+    reviewAvg = userData.reviews.reduce(
+      (a, b) => {
+        console.log('a:', a);
+        console.log('b:', b);
+        return { stars: a.stars + b.stars };
+      },
+      { stars: 0 }
+    );
+    reviewAvg = reviewAvg.stars / userData.reviews.length;
+    console.log('reviews are', reviewAvg);
+  } else {
+    reviewAvg = 0;
+  }
   const handleEditBio = () => {
-    console.log(userData);
     axios
       .put(`/userr?email=${user.email}`, userData)
       .then(() => {
@@ -112,8 +128,8 @@ export default function ProfileView() {
           </Typography>
           <Typography>My Reviews</Typography>
           <Item>
-            <Rating name="read-only" value={5} readOnly />
-            <div>100 reviews</div>
+            <Rating name="read-only" value={reviewAvg} readOnly />
+            <div>{userData.reviews.length} reviews</div>
           </Item>
           <Typography>
             Bio
@@ -144,9 +160,10 @@ export default function ProfileView() {
             <Item>{userData.bio}</Item>
           )}
           <Typography>Contact</Typography>
-          <Item onClick={handleMessage} style={{}}>
-            Message Me
+          <Item onClick={handleMessage} style={{}} >
+          <Link to='/chat' style={{ textDecoration: 'none', color: 'white' }}>Message</Link>
           </Item>
+
         </Stack>
       </Box>
     </Container>

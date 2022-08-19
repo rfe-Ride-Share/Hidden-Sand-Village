@@ -1,23 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import Paper from '@mui/material/Paper';
 
 import UserIconCard from './user-icon-card';
 
-function ChatList({ users = {} }) {
-  const listOfUserIcons = [];
-  const onClick = () =>
-    console.log(
-      'opening this users direct message is supposed to appear here. user-icon-card.jsx'
-    );
+function getFriends(conversations, setFriends, currentUser) {
+  console.log('friends function being entered');
+  const friendsAlreadyAdded = {};
+  const memberConversations = [];
+  const promises = [];
 
-  for (const user of users) {
+  for (const conversation of conversations) {
+    for (const memberId of conversation.members) {
+      if (memberId !== currentUser._id && !friendsAlreadyAdded[memberId]) {
+        memberConversations.push(conversation);
+
+        // comment this line out to allow duplicates
+        // friendsAlreadyAdded[memberId] = true;
+
+        console.log('member id is', memberId);
+        promises.push(
+          axios({
+            url: '/userr/',
+            method: 'get',
+            params: { _id: memberId }
+          })
+        );
+      }
+    }
+  }
+
+  Promise.all(promises)
+    .then((results) => {
+      console.log('results in chat list below');
+      console.log(results);
+      const newFriends = [];
+      for (let currentIndex = 0; currentIndex < results.length; currentIndex++) {
+        const result = results[currentIndex];
+        const conversation = memberConversations[currentIndex];
+
+        const newFriend = result.data;
+        newFriend.conversation = conversation;
+        console.log('new conversation id is', newFriend.conversation);
+        newFriends.push(newFriend);
+      }
+
+      setFriends(newFriends);
+    })
+    .catch((error) => {
+      console.log("you're an idiot, webpack knows better");
+    })
+}
+
+function ChatList({ conversations, currentUser, setCurrentChat }) {
+  console.log('chat list being rendered conversations being passed in are', conversations);
+  const listOfUserIcons = [];
+
+  const [friends, setFriends] = useState(null);
+
+
+  const friendsIsNotSetYet = friends === null || (friends.length === 0 && conversations.length > 0);
+
+  if (friendsIsNotSetYet) {
+    console.log('webpack doesnt entirely hate you');
+    getFriends(conversations, setFriends, currentUser);
+    return null;
+  }
+
+
+  for (const friend of friends) {
     listOfUserIcons.push(
       <UserIconCard
-        image={user.user_photo}
-        name={user.first_name}
-        onClick={onClick}
+        image={friend.user_photo}
+        name={friend.first_name}
+        onClick={() => setCurrentChat(friend.conversation)}
+
       />
     );
   }

@@ -7,12 +7,13 @@ import Chat from './components/chat/chat';
 import DropdownMenu from './components/dropdown-menu/dropdown-menu';
 import ProfileView from './components/profile-view/profile-view';
 import SearchView from './components/search-view/search-view';
-import RiderTripView from './components/trip-view/rider-trip-view/rider-trip-view';
+import TripView from './components/trip-view/trip-view';
 import DriverTripView from './components/trip-view/driver-trip-view/driver-trip-view';
 import TripListView from './components/trip-list-view/trip-list-view';
 import ReviewView from './components/review-view/review-view';
 import Payment from './components/payment/payment';
 import AgreeToPayment from './components/agree-to-payment/agree-to-payment';
+import ConfirmationPageDelete from './components/trip-list-view/buttons/confirmation-page';
 
 import {
   GoogleMap,
@@ -39,7 +40,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SearchView />} />
         <Route path="/chat" element={<ProtectedRoute component={Chat} />} />
-        <Route path="/trip" element={<RiderTripView />} />
+        <Route path="/trip" element={<TripView />} />
         <Route
           path="/profile"
           element={<ProtectedRoute component={ProfileView} />}
@@ -64,6 +65,7 @@ function App() {
         {/* <Route path="/add" element={<AddTripView />} /> */}
         <Route path="/payment" element={<Payment />} />
         <Route path="/confirm" element={<AgreeToPayment />} />
+        <Route path="/confirm-cancel" element={<ConfirmationPageDelete />} />
       </Routes>
 
       {/* <div>This is a very important message!!</div>

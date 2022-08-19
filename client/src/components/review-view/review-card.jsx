@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import Box from '@mui/material/Box';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -24,27 +25,40 @@ export default function ReviewCard({ profile = {} }) {
         <CardContent
           sx={{
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: 'column',
             justifyContent: 'space-between',
+            maxWidth: '100%',
           }}
         >
-          <Typography sx={{ fontSize: 14 }} gutterBottom>
-            Rate {profile.name}
-          </Typography>
-          <RatingStars profile={profile} />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography sx={{ fontSize: 14 }} gutterBottom>
+              Rate {profile.name}
+            </Typography>
+            <RatingStars profile={profile} />
+          </Box>
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Feedback"
+            multiline
+            maxRows={20}
+            minRows={10}
+            sx={{
+              margin: '20px',
+              borderRadius: '20px',
+              width: '80%',
+            }}
+            onChange={(event) => {
+              profile.feedback = event.target.value;
+            }}
+          />
         </CardContent>
-        <TextField
-          id="outlined-basic"
-          label="Feedback"
-          variant="outlined"
-          sx={{
-            margin: '20px',
-            borderRadius: '20px',
-          }}
-          onChange={(event) => {
-            profile.feedback = event.target.value;
-          }}
-        />
       </MainCardContainer>
     </Card>
   );
@@ -53,5 +67,5 @@ export default function ReviewCard({ profile = {} }) {
 const MainCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 100%;
 `;

@@ -3,42 +3,38 @@ const Conversation = require('../models/Conversation');
 
 // Create conversation
 router.post('/', async (req, res) => {
-  const newConversation = new Conversation({
+  Conversation.create({
     members: [req.body.senderId, req.body.receiverId],
-  });
-
-  try {
-    const savedConversation = await newConversation.save();
-    res.status(200).json(savedConversation);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  })
+    .then((convers) => {
+      res.status(200).send(convers);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 // Read conversation
-
 router.get('/:userId', async (req, res) => {
+  console.log(req.params.userId);
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },
     });
-    res.status(200).json(conversation);
+    res.status(200).send(conversation);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send(err);
   }
 });
 
-// get conv includes two userId
-
-router.get('/find/:firstUserId/:secondUserId', async (req, res) => {
-  try {
-    const conversation = await Conversation.findOne({
-      members: { $all: [req.params.firstUserId, req.params.secondUserId] },
-    });
-    res.status(200).json(conversation);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+// get conversation including two userId
+router.get('/find/:firstUserId/:secondUserId', (req, res) => {
+  console.log('params are', req.params);
+  Conversation.findOne({
+    members: { $all: [req.params.firstUserId, req.params.secondUserId] },
+  })
+    .then((convers) => res.send(convers))
+    .catch((err) => res.status(500).send(err));
 });
 
 module.exports = router;

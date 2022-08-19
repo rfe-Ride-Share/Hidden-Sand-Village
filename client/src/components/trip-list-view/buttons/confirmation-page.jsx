@@ -7,12 +7,10 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import RiderCard from '../trip-view/rider-trip-view/rider-card';
-import ConfirmRequestButton from './buttons/confirm-request-button';
-import GoBackButton from './buttons/go-back-button';
-import addRiderToTrip from './add-rider-to-trip';
+import CancelButton from './cancel-button.jsx';
+import GoBackButton from '../../agree-to-payment/buttons/go-back-button';
 
-function AgreeToPayment(props) {
+function ConfirmationPageDelete(props) {
   const location = useLocation();
 
   const tripInfo = location.state || {};
@@ -22,38 +20,38 @@ function AgreeToPayment(props) {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   if (isConfirmed) {
-    addRiderToTrip(tripInfo);
-    return (
-      <Container
-        sx={{
-          padding: '1px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <RiderCard tripInfo={tripInfo} />
-          <AgreementMessage>
-            <Typography variant="body1">
-              Congratulations! Your request to join the ride has been sent to
-              the driver. The driver will message you with furher details.
-            </Typography>
-          </AgreementMessage>
-          <AgreementButtons>
-            <GoBackButton />
-          </AgreementButtons>
-        </Box>
-      </Container>
-    );
+    return null;
   }
+
+  // if (isConfirmed) {
+  //   return (
+  //     <Container
+  //       sx={{
+  //         padding: '1px',
+  //         display: 'flex',
+  //         flexDirection: 'column',
+  //         alignItems: 'center',
+  //       }}
+  //     >
+  //       <Box
+  //         sx={{
+  //           width: '100%',
+  //           display: 'flex',
+  //           flexDirection: 'column',
+  //           alignItems: 'center',
+  //         }}
+  //       >
+  //         <AgreementMessage>
+  //           Congratulations! If you are a driver your trip has been cancelled
+  //           for all riders. If you are a rider you have removed yourself from the trip.
+  //         </AgreementMessage>
+  //         <AgreementButtons>
+  //           <GoBackButton />
+  //         </AgreementButtons>
+  //       </Box>
+  //     </Container>
+  //   );
+  // }
 
   return (
     <Container
@@ -72,21 +70,20 @@ function AgreeToPayment(props) {
           alignItems: 'center',
         }}
       >
-        <RiderCard tripInfo={tripInfo} />
         <AgreementMessage>
           <Typography variant="body1">
-            By clicking {'"I Accept"'} the user fully agrees to split the cost
-            of the trip up to and including the amount of ${cost} if accepted by
-            the driver and not cancelled within 24 hours of departure.
+            Are you sure you want to cancel?
           </Typography>
         </AgreementMessage>
         <AgreementCheckbox>
           <Typography variant="body1">
-            I Accept <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
+            Yes I want to cancel{' '}
+            <Checkbox onChange={() => setIsAccepted(!isAccepted)} />
           </Typography>
         </AgreementCheckbox>
         <AgreementButtons>
-          <ConfirmRequestButton
+          <CancelButton
+            trip={tripInfo}
             isAccepted={isAccepted}
             setIsConfirmed={setIsConfirmed}
           />
@@ -114,4 +111,4 @@ const AgreementButtons = styled.div`
   justify-content: space-around;
 `;
 
-export default AgreeToPayment;
+export default ConfirmationPageDelete;

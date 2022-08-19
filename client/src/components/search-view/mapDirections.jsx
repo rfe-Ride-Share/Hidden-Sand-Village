@@ -93,8 +93,8 @@ export default function MapDirections({ startPos, destPos }) {
               options={{
                 polylineOptions: {
                   zIndex: 12,
-                  strokeColor: '#11ABC1',
-                  strokeWeight: 4,
+                  strokeColor: '#F5B935',
+                  strokeWeight: 3.8,
                 },
                 markerOptions: {
                   clickable: false,

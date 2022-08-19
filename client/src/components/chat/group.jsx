@@ -2,24 +2,46 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from 'styled-components'
 
-
-export default function Group({ conversation, currentUser }) {
-  const [user, setUser] = useState(null);
+// import ChatList from './chat-list/chat-list';
 
 
-  // useEffect(() => {
-  //   const friendId = conversation.members.find((m) => m !== currentUser._id);
+export default function Group({ convo, currentUser, friend, setFriend }) {
+//   const [friend, setFriend] = useState({first_name: '',
+//   last_name: '',
+//   user_photo: '',
+// });
 
-  //   const getUser = async () => {
-  //     try {
-  //       const res = await axios("/users?userId=" + friendId);
-  //       setUser(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getUser();
-  // }, [currentUser, conversation]);
+   useEffect(() => {
+
+    console.log('convo is: ',convo)
+    console.log('currentUser._id: ', currentUser._id);
+
+
+    const friendId = convo.members.filter((m) => m !== currentUser._id);
+
+
+
+
+
+    console.log('friendId', friendId);
+
+
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/userr?_id=" + friendId)
+        console.log('friendData', res.data)
+        if (res.data._id !== currentUser._id) {
+          setFriend(res.data);
+        }
+
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+   getUser();
+
+  }, [currentUser, convo, setFriend]);
 
   return (
     <TripGroup>
@@ -27,11 +49,10 @@ export default function Group({ conversation, currentUser }) {
       <img
         className="conversationImg"
         src={
-          'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg'
-        }
+           friend.user_photo}
         alt=""
       />
-      <span className="conversationName">Disney Trip</span>
+      <span className="conversationName">TEST</span>
     </div>
     </TripGroup>
   );
@@ -42,6 +63,7 @@ const TripGroup = styled.div`
 
 .conversation {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 10px;
   cursor: pointer;
@@ -64,7 +86,7 @@ const TripGroup = styled.div`
   font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 718px) {
   .conversationName {
     display: none;
   }

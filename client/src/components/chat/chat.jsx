@@ -81,12 +81,12 @@ const [messages, setMessages] = useState([{
   return (
   <ChatWrapper>
     <div className="messenger">
-    {/* {tripConversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
-                <Group conversation={c} currentUser={user} />
-              </div>
-            ))} */}
-   {/* <Group /> */}
+
+   {tripConversations.map((c) => (
+<div onClick={() => {setCurrentChat(c)}}>
+<Group convo={c} currentUser={user}/>
+</div>
+ ))}
   <div className="chatBox">
     <div className="chatBoxWrapper">
       <div className="chatBoxTop">

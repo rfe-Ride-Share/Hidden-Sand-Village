@@ -3,23 +3,25 @@ import { useEffect, useState } from "react";
 import styled from 'styled-components'
 
 
-export default function Group({ conversation, currentUser }) {
-  const [user, setUser] = useState(null);
+export default function Group({ convo, currentUser }) {
+  const [friend, setFriend] = useState(null);
 
 
-  // useEffect(() => {
-  //   const friendId = conversation.members.find((m) => m !== currentUser._id);
+  useEffect(() => {
+    const friendId = convo.members.find((m) => m !== currentUser._id);
+    console.log('friendId', friendId);
 
-  //   const getUser = async () => {
-  //     try {
-  //       const res = await axios("/users?userId=" + friendId);
-  //       setUser(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getUser();
-  // }, [currentUser, conversation]);
+    const getUser = async () => {
+      try {
+        const res = await axios.get("/userr?_id=" + friendId)
+        console.log(res.data)
+        setFriend(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [currentUser, convo]);
 
   return (
     <TripGroup>
@@ -27,11 +29,10 @@ export default function Group({ conversation, currentUser }) {
       <img
         className="conversationImg"
         src={
-          'https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg'
-        }
+          user.user_photo}
         alt=""
       />
-      <span className="conversationName">Disney Trip</span>
+      <span className="conversationName">{user.first_name + " " + user.last_name}</span>
     </div>
     </TripGroup>
   );

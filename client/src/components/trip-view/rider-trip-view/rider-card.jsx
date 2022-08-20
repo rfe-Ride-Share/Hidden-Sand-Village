@@ -78,8 +78,8 @@ export default function RiderCard({ tripInfo = {} }) {
             Total Cost: ${tripInfo.price.toFixed(2)}
             <br />
             Rider Cost $
-            {(tripInfo.price / tripInfo.passenger_capacity).toFixed(2)} - $
-            {(tripInfo.price / 2).toFixed(2)}
+            {(tripInfo.price / (tripInfo.passenger_capacity + 1)).toFixed(2)} -
+            ${(tripInfo.price / 2).toFixed(2)}
             <br />
             Remaining Seats:{' '}
             {tripInfo.passenger_capacity - acceptedRiders.length}

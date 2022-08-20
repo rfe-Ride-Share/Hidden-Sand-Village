@@ -5,15 +5,25 @@ A mobile first rideshare app in which users can plan road trips, request to join
 ## Getting Started
 
 1. Clone down the repo
-   `git clone https://github.com/rfe-Ride-Share/Hidden-Sand-Village`
+   ```
+   git clone https://github.com/rfe-Ride-Share/Hidden-Sand-Village
+   ```
 2. Install dependencies
-   `npm install`
+   ```
+   npm install
+   ```
 3. To prepare client-side code
-   `npm run client-dev`
+   ```
+   npm run client-dev
+   ```
 4. To start the server (in a separate terminal window)
-   `npm run server-dev`
+   ```
+   npm run server-dev
+   ```
 5. Open up a browser window and navigate to this url
-   `http://localhost:3000/`
+   ```
+   http://localhost:3000/
+   ```
 6. For realistic mobile view results, open up chrome dev tools and change the viewport to iPhone SE
 
 ## Product Features

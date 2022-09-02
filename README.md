@@ -25,6 +25,9 @@ A mobile-first rideshare app where people can post trips they're taking, request
 ![Google Maps](https://img.shields.io/badge/Google_Maps-D14836?style=for-the-badge&logo=googlemaps&logoColor=white)
 ![Socket](https://img.shields.io/badge/socket.io-25c2a0?style=for-the-badge&logo=socket.io&logoColor=black)
 
+## Mockup & Flow Diagram
+<img width="100%" alt="Figma Diagram" src="https://user-images.githubusercontent.com/98896929/188232171-eabcc8d8-93f6-49ba-a8e8-c048a96ee49a.png">
+
 ## Features
 
 
